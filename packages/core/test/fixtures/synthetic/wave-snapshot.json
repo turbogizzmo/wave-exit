@@ -1070,5 +1070,33 @@
       "attachments": []
     }
   ],
-  "estimates": []
+  "estimates": [
+    {
+      "id": "RXN0aW1hdGU6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx",
+      "number": "E-12",
+      "date": "2025-11-01",
+      "dueDate": "2025-12-01",
+      "status": "SENT",
+      "title": "Estimate",
+      "poNumber": "",
+      "memo": "",
+      "currency": "USD",
+      "customerId": "Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDA0",
+      "customerName": "Dogwood Partners",
+      "subtotal": "2400.00",
+      "taxTotal": "0.00",
+      "discountTotal": "0.00",
+      "total": "2400.00",
+      "items": [
+        {
+          "description": "Rebrand, phase 1",
+          "quantity": "16",
+          "unitPrice": "150",
+          "total": "2400.00",
+          "accountId": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTY=",
+          "productId": "UHJvZHVjdDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE="
+        }
+      ]
+    }
+  ]
 }

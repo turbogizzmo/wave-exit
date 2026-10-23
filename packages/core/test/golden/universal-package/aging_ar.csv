@@ -1,0 +1,2 @@
+as_of,document_id,number,contact_id,contact_name,date,due_date,due_date_known,days_past_due,bucket,amount_due
+2025-12-31,wave:SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDI=,1002,wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAy,Cedar & Co,2025-02-10,2025-03-12,true,294,90+,582.50

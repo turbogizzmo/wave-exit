@@ -1,0 +1,68 @@
+# Tie-out report
+Maple & Pine Design LLC
+Wave Exit conversion checks, made 2026-01-20
+
+## Summary
+Every check passed or is explained: 1 check has notes to review.
+Period: 2025-01-01 to 2025-12-31. Cutover date: 2025-12-31. Scope: full history.
+Built from Wave's transactions export and a Wave connection (read 2026-01-16).
+33 entries, 91 lines, 25 accounts, 9 contacts, 5 invoices, 1 bill, 3 receipts.
+Check                                Result  Finding
+-----------------------------------  ------  --------------------------------------------------------------------------------------
+1. Every entry balances              OK      All 33 entries have equal debits and credits.
+2. Total debits equal total credits  OK      Debits and credits both total 28,978.32.
+3. Account balances agree with Wave  OK      All 25 accounts match the balance Wave shows today.
+4. Invoices and payments agree       Review  5 invoices: some amounts need a look (see detail).
+5. Bills add up to accounts payable  OK      1 bill; open bills total 200.00, equal to accounts payable.
+6. Nothing lost in reading           OK      All 91 ledger lines, 8 contacts and 3 receipts were read.
+7. Dates are plausible               OK      All entries fall between 2025-01-01 and 2025-12-31, before the export date 2026-01-15.
+
+## Source files
+Wave wrote the export on 2026-01-15.
+File            Rows  SHA-256
+--------------  ----  ----------------------------------------------------------------
+accounting.csv    91  6bf679c9d53202c6d1f2b7e3a5160205e2c3654c1d3842c15d96bf0b9f190e56
+customers.csv      3  90354a3e77c1b76592dd6239b1062454e9a64449a6a2f950e1d10a78b483e513
+vendors.csv        5  7b14ae43918faef7fd9740a3576e5d914fb16123ae707bcce1053ef0acc9af99
+bill_items.csv     1  699eb62461e147a7c9a7ec048e0803aea0fb29c18edae0f7c5faf399c054ead3
+
+## Check 1: Every entry balances
+OK. All 33 entries have equal debits and credits.
+No further detail.
+
+## Check 2: Total debits equal total credits
+OK. Debits and credits both total 28,978.32.
+No further detail.
+
+## Check 3: Account balances agree with Wave
+OK. All 25 accounts match the balance Wave shows today.
+No further detail.
+
+## Check 4: Invoices and payments agree
+Review. 5 invoices: some amounts need a look (see detail).
+Wave lists 5 posted invoices; 5 were found in the export.
+Still owed per Wave: 582.50. Still owed per the export's payments: 582.50.
+Accounts receivable balance: 532.50. Open invoices total: 582.50.
+Difference (50.00): receivable entries without an invoice number (customer credits, overpayments, write-offs) usually explain it.
+
+## Check 5: Bills add up to accounts payable
+OK. 1 bill; open bills total 200.00, equal to accounts payable.
+Bill handling hasn't yet been checked against a real Wave export that uses bills. Review bills carefully.
+
+## Check 6: Nothing lost in reading
+OK. All 91 ledger lines, 8 contacts and 3 receipts were read.
+accounting.csv: 91 lines in, 91 lines in 33 entries.
+customers.csv + vendors.csv: 8 contacts in.
+Receipts: 3 files in, 1 linked to transactions, 2 kept unlinked.
+
+## Check 7: Dates are plausible
+OK. All entries fall between 2025-01-01 and 2025-12-31, before the export date 2026-01-15.
+No further detail.
+
+## Review items
+Item                                                               Level  Answer
+-----------------------------------------------------------------  -----  ------------
+Transfer on 2025-06-01 has no matching other side                  amber  Not answered
+1 receivable entry has no invoice number                           amber  Not answered
+Receipt "2025-09-12-CORNER_COFFEE.jpg" fits 2 transactions         amber  Not answered
+Receipt "2025-09-30-UNKNOWN_SHOP.png" doesn't match a transaction  amber  Not answered

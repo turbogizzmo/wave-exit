@@ -154,7 +154,35 @@ export function resolveAccounts(
   }
 
   const list = [...accounts.values()].sort((a, b) => a.type.localeCompare(b.type) || a.name.localeCompare(b.name) || a.id.localeCompare(b.id));
+  assignCodes(list);
   return { accounts: list, byExportKey, issues };
+}
+
+const CODE_BASE: Record<WaveAccountType, number> = { ASSET: 1000, LIABILITY: 2000, EQUITY: 3000, INCOME: 4000, EXPENSE: 5000 };
+
+/**
+ * Give every account a chart code. Wave's own account number wins when it is set
+ * and unique; the rest are numbered by type in steps of 10, in name order,
+ * skipping codes already taken.
+ */
+export function assignCodes(accounts: Account[]): void {
+  const counts = new Map<string, number>();
+  for (const a of accounts) if (a.code) counts.set(a.code, (counts.get(a.code) ?? 0) + 1);
+  const taken = new Set<string>();
+  for (const a of accounts) {
+    if (a.code && counts.get(a.code) === 1) taken.add(a.code);
+    else a.code = "";
+  }
+  const next = new Map<WaveAccountType, number>();
+  const ordered = [...accounts].sort((a, b) => CODE_BASE[a.type] - CODE_BASE[b.type] || (a.role === "expense" && a.subtype === "COST_OF_GOODS_SOLD" ? 0 : 1) - (b.role === "expense" && b.subtype === "COST_OF_GOODS_SOLD" ? 0 : 1) || a.name.localeCompare(b.name) || a.id.localeCompare(b.id));
+  for (const a of ordered) {
+    if (a.code) continue;
+    let n = next.get(a.type) ?? CODE_BASE[a.type] + 10;
+    while (taken.has(String(n))) n += 10;
+    a.code = String(n);
+    taken.add(a.code);
+    next.set(a.type, n + 10);
+  }
 }
 
 function isSystemSubtype(catalogue: SubtypeCatalogue, a: SnapAccount): boolean {
@@ -173,6 +201,7 @@ function fromWave(a: SnapAccount, catalogue: SubtypeCatalogue, exponent: number)
   const info = catalogue.byTypeAndValue(type, a.subtype);
   return {
     id: `wave:${a.id}`,
+    code: a.displayId,
     name: a.name,
     group: TYPE_TO_GROUP[type],
     type,
@@ -195,6 +224,7 @@ function fromExport(r: LedgerRow, subtype: string, isSystem: boolean, lines: num
   const type = GROUP_TO_TYPE[r.accountGroup];
   return {
     id: `export:${exportKey(r)}`,
+    code: "",
     name: r.accountName,
     group: r.accountGroup,
     type,

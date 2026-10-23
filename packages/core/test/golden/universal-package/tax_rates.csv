@@ -1,0 +1,2 @@
+tax_rate_id,name,abbreviation,tax_number,rate,rate_history,compound,recoverable,active
+wave:U2FsZXNUYXg6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx,State Sales Tax,ST,,0.0825,"{""2024-01-01"":""0.0825""}",false,false,true

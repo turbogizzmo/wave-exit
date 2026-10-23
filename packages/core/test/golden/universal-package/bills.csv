@@ -1,0 +1,2 @@
+bill_id,number,vendor_id,vendor_name,date,due_date,due_date_known,po_number,memo,subtotal,tax_total,total,amount_paid,amount_due,status,wave_status,wave_total,wave_amount_paid,wave_amount_due,lines_from,entry_ids,wave_id
+export-bill:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMw==:B-77,B-77,wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMw==,Granite Print Co,2025-07-01,2025-07-01,false,,,600.00,0.00,600.00,400.00,200.00,partial,,,,,ledger,"[""9000000000000000024""]",

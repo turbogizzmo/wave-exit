@@ -1,0 +1,10 @@
+contact_id,role,name,email,phone,currency,active,address_line_1,address_line_2,city,province,postal_code,country,wave_id,other_details
+wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx,customer,Birch Studio,accounts@birch.example,,USD,true,,,Portland,,,,Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx,{}
+wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAy,customer,Cedar & Co,ap@cedar.example,,USD,true,,,,,,,Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAy,{}
+wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDA0,customer,Dogwood Partners,,,USD,true,,,,,,,Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDA0,{}
+wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAz,customer,Walk-in Customer,,,USD,true,,,,,,,Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAz,{}
+wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMg==,vendor,Cloudware Inc,,,USD,true,,,,,,,VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMg==,{}
+wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwNA==,vendor,Corner Coffee,,,USD,true,,,,,,,VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwNA==,{}
+wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMw==,vendor,Granite Print Co,,,USD,true,,,,,,,VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMw==,{}
+wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwNQ==,vendor,Lease Masters,,,USD,true,,,,,,,VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwNQ==,{}
+wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMQ==,vendor,Paper Planet,,,USD,true,,,,,,,VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMQ==,{}

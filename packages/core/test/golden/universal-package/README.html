@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maple &amp; Pine Design LLC – Wave export</title>
+<style>
+:root { color-scheme: light dark; --fg: #1d1d1f; --bg: #ffffff; --muted: #5f6368; --rule: #d9d9de; --code: #f3f3f5; }
+@media (prefers-color-scheme: dark) { :root { --fg: #e8e8ea; --bg: #161618; --muted: #a0a0a8; --rule: #3a3a40; --code: #26262a; } }
+body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--fg); background: var(--bg); max-width: 960px; margin: 0 auto; padding: 24px 16px 64px; }
+h1 { font-size: 26px; margin-bottom: 4px; } h2 { margin-top: 40px; border-bottom: 1px solid var(--rule); padding-bottom: 4px; } h3 { margin-top: 28px; }
+p.lead { color: var(--muted); margin-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; display: block; overflow-x: auto; }
+th, td { text-align: left; vertical-align: top; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--rule); }
+code { background: var(--code); padding: 1px 4px; border-radius: 3px; font-size: 13px; }
+</style></head><body>
+<h1>Maple &amp; Pine Design LLC</h1>
+<p class="lead">Wave Accounting books, 2025-01-01 to 2025-12-31, converted by Wave Exit 0.3.0 on 2026-01-20.</p>
+
+<h2>What this is</h2>
+<p>This folder holds everything Wave Exit read from Wave for this business, as plain CSV files any accounting program or spreadsheet can open, with the receipts and a tie-out report showing the books hold together. It is a complete archive: every other Wave Exit output can be rebuilt from it.</p>
+<p>It was built from Wave's transactions export together with a Wave connection, so the chart of accounts is complete and balances were compared with Wave.</p>
+<p>The ledger is always the full history. The cutover date (2025-12-31) and scope (full-history) recorded in <code>manifest.json</code> are used by outputs that load the books into another system.</p>
+
+<h2>Checks</h2>
+<ul><li><b>1. Every entry balances</b> — green: All 33 entries have equal debits and credits.</li>
+<li><b>2. Total debits equal total credits</b> — green: Debits and credits both total 28,978.32.</li>
+<li><b>3. Account balances agree with Wave</b> — green: All 25 accounts match the balance Wave shows today.</li>
+<li><b>4. Invoices and payments agree</b> — amber: 5 invoices: some amounts need a look (see detail).</li>
+<li><b>5. Bills add up to accounts payable</b> — green: 1 bill; open bills total 200.00, equal to accounts payable.</li>
+<li><b>6. Nothing lost in reading</b> — green: All 91 ledger lines, 8 contacts and 3 receipts were read.</li>
+<li><b>7. Dates are plausible</b> — green: All entries fall between 2025-01-01 and 2025-12-31, before the export date 2026-01-15.</li></ul>
+<p>Details are in <code>tie_out_report.pdf</code>.</p>
+
+<h2>Conventions</h2>
+<ul>
+<li>Text is UTF-8 with a byte-order mark, so Excel opens it with the right characters. Lines end with CRLF.</li>
+<li>Dates are YYYY-MM-DD.</li>
+<li>Amounts are in USD, written as plain decimals with 2 decimal places. Debits and credits are two columns of positive amounts.</li>
+<li>IDs are stable: running Wave Exit again on a newer export gives the same IDs for the same records.</li>
+<li>The CSV files are data, not formulas. If a text cell starts with <code>=</code>, a spreadsheet may treat it as a formula; open the files through the Wave Exit Excel workbook when that matters.</li>
+</ul>
+<table><thead><tr><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>id</td><td>Stable identifier. Survives re-running Wave Exit on a newer export. <code>wave:</code> IDs are Wave's own; <code>export:</code> IDs come from names in the export.</td></tr>
+<tr><td>code</td><td>Chart code. Wave's account number where set, otherwise assigned by Wave Exit by type (1000s assets, 2000s liabilities, 3000s equity, 4000s income, 5000s expenses).</td></tr>
+<tr><td>text</td><td>Text.</td></tr>
+<tr><td>date</td><td>Date, YYYY-MM-DD. Blank if unknown.</td></tr>
+<tr><td>amount</td><td>Money in the business currency: plain decimal, <code>.</code> as decimal point, no thousands separators or symbol, minus sign for negatives.</td></tr>
+<tr><td>decimal</td><td>Plain decimal number, as Wave gives it.</td></tr>
+<tr><td>integer</td><td>Whole number.</td></tr>
+<tr><td>boolean</td><td><code>true</code> or <code>false</code>.</td></tr>
+<tr><td>list</td><td>A JSON array of strings, e.g. <code>[&quot;a&quot;,&quot;b&quot;]</code>. <code>[]</code> when empty.</td></tr>
+<tr><td>json</td><td>A JSON object. <code>{}</code> when empty.</td></tr>
+</tbody></table>
+
+<h2>Files</h2>
+<ul>
+<li><code>manifest.json</code>: format version, business, period, input mode, source files with SHA-256, row counts, check results, the settings and review answers used.</li>
+<li><code>tie_out_report.pdf</code>: the checks, for the client file.</li>
+<li><code>attachments/</code>: receipt files as Wave gave them; <code>attachments.csv</code> links each to its entry.</li>
+<li><a href="#accounts.csv"><code>accounts.csv</code></a></li>
+<li><a href="#contacts.csv"><code>contacts.csv</code></a></li>
+<li><a href="#items.csv"><code>items.csv</code></a></li>
+<li><a href="#tax_rates.csv"><code>tax_rates.csv</code></a></li>
+<li><a href="#journal.csv"><code>journal.csv</code></a></li>
+<li><a href="#invoices.csv"><code>invoices.csv</code></a></li>
+<li><a href="#invoice_lines.csv"><code>invoice_lines.csv</code></a></li>
+<li><a href="#bills.csv"><code>bills.csv</code></a></li>
+<li><a href="#bill_lines.csv"><code>bill_lines.csv</code></a></li>
+<li><a href="#payments.csv"><code>payments.csv</code></a></li>
+<li><a href="#estimates.csv"><code>estimates.csv</code></a></li>
+<li><a href="#estimate_lines.csv"><code>estimate_lines.csv</code></a></li>
+<li><a href="#trial_balance.csv"><code>trial_balance.csv</code></a></li>
+<li><a href="#aging_ar.csv"><code>aging_ar.csv</code></a></li>
+<li><a href="#aging_ap.csv"><code>aging_ap.csv</code></a></li>
+<li><a href="#attachments.csv"><code>attachments.csv</code></a></li>
+<li><a href="#review_items.csv"><code>review_items.csv</code></a></li>
+</ul>
+
+<h3 id="accounts.csv">accounts.csv</h3>
+<p>The chart of accounts: Wave's full chart when connected (including empty and archived accounts), otherwise every account that appears in the export. Identical Wave system accounts (Transfer Clearing, Accounts Receivable…) are merged into one row. Rows: 25.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>account_id</code></td><td>id</td><td>The account.</td></tr>
+<tr><td><code>code</code></td><td>code</td><td>Chart code.</td></tr>
+<tr><td><code>name</code></td><td>text</td><td>Account name.</td></tr>
+<tr><td><code>type</code></td><td>text</td><td>ASSET, LIABILITY, EQUITY, INCOME or EXPENSE.</td></tr>
+<tr><td><code>subtype</code></td><td>text</td><td>Wave's subtype, e.g. CASH_AND_BANK. Blank if unknown.</td></tr>
+<tr><td><code>subtype_name</code></td><td>text</td><td>Wave's name for the subtype, as the export writes it.</td></tr>
+<tr><td><code>normal_balance</code></td><td>text</td><td>DEBIT or CREDIT.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td>False for archived accounts. Archived accounts still carry their history.</td></tr>
+<tr><td><code>is_system</code></td><td>boolean</td><td>True for accounts Wave creates itself.</td></tr>
+<tr><td><code>wave_ids</code></td><td>list</td><td>Every Wave account folded into this row.</td></tr>
+<tr><td><code>currency</code></td><td>text</td><td>Account currency, if Wave gives one.</td></tr>
+<tr><td><code>description</code></td><td>text</td><td>Description.</td></tr>
+<tr><td><code>wave_balance</code></td><td>amount</td><td>The balance Wave reported when it was read (blank without a connection). Normal-balance sign.</td></tr>
+<tr><td><code>balance_at_cutover</code></td><td>amount</td><td>Balance at the cutover date, from the ledger. Normal-balance sign.</td></tr>
+<tr><td><code>balance_at_end</code></td><td>amount</td><td>Balance at the last ledger date. Normal-balance sign.</td></tr>
+</tbody></table>
+
+<h3 id="contacts.csv">contacts.csv</h3>
+<p>Customers and vendors. Names link the export to Wave; IDs are Wave's when connected. Rows: 9.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>contact_id</code></td><td>id</td><td>The contact.</td></tr>
+<tr><td><code>role</code></td><td>text</td><td>customer or vendor.</td></tr>
+<tr><td><code>name</code></td><td>text</td><td>Name.</td></tr>
+<tr><td><code>email</code></td><td>text</td><td>Email.</td></tr>
+<tr><td><code>phone</code></td><td>text</td><td>Phone.</td></tr>
+<tr><td><code>currency</code></td><td>text</td><td>Currency.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td>False if archived in Wave.</td></tr>
+<tr><td><code>address_line_1</code></td><td>text</td><td>Address.</td></tr>
+<tr><td><code>address_line_2</code></td><td>text</td><td>Address.</td></tr>
+<tr><td><code>city</code></td><td>text</td><td>City.</td></tr>
+<tr><td><code>province</code></td><td>text</td><td>State or province.</td></tr>
+<tr><td><code>postal_code</code></td><td>text</td><td>ZIP or postal code.</td></tr>
+<tr><td><code>country</code></td><td>text</td><td>Country.</td></tr>
+<tr><td><code>wave_id</code></td><td>text</td><td>Wave's ID.</td></tr>
+<tr><td><code>other_details</code></td><td>json</td><td>Every other detail Wave or the export gave, by field name.</td></tr>
+</tbody></table>
+
+<h3 id="items.csv">items.csv</h3>
+<p>Products and services (Wave connection only). Rows: 1.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>item_id</code></td><td>id</td><td>The item.</td></tr>
+<tr><td><code>name</code></td><td>text</td><td>Name.</td></tr>
+<tr><td><code>description</code></td><td>text</td><td>Description.</td></tr>
+<tr><td><code>unit_price</code></td><td>decimal</td><td>Default price.</td></tr>
+<tr><td><code>sold</code></td><td>boolean</td><td>Sold to customers.</td></tr>
+<tr><td><code>bought</code></td><td>boolean</td><td>Bought from vendors.</td></tr>
+<tr><td><code>income_account_id</code></td><td>id</td><td>Income account.</td></tr>
+<tr><td><code>income_account_code</code></td><td>code</td><td>Its code.</td></tr>
+<tr><td><code>expense_account_id</code></td><td>id</td><td>Expense account.</td></tr>
+<tr><td><code>expense_account_code</code></td><td>code</td><td>Its code.</td></tr>
+<tr><td><code>tax_rate_ids</code></td><td>list</td><td>Default sales taxes.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td>False if archived.</td></tr>
+</tbody></table>
+
+<h3 id="tax_rates.csv">tax_rates.csv</h3>
+<p>Sales taxes (Wave connection only). Rows: 1.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>tax_rate_id</code></td><td>id</td><td>The tax.</td></tr>
+<tr><td><code>name</code></td><td>text</td><td>Name.</td></tr>
+<tr><td><code>abbreviation</code></td><td>text</td><td>Abbreviation.</td></tr>
+<tr><td><code>tax_number</code></td><td>text</td><td>Registration number.</td></tr>
+<tr><td><code>rate</code></td><td>decimal</td><td>Rate in force at the end of the ledger, as a fraction (0.0825 = 8.25%).</td></tr>
+<tr><td><code>rate_history</code></td><td>json</td><td>Every rate by the date it took effect.</td></tr>
+<tr><td><code>compound</code></td><td>boolean</td><td>Charged on top of other taxes.</td></tr>
+<tr><td><code>recoverable</code></td><td>boolean</td><td>Tax paid on purchases can be recovered.</td></tr>
+<tr><td><code>active</code></td><td>boolean</td><td>False if archived.</td></tr>
+</tbody></table>
+
+<h3 id="journal.csv">journal.csv</h3>
+<p>The ledger: one row per line, every entry from Wave's export, in date order. Every entry balances. This is the full history whatever the scope setting. Rows: 91.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>entry_id</code></td><td>id</td><td>The entry: Wave's Transaction ID.</td></tr>
+<tr><td><code>line_no</code></td><td>integer</td><td>Line number within the entry, from 1.</td></tr>
+<tr><td><code>date</code></td><td>date</td><td>Entry date.</td></tr>
+<tr><td><code>account_id</code></td><td>id</td><td>Account (accounts.csv).</td></tr>
+<tr><td><code>account_code</code></td><td>code</td><td>Account code.</td></tr>
+<tr><td><code>account_name</code></td><td>text</td><td>Account name.</td></tr>
+<tr><td><code>debit</code></td><td>amount</td><td>Debit, or 0.00.</td></tr>
+<tr><td><code>credit</code></td><td>amount</td><td>Credit, or 0.00.</td></tr>
+<tr><td><code>description</code></td><td>text</td><td>The entry's description.</td></tr>
+<tr><td><code>line_description</code></td><td>text</td><td>The line's own description, if any.</td></tr>
+<tr><td><code>customer_id</code></td><td>id</td><td>Customer on the line, if any.</td></tr>
+<tr><td><code>vendor_id</code></td><td>id</td><td>Vendor on the line, if any.</td></tr>
+<tr><td><code>contact</code></td><td>text</td><td>Customer or vendor name.</td></tr>
+<tr><td><code>invoice_number</code></td><td>text</td><td>Invoice number on the line.</td></tr>
+<tr><td><code>bill_number</code></td><td>text</td><td>Bill number on the line.</td></tr>
+<tr><td><code>memo</code></td><td>text</td><td>Notes / memo.</td></tr>
+<tr><td><code>sales_tax_name</code></td><td>text</td><td>Sales tax name, as the export gives it.</td></tr>
+<tr><td><code>sales_tax_amount</code></td><td>text</td><td>Sales tax amount, as the export gives it (format not yet seen in a real export).</td></tr>
+<tr><td><code>entry_type</code></td><td>text</td><td>expense, refund, deposit, sales-receipt, transfer, credit-card-payment, invoice, invoice-payment, bill, bill-payment or journal.</td></tr>
+<tr><td><code>entry_type_reason</code></td><td>text</td><td>Why the entry got that type.</td></tr>
+<tr><td><code>rule_id</code></td><td>text</td><td>The classification rule that matched.</td></tr>
+<tr><td><code>paired_entry_id</code></td><td>id</td><td>For a transfer recorded as two entries through Transfer Clearing: the other entry.</td></tr>
+<tr><td><code>date_added</code></td><td>date</td><td>When the entry was added in Wave.</td></tr>
+<tr><td><code>date_modified</code></td><td>date</td><td>When it was last changed in Wave.</td></tr>
+<tr><td><code>source_ref</code></td><td>text</td><td>Where the line came from in Wave's export.</td></tr>
+</tbody></table>
+
+<h3 id="invoices.csv">invoices.csv</h3>
+<p>Invoices, with what was paid and is still owed. When connected, checked against Wave's invoices. Rows: 5.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>invoice_id</code></td><td>id</td><td>The invoice.</td></tr>
+<tr><td><code>number</code></td><td>text</td><td>Invoice number.</td></tr>
+<tr><td><code>customer_id</code></td><td>id</td><td>The customer (contacts.csv).</td></tr>
+<tr><td><code>customer_name</code></td><td>text</td><td>The customer's name.</td></tr>
+<tr><td><code>date</code></td><td>date</td><td>Invoice date.</td></tr>
+<tr><td><code>due_date</code></td><td>date</td><td>Due date.</td></tr>
+<tr><td><code>due_date_known</code></td><td>boolean</td><td>False when the due date isn't known (export-file-only mode): the document date is used instead.</td></tr>
+<tr><td><code>po_number</code></td><td>text</td><td>Purchase order number.</td></tr>
+<tr><td><code>memo</code></td><td>text</td><td>Memo.</td></tr>
+<tr><td><code>subtotal</code></td><td>amount</td><td>Total of the lines before tax.</td></tr>
+<tr><td><code>tax_total</code></td><td>amount</td><td>Sales tax.</td></tr>
+<tr><td><code>total</code></td><td>amount</td><td>Total, as in the ledger.</td></tr>
+<tr><td><code>amount_paid</code></td><td>amount</td><td>Payments applied, to the end of the ledger.</td></tr>
+<tr><td><code>amount_due</code></td><td>amount</td><td>Still owed at the end of the ledger.</td></tr>
+<tr><td><code>status</code></td><td>text</td><td>paid, partial, unpaid or overpaid, worked out from the ledger.</td></tr>
+<tr><td><code>wave_status</code></td><td>text</td><td>Wave's own status at the time Wave was read (blank without a connection).</td></tr>
+<tr><td><code>wave_total</code></td><td>amount</td><td>Wave's total (blank without a connection).</td></tr>
+<tr><td><code>wave_amount_paid</code></td><td>amount</td><td>Wave's amount paid (blank without a connection).</td></tr>
+<tr><td><code>wave_amount_due</code></td><td>amount</td><td>Wave's amount due (blank without a connection).</td></tr>
+<tr><td><code>lines_from</code></td><td>text</td><td><code>wave</code> when the lines are Wave's line items; <code>ledger</code> when rebuilt from the ledger.</td></tr>
+<tr><td><code>entry_ids</code></td><td>list</td><td>Ledger entries (journal.csv entry_id) that raised the document.</td></tr>
+<tr><td><code>wave_id</code></td><td>text</td><td>Wave's ID for the document.</td></tr>
+</tbody></table>
+
+<h3 id="invoice_lines.csv">invoice_lines.csv</h3>
+<p>Invoice line items: Wave's when connected, otherwise rebuilt from the ledger (one line per income line). Rows: 5.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>invoice_id</code></td><td>id</td><td>The invoice.</td></tr>
+<tr><td><code>line_no</code></td><td>integer</td><td>Line number, from 1.</td></tr>
+<tr><td><code>description</code></td><td>text</td><td>Line description.</td></tr>
+<tr><td><code>quantity</code></td><td>decimal</td><td>Quantity.</td></tr>
+<tr><td><code>unit_price</code></td><td>decimal</td><td>Unit price.</td></tr>
+<tr><td><code>account_id</code></td><td>id</td><td>Account the line posts to (accounts.csv).</td></tr>
+<tr><td><code>account_code</code></td><td>code</td><td>That account's code.</td></tr>
+<tr><td><code>item_id</code></td><td>id</td><td>Product or service (items.csv), if any.</td></tr>
+<tr><td><code>amount</code></td><td>amount</td><td>Line amount before tax. Negative for discounts.</td></tr>
+<tr><td><code>tax_amount</code></td><td>amount</td><td>Sales tax on the line.</td></tr>
+<tr><td><code>tax_rate_ids</code></td><td>list</td><td>Sales taxes applied (tax_rates.csv).</td></tr>
+</tbody></table>
+
+<h3 id="bills.csv">bills.csv</h3>
+<p>Bills, rebuilt from the ledger (Wave's API has no bills). Not yet checked against a real export that uses bills. Rows: 1.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>bill_id</code></td><td>id</td><td>The bill.</td></tr>
+<tr><td><code>number</code></td><td>text</td><td>Bill number.</td></tr>
+<tr><td><code>vendor_id</code></td><td>id</td><td>The vendor (contacts.csv).</td></tr>
+<tr><td><code>vendor_name</code></td><td>text</td><td>The vendor's name.</td></tr>
+<tr><td><code>date</code></td><td>date</td><td>Bill date.</td></tr>
+<tr><td><code>due_date</code></td><td>date</td><td>Due date.</td></tr>
+<tr><td><code>due_date_known</code></td><td>boolean</td><td>False when the due date isn't known (export-file-only mode): the document date is used instead.</td></tr>
+<tr><td><code>po_number</code></td><td>text</td><td>Purchase order number.</td></tr>
+<tr><td><code>memo</code></td><td>text</td><td>Memo.</td></tr>
+<tr><td><code>subtotal</code></td><td>amount</td><td>Total of the lines before tax.</td></tr>
+<tr><td><code>tax_total</code></td><td>amount</td><td>Sales tax.</td></tr>
+<tr><td><code>total</code></td><td>amount</td><td>Total, as in the ledger.</td></tr>
+<tr><td><code>amount_paid</code></td><td>amount</td><td>Payments applied, to the end of the ledger.</td></tr>
+<tr><td><code>amount_due</code></td><td>amount</td><td>Still owed at the end of the ledger.</td></tr>
+<tr><td><code>status</code></td><td>text</td><td>paid, partial, unpaid or overpaid, worked out from the ledger.</td></tr>
+<tr><td><code>wave_status</code></td><td>text</td><td>Wave's own status at the time Wave was read (blank without a connection).</td></tr>
+<tr><td><code>wave_total</code></td><td>amount</td><td>Wave's total (blank without a connection).</td></tr>
+<tr><td><code>wave_amount_paid</code></td><td>amount</td><td>Wave's amount paid (blank without a connection).</td></tr>
+<tr><td><code>wave_amount_due</code></td><td>amount</td><td>Wave's amount due (blank without a connection).</td></tr>
+<tr><td><code>lines_from</code></td><td>text</td><td><code>wave</code> when the lines are Wave's line items; <code>ledger</code> when rebuilt from the ledger.</td></tr>
+<tr><td><code>entry_ids</code></td><td>list</td><td>Ledger entries (journal.csv entry_id) that raised the document.</td></tr>
+<tr><td><code>wave_id</code></td><td>text</td><td>Wave's ID for the document.</td></tr>
+</tbody></table>
+
+<h3 id="bill_lines.csv">bill_lines.csv</h3>
+<p>Bill lines, rebuilt from the ledger. Rows: 1.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>bill_id</code></td><td>id</td><td>The bill.</td></tr>
+<tr><td><code>line_no</code></td><td>integer</td><td>Line number, from 1.</td></tr>
+<tr><td><code>description</code></td><td>text</td><td>Line description.</td></tr>
+<tr><td><code>quantity</code></td><td>decimal</td><td>Quantity.</td></tr>
+<tr><td><code>unit_price</code></td><td>decimal</td><td>Unit price.</td></tr>
+<tr><td><code>account_id</code></td><td>id</td><td>Account the line posts to (accounts.csv).</td></tr>
+<tr><td><code>account_code</code></td><td>code</td><td>That account's code.</td></tr>
+<tr><td><code>item_id</code></td><td>id</td><td>Product or service (items.csv), if any.</td></tr>
+<tr><td><code>amount</code></td><td>amount</td><td>Line amount before tax. Negative for discounts.</td></tr>
+<tr><td><code>tax_amount</code></td><td>amount</td><td>Sales tax on the line.</td></tr>
+<tr><td><code>tax_rate_ids</code></td><td>list</td><td>Sales taxes applied (tax_rates.csv).</td></tr>
+</tbody></table>
+
+<h3 id="payments.csv">payments.csv</h3>
+<p>Payments against invoices and bills: one row per application, so a deposit paying two invoices is two rows. Rows: 7.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>payment_id</code></td><td>id</td><td>The payment (its ledger entry).</td></tr>
+<tr><td><code>entry_id</code></td><td>id</td><td>Ledger entry (journal.csv).</td></tr>
+<tr><td><code>date</code></td><td>date</td><td>Payment date.</td></tr>
+<tr><td><code>contact_id</code></td><td>id</td><td>Customer or vendor.</td></tr>
+<tr><td><code>contact_name</code></td><td>text</td><td>Their name.</td></tr>
+<tr><td><code>bank_account_id</code></td><td>id</td><td>Bank or card account the money moved through.</td></tr>
+<tr><td><code>bank_account_code</code></td><td>code</td><td>Its code.</td></tr>
+<tr><td><code>amount</code></td><td>amount</td><td>Total money moved by the payment (the same on every row of one payment).</td></tr>
+<tr><td><code>applied_to_type</code></td><td>text</td><td>invoice or bill.</td></tr>
+<tr><td><code>applied_to_id</code></td><td>id</td><td>The invoice or bill (invoices.csv / bills.csv).</td></tr>
+<tr><td><code>applied_to_number</code></td><td>text</td><td>Its number.</td></tr>
+<tr><td><code>applied_amount</code></td><td>amount</td><td>Amount applied to that document.</td></tr>
+<tr><td><code>linked_by</code></td><td>text</td><td>wave-id (Wave's own link), invoice-date-amount (matched on number, date and amount) or ledger-number (invoice number on the ledger lines).</td></tr>
+<tr><td><code>wave_payment_id</code></td><td>text</td><td>Wave's payment ID, when connected.</td></tr>
+</tbody></table>
+
+<h3 id="estimates.csv">estimates.csv</h3>
+<p>Estimates (Wave connection only). Rows: 1.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>estimate_id</code></td><td>id</td><td>The estimate.</td></tr>
+<tr><td><code>number</code></td><td>text</td><td>Number.</td></tr>
+<tr><td><code>customer_id</code></td><td>id</td><td>Customer.</td></tr>
+<tr><td><code>customer_name</code></td><td>text</td><td>Name.</td></tr>
+<tr><td><code>date</code></td><td>date</td><td>Date.</td></tr>
+<tr><td><code>expiry_date</code></td><td>date</td><td>Valid until.</td></tr>
+<tr><td><code>status</code></td><td>text</td><td>Wave's status.</td></tr>
+<tr><td><code>total</code></td><td>amount</td><td>Total.</td></tr>
+</tbody></table>
+
+<h3 id="estimate_lines.csv">estimate_lines.csv</h3>
+<p>Estimate lines. Rows: 1.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>estimate_id</code></td><td>id</td><td>The estimate.</td></tr>
+<tr><td><code>line_no</code></td><td>integer</td><td>Line number, from 1.</td></tr>
+<tr><td><code>description</code></td><td>text</td><td>Line description.</td></tr>
+<tr><td><code>quantity</code></td><td>decimal</td><td>Quantity.</td></tr>
+<tr><td><code>unit_price</code></td><td>decimal</td><td>Unit price.</td></tr>
+<tr><td><code>account_id</code></td><td>id</td><td>Account the line posts to (accounts.csv).</td></tr>
+<tr><td><code>account_code</code></td><td>code</td><td>That account's code.</td></tr>
+<tr><td><code>item_id</code></td><td>id</td><td>Product or service (items.csv), if any.</td></tr>
+<tr><td><code>amount</code></td><td>amount</td><td>Line amount before tax. Negative for discounts.</td></tr>
+<tr><td><code>tax_amount</code></td><td>amount</td><td>Sales tax on the line.</td></tr>
+<tr><td><code>tax_rate_ids</code></td><td>list</td><td>Sales taxes applied (tax_rates.csv).</td></tr>
+</tbody></table>
+
+<h3 id="trial_balance.csv">trial_balance.csv</h3>
+<p>Debits, credits and balance by account at the last ledger date, and again at the cutover date if that is earlier. Rows: 25.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>as_of</code></td><td>date</td><td>Date.</td></tr>
+<tr><td><code>account_id</code></td><td>id</td><td>Account.</td></tr>
+<tr><td><code>account_code</code></td><td>code</td><td>Code.</td></tr>
+<tr><td><code>account_name</code></td><td>text</td><td>Name.</td></tr>
+<tr><td><code>type</code></td><td>text</td><td>Account type.</td></tr>
+<tr><td><code>debit</code></td><td>amount</td><td>Total debits to that date.</td></tr>
+<tr><td><code>credit</code></td><td>amount</td><td>Total credits to that date.</td></tr>
+<tr><td><code>balance</code></td><td>amount</td><td>Balance, normal-balance sign.</td></tr>
+</tbody></table>
+
+<h3 id="aging_ar.csv">aging_ar.csv</h3>
+<p>Open invoices at the cutover date, invoice by invoice. Rows: 1.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>as_of</code></td><td>date</td><td>The cutover date the aging is worked out at.</td></tr>
+<tr><td><code>document_id</code></td><td>id</td><td>The invoice or bill.</td></tr>
+<tr><td><code>number</code></td><td>text</td><td>Document number.</td></tr>
+<tr><td><code>contact_id</code></td><td>id</td><td>Customer or vendor.</td></tr>
+<tr><td><code>contact_name</code></td><td>text</td><td>Their name.</td></tr>
+<tr><td><code>date</code></td><td>date</td><td>Document date.</td></tr>
+<tr><td><code>due_date</code></td><td>date</td><td>Due date.</td></tr>
+<tr><td><code>due_date_known</code></td><td>boolean</td><td>False when the due date isn't known; the document date is used.</td></tr>
+<tr><td><code>days_past_due</code></td><td>integer</td><td>Days past due at as_of (0 if not yet due).</td></tr>
+<tr><td><code>bucket</code></td><td>text</td><td>current, 1-30, 31-60, 61-90 or 90+.</td></tr>
+<tr><td><code>amount_due</code></td><td>amount</td><td>Owed at as_of: payments after as_of are not counted.</td></tr>
+</tbody></table>
+
+<h3 id="aging_ap.csv">aging_ap.csv</h3>
+<p>Open bills at the cutover date, bill by bill. Rows: 1.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>as_of</code></td><td>date</td><td>The cutover date the aging is worked out at.</td></tr>
+<tr><td><code>document_id</code></td><td>id</td><td>The invoice or bill.</td></tr>
+<tr><td><code>number</code></td><td>text</td><td>Document number.</td></tr>
+<tr><td><code>contact_id</code></td><td>id</td><td>Customer or vendor.</td></tr>
+<tr><td><code>contact_name</code></td><td>text</td><td>Their name.</td></tr>
+<tr><td><code>date</code></td><td>date</td><td>Document date.</td></tr>
+<tr><td><code>due_date</code></td><td>date</td><td>Due date.</td></tr>
+<tr><td><code>due_date_known</code></td><td>boolean</td><td>False when the due date isn't known; the document date is used.</td></tr>
+<tr><td><code>days_past_due</code></td><td>integer</td><td>Days past due at as_of (0 if not yet due).</td></tr>
+<tr><td><code>bucket</code></td><td>text</td><td>current, 1-30, 31-60, 61-90 or 90+.</td></tr>
+<tr><td><code>amount_due</code></td><td>amount</td><td>Owed at as_of: payments after as_of are not counted.</td></tr>
+</tbody></table>
+
+<h3 id="attachments.csv">attachments.csv</h3>
+<p>Receipt files in attachments/, and the entry each belongs to where it could be matched. Rows: 3.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>file</code></td><td>text</td><td>Path inside the package.</td></tr>
+<tr><td><code>sha256</code></td><td>text</td><td>SHA-256 of the file.</td></tr>
+<tr><td><code>bytes</code></td><td>integer</td><td>Size.</td></tr>
+<tr><td><code>entry_id</code></td><td>id</td><td>Ledger entry it belongs to; blank if unlinked.</td></tr>
+<tr><td><code>status</code></td><td>text</td><td>linked, ambiguous (several possible entries) or unmatched.</td></tr>
+<tr><td><code>candidate_entry_ids</code></td><td>list</td><td>Entries it might belong to.</td></tr>
+</tbody></table>
+
+<h3 id="review_items.csv">review_items.csv</h3>
+<p>Everything Wave Exit asked a person to look at, and the answer given. Rows: 4.</p>
+<table><thead><tr><th>Column</th><th>Kind</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>item_id</code></td><td>id</td><td>The item.</td></tr>
+<tr><td><code>kind</code></td><td>text</td><td>What sort of item.</td></tr>
+<tr><td><code>severity</code></td><td>text</td><td>red (blocked outputs until answered) or amber.</td></tr>
+<tr><td><code>title</code></td><td>text</td><td>Title.</td></tr>
+<tr><td><code>explanation</code></td><td>text</td><td>Explanation.</td></tr>
+<tr><td><code>answer</code></td><td>text</td><td>The answer given, if any.</td></tr>
+<tr><td><code>options</code></td><td>json</td><td>The answers that were offered, value → label.</td></tr>
+<tr><td><code>refs</code></td><td>list</td><td>Entries, accounts or documents it concerns.</td></tr>
+</tbody></table>
+
+<h2>Not available from Wave</h2>
+<p>Recurring invoice schedules, bank reconciliation status, bank-feed connections and payroll detail beyond Wave's payroll exports can't be read from Wave by any supported route, so they aren't here.</p>
+</body></html>

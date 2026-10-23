@@ -1,0 +1,361 @@
+# Report pack
+Maple & Pine Design LLC
+2025-01-01 to 2025-12-31, made 2026-01-20 by Wave Exit. Amounts in USD; negatives in parentheses.
+
+## Tie-out summary
+Every check passed or is explained: 1 check has notes to review.
+Period: 2025-01-01 to 2025-12-31. Cutover date: 2025-12-31. Scope: full history.
+Built from Wave's transactions export and a Wave connection (read 2026-01-16).
+33 entries, 91 lines, 25 accounts, 9 contacts, 5 invoices, 1 bill, 3 receipts.
+Check                                Result  Finding
+-----------------------------------  ------  --------------------------------------------------------------------------------------
+1. Every entry balances              OK      All 33 entries have equal debits and credits.
+2. Total debits equal total credits  OK      Debits and credits both total 28,978.32.
+3. Account balances agree with Wave  OK      All 25 accounts match the balance Wave shows today.
+4. Invoices and payments agree       Review  5 invoices: some amounts need a look (see detail).
+5. Bills add up to accounts payable  OK      1 bill; open bills total 200.00, equal to accounts payable.
+6. Nothing lost in reading           OK      All 91 ledger lines, 8 contacts and 3 receipts were read.
+7. Dates are plausible               OK      All entries fall between 2025-01-01 and 2025-12-31, before the export date 2026-01-15.
+
+## Source files
+Wave wrote the export on 2026-01-15.
+File            Rows  SHA-256
+--------------  ----  ----------------------------------------------------------------
+accounting.csv    91  6bf679c9d53202c6d1f2b7e3a5160205e2c3654c1d3842c15d96bf0b9f190e56
+customers.csv      3  90354a3e77c1b76592dd6239b1062454e9a64449a6a2f950e1d10a78b483e513
+vendors.csv        5  7b14ae43918faef7fd9740a3576e5d914fb16123ae707bcce1053ef0acc9af99
+bill_items.csv     1  699eb62461e147a7c9a7ec048e0803aea0fb29c18edae0f7c5faf399c054ead3
+
+## Check 1: Every entry balances
+OK. All 33 entries have equal debits and credits.
+No further detail.
+
+## Check 2: Total debits equal total credits
+OK. Debits and credits both total 28,978.32.
+No further detail.
+
+## Check 3: Account balances agree with Wave
+OK. All 25 accounts match the balance Wave shows today.
+No further detail.
+
+## Check 4: Invoices and payments agree
+Review. 5 invoices: some amounts need a look (see detail).
+Wave lists 5 posted invoices; 5 were found in the export.
+Still owed per Wave: 582.50. Still owed per the export's payments: 582.50.
+Accounts receivable balance: 532.50. Open invoices total: 582.50.
+Difference (50.00): receivable entries without an invoice number (customer credits, overpayments, write-offs) usually explain it.
+
+## Check 5: Bills add up to accounts payable
+OK. 1 bill; open bills total 200.00, equal to accounts payable.
+Bill handling hasn't yet been checked against a real Wave export that uses bills. Review bills carefully.
+
+## Check 6: Nothing lost in reading
+OK. All 91 ledger lines, 8 contacts and 3 receipts were read.
+accounting.csv: 91 lines in, 91 lines in 33 entries.
+customers.csv + vendors.csv: 8 contacts in.
+Receipts: 3 files in, 1 linked to transactions, 2 kept unlinked.
+
+## Check 7: Dates are plausible
+OK. All entries fall between 2025-01-01 and 2025-12-31, before the export date 2026-01-15.
+No further detail.
+
+## Review items
+Item                                                               Level  Answer
+-----------------------------------------------------------------  -----  ------------
+Transfer on 2025-06-01 has no matching other side                  amber  Not answered
+1 receivable entry has no invoice number                           amber  Not answered
+Receipt "2025-09-12-CORNER_COFFEE.jpg" fits 2 transactions         amber  Not answered
+Receipt "2025-09-30-UNKNOWN_SHOP.png" doesn't match a transaction  amber  Not answered
+
+## Trial balance at 2025-12-31
+Code  Account                           Debit     Credit
+----  ----------------------------  ---------  ---------
+1020  Accounts Receivable              532.50
+1030  Business Checking             10,685.27
+1040  Business Savings               2,100.00
+1050  Equipment                      1,000.00
+1060  Prepaid Expenses                 150.00
+1070  Transfer Clearing                 99.00
+2010  Accounts Payable                            200.00
+2020  Sales Tax Payable                            82.50
+2040  Visa Card                        458.75
+3010  Owner Investment / Drawings              10,000.00
+4010  Consulting Income                         3,400.00
+4020  Discounts Given                  100.00
+4030  Interest Income                               4.12
+4040  Sales                                     2,950.00
+5010  Printing                         600.00
+5020  Depreciation                     300.00
+5030  Meals & Entertainment            223.75
+5050  Office Supplies                  285.95
+5060  Old Printer Lease (archived)      75.00
+5070  Payment Processing Fees           26.40
+5080  Software
+      Total                         16,636.62  16,636.62
+
+## Profit and loss: 2025
+2025-01-01 to 2025-12-31
+                                   Amount
+-------------------------------  --------
+Income
+  4010  Consulting Income        3,400.00
+  4020  Discounts Given          (100.00)
+  4030  Interest Income              4.12
+  4040  Sales                    2,950.00
+Total income                     6,254.12
+Cost of goods sold
+  5010  Printing                   600.00
+Total cost of goods sold           600.00
+Gross profit                     5,654.12
+Expenses
+  5020  Depreciation               300.00
+  5030  Meals & Entertainment      223.75
+  5050  Office Supplies            285.95
+  5060  Old Printer Lease           75.00
+  5070  Payment Processing Fees     26.40
+Total expenses                     911.10
+Net income                       4,743.02
+
+## Balance sheet at 2025-12-31
+                                                    Amount
+-----------------------------------------------  ---------
+Assets
+  1020  Accounts Receivable                         532.50
+  1030  Business Checking                        10,685.27
+  1040  Business Savings                          2,100.00
+  1050  Equipment                                 1,000.00
+  1060  Prepaid Expenses                            150.00
+  1070  Transfer Clearing                            99.00
+Total assets                                     14,566.77
+Liabilities
+  2010  Accounts Payable                            200.00
+  2020  Sales Tax Payable                            82.50
+  2040  Visa Card                                 (458.75)
+Total liabilities                                 (176.25)
+Equity
+  3010  Owner Investment / Drawings              10,000.00
+  Retained earnings (profit from earlier years)       0.00
+  Net income this year                            4,743.02
+Total equity                                     14,743.02
+Total liabilities and equity                     14,566.77
+
+## Accounts receivable aging at 2025-12-31
+1 open document, totalling 582.50.
+Customer    Current  1-30  31-60  61-90     90+
+----------  -------  ----  -----  -----  ------
+Cedar & Co                               582.50
+Total          0.00  0.00   0.00   0.00  582.50
+
+## Accounts receivable aging: detail
+Number  Customer    Date        Due         Days    Owed
+------  ----------  ----------  ----------  ----  ------
+1002    Cedar & Co  2025-02-10  2025-03-12   294  582.50
+
+## Accounts payable aging at 2025-12-31
+1 open document, totalling 200.00.
+Due dates aren't in Wave's export, so without a Wave connection documents are aged from their own date.
+Vendor            Current  1-30  31-60  61-90     90+
+----------------  -------  ----  -----  -----  ------
+Granite Print Co                               200.00
+Total                0.00  0.00   0.00   0.00  200.00
+
+## Accounts payable aging: detail
+Number  Vendor            Date        Due         Days    Owed
+------  ----------------  ----------  ----------  ----  ------
+B-77    Granite Print Co  2025-07-01  2025-07-01   183  200.00
+
+## General ledger: 1020 Accounts Receivable
+Date        Description                      Contact          Debit    Credit   Balance
+----------  -------------------------------  ------------  --------  --------  --------
+2025-02-01  Invoice 1001                     Birch Studio  1,440.00            1,440.00
+2025-02-10  Invoice 1002                     Cedar & Co    1,082.50            2,522.50
+2025-02-15  Payment for invoice 1001         Birch Studio              500.00  2,022.50
+2025-03-01  Payment for invoice 1001         Birch Studio              940.00  1,082.50
+2025-03-10  Payment for invoice 1002         Cedar & Co                500.00    582.50
+2025-03-15  Invoice 1003                     Birch Studio  1,960.00            2,542.50
+2025-03-16  Invoice 1004                     Birch Studio    750.00            3,292.50
+2025-04-01  Payment for invoices 1003, 1004  Birch Studio            1,960.00  1,332.50
+2025-04-01  Payment for invoices 1003, 1004  Birch Studio              750.00    582.50
+2025-04-05  Invoice 1005                     Cedar & Co      900.00            1,482.50
+2025-04-20  Payment for invoice 1005         Cedar & Co                900.00    582.50
+2025-09-01  Customer credit                  Cedar & Co                 50.00    532.50
+            Balance                                                              532.50
+
+## General ledger: 1030 Business Checking
+Date        Description                      Contact               Debit    Credit     Balance
+----------  -------------------------------  ----------------  ---------  --------  ----------
+2025-01-01  Equipment purchase                                            1,450.00  (1,450.00)
+2025-01-02  Owner investment                                   10,000.00              8,550.00
+2025-01-05  PAPER PLANET #221                Paper Planet                   123.45    8,426.55
+2025-01-10  LEASE MASTERS JAN                Lease Masters                   75.00    8,351.55
+2025-02-15  Payment for invoice 1001         Birch Studio         500.00              8,851.55
+2025-03-01  Payment for invoice 1001         Birch Studio         940.00              9,791.55
+2025-03-10  Payment for invoice 1002         Cedar & Co           500.00             10,291.55
+2025-04-01  Payment for invoices 1003, 1004  Birch Studio       2,710.00             13,001.55
+2025-04-20  Payment for invoice 1005         Cedar & Co           873.60             13,875.15
+2025-05-01  Move to savings                                               1,800.00   12,075.15
+2025-05-15  ONLINE TRANSFER TO SAVINGS                                      300.00   11,775.15
+2025-05-20  VISA PAYMENT                                                    450.00   11,325.15
+2025-06-01  TRANSFER OUT 5521                                                99.00   11,226.15
+2025-06-05  Cash sale                        Walk-in Customer     250.00             11,476.15
+2025-06-30  INTEREST PAID                                           4.12             11,480.27
+2025-07-15  Payment for bill B-77            Granite Print Co               400.00   11,080.27
+2025-08-01  TEAM OFFSITE SPLIT                                              395.00   10,685.27
+            Balance                                                                  10,685.27
+
+## General ledger: 1040 Business Savings
+Date        Description                    Contact     Debit  Credit   Balance
+----------  -----------------------------  -------  --------  ------  --------
+2025-05-01  Move to savings                         1,800.00          1,800.00
+2025-05-15  ONLINE TRANSFER FROM CHECKING             300.00          2,100.00
+            Balance                                                   2,100.00
+
+## General ledger: 1050 Equipment
+Date        Description          Contact     Debit  Credit   Balance
+----------  -------------------  -------  --------  ------  --------
+2025-01-01  Equipment purchase            1,200.00          1,200.00
+2025-12-31  Year-end adjustment                     200.00  1,000.00
+            Balance                                         1,000.00
+
+## General ledger: 1060 Prepaid Expenses
+Date        Description          Contact   Debit  Credit  Balance
+----------  -------------------  -------  ------  ------  -------
+2025-01-01  Equipment purchase            250.00           250.00
+2025-12-31  Year-end adjustment                   100.00   150.00
+            Balance                                        150.00
+
+## General ledger: 1070 Transfer Clearing
+Date        Description                    Contact   Debit  Credit  Balance
+----------  -----------------------------  -------  ------  ------  -------
+2025-05-15  ONLINE TRANSFER TO SAVINGS              300.00           300.00
+2025-05-15  ONLINE TRANSFER FROM CHECKING                   300.00     0.00
+2025-05-20  VISA PAYMENT                            450.00           450.00
+2025-05-21  PAYMENT THANK YOU                               450.00     0.00
+2025-06-01  TRANSFER OUT 5521                        99.00            99.00
+            Balance                                                   99.00
+
+## General ledger: 2010 Accounts Payable
+Date        Description            Contact            Debit  Credit  Balance
+----------  ---------------------  ----------------  ------  ------  -------
+2025-07-01  Bill B-77              Granite Print Co          600.00   600.00
+2025-07-15  Payment for bill B-77  Granite Print Co  400.00           200.00
+            Balance                                                   200.00
+
+## General ledger: 2020 Sales Tax Payable
+Date        Description   Contact     Debit  Credit  Balance
+----------  ------------  ----------  -----  ------  -------
+2025-02-10  Invoice 1002  Cedar & Co          82.50    82.50
+            Balance                                    82.50
+
+## General ledger: 2040 Visa Card
+Date        Description           Contact         Debit  Credit   Balance
+----------  --------------------  -------------  ------  ------  --------
+2025-01-06  CLOUDWARE INC         Cloudware Inc           49.00     49.00
+2025-01-20  CLOUDWARE INC REFUND  Cloudware Inc   49.00              0.00
+2025-05-21  PAYMENT THANK YOU                    450.00          (450.00)
+2025-09-10  PAPER PLANET RETURN   Paper Planet    30.00          (480.00)
+2025-09-12  CORNER COFFEE         Corner Coffee            8.50  (471.50)
+2025-09-12  CORNER COFFEE         Corner Coffee           12.75  (458.75)
+2025-09-20  VOIDED CHARGE                                        (458.75)
+            Balance                                              (458.75)
+
+## General ledger: 3010 Owner Investment / Drawings
+Date        Description       Contact  Debit     Credit    Balance
+----------  ----------------  -------  -----  ---------  ---------
+2025-01-02  Owner investment                  10,000.00  10,000.00
+            Balance                                      10,000.00
+
+## General ledger: 4010 Consulting Income
+Date        Description                   Contact       Debit    Credit   Balance
+----------  ----------------------------  ------------  -----  --------  --------
+2025-02-01  Invoice 1001: Brand workshop  Birch Studio         1,440.00  1,440.00
+2025-03-15  Invoice 1003                  Birch Studio         1,960.00  3,400.00
+            Balance                                                      3,400.00
+
+## General ledger: 4020 Discounts Given
+Date        Description                     Contact      Debit  Credit   Balance
+----------  ------------------------------  ----------  ------  ------  --------
+2025-04-05  Invoice 1005: Loyalty discount  Cedar & Co  100.00          (100.00)
+            Balance                                                     (100.00)
+
+## General ledger: 4030 Interest Income
+Date        Description    Contact  Debit  Credit  Balance
+----------  -------------  -------  -----  ------  -------
+2025-06-30  INTEREST PAID                    4.12     4.12
+            Balance                                   4.12
+
+## General ledger: 4040 Sales
+Date        Description                 Contact           Debit    Credit   Balance
+----------  --------------------------  ----------------  -----  --------  --------
+2025-02-10  Invoice 1002: Logo package  Cedar & Co               1,000.00  1,000.00
+2025-03-16  Invoice 1004                Birch Studio               750.00  1,750.00
+2025-04-05  Invoice 1005                Cedar & Co               1,000.00  2,750.00
+2025-06-05  Cash sale                   Walk-in Customer           250.00  3,000.00
+2025-09-01  Customer credit             Cedar & Co        50.00            2,950.00
+            Balance                                                        2,950.00
+
+## General ledger: 5010 Printing
+Date        Description  Contact            Debit  Credit  Balance
+----------  -----------  ----------------  ------  ------  -------
+2025-07-01  Bill B-77    Granite Print Co  600.00           600.00
+            Balance                                         600.00
+
+## General ledger: 5020 Depreciation
+Date        Description          Contact   Debit  Credit  Balance
+----------  -------------------  -------  ------  ------  -------
+2025-12-31  Year-end adjustment           300.00           300.00
+            Balance                                        300.00
+
+## General ledger: 5030 Meals & Entertainment
+Date        Description                        Contact        Debit  Credit  Balance
+----------  ---------------------------------  -------------  -----  ------  -------
+2025-08-01  TEAM OFFSITE SPLIT: Split line 2                  11.25            11.25
+2025-08-01  TEAM OFFSITE SPLIT: Split line 4                  13.25            24.50
+2025-08-01  TEAM OFFSITE SPLIT: Split line 6                  15.25            39.75
+2025-08-01  TEAM OFFSITE SPLIT: Split line 8                  17.25            57.00
+2025-08-01  TEAM OFFSITE SPLIT: Split line 10                 19.25            76.25
+2025-08-01  TEAM OFFSITE SPLIT: Split line 12                 21.25            97.50
+2025-08-01  TEAM OFFSITE SPLIT: Split line 14                 23.25           120.75
+2025-08-01  TEAM OFFSITE SPLIT: Split line 16                 25.25           146.00
+2025-08-01  TEAM OFFSITE SPLIT: Split line 18                 27.25           173.25
+2025-08-01  TEAM OFFSITE SPLIT: Split line 20                 29.25           202.50
+2025-09-12  CORNER COFFEE                      Corner Coffee   8.50           211.00
+2025-09-12  CORNER COFFEE                      Corner Coffee  12.75           223.75
+2025-09-20  VOIDED CHARGE                                                     223.75
+            Balance                                                           223.75
+
+## General ledger: 5050 Office Supplies
+Date        Description                        Contact        Debit  Credit  Balance
+----------  ---------------------------------  ------------  ------  ------  -------
+2025-01-05  PAPER PLANET #221                  Paper Planet  123.45           123.45
+2025-08-01  TEAM OFFSITE SPLIT: Split line 1                  10.25           133.70
+2025-08-01  TEAM OFFSITE SPLIT: Split line 3                  12.25           145.95
+2025-08-01  TEAM OFFSITE SPLIT: Split line 5                  14.25           160.20
+2025-08-01  TEAM OFFSITE SPLIT: Split line 7                  16.25           176.45
+2025-08-01  TEAM OFFSITE SPLIT: Split line 9                  18.25           194.70
+2025-08-01  TEAM OFFSITE SPLIT: Split line 11                 20.25           214.95
+2025-08-01  TEAM OFFSITE SPLIT: Split line 13                 22.25           237.20
+2025-08-01  TEAM OFFSITE SPLIT: Split line 15                 24.25           261.45
+2025-08-01  TEAM OFFSITE SPLIT: Split line 17                 26.25           287.70
+2025-08-01  TEAM OFFSITE SPLIT: Split line 19                 28.25           315.95
+2025-09-10  PAPER PLANET RETURN                Paper Planet           30.00   285.95
+            Balance                                                           285.95
+
+## General ledger: 5060 Old Printer Lease
+Date        Description        Contact        Debit  Credit  Balance
+----------  -----------------  -------------  -----  ------  -------
+2025-01-10  LEASE MASTERS JAN  Lease Masters  75.00            75.00
+            Balance                                            75.00
+
+## General ledger: 5070 Payment Processing Fees
+Date        Description               Contact     Debit  Credit  Balance
+----------  ------------------------  ----------  -----  ------  -------
+2025-04-20  Payment for invoice 1005  Cedar & Co  26.40            26.40
+            Balance                                                26.40
+
+## General ledger: 5080 Software
+Date        Description           Contact        Debit  Credit  Balance
+----------  --------------------  -------------  -----  ------  -------
+2025-01-06  CLOUDWARE INC         Cloudware Inc  49.00            49.00
+2025-01-20  CLOUDWARE INC REFUND  Cloudware Inc          49.00     0.00
+            Balance                                                0.00

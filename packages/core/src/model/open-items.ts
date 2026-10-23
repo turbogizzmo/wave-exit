@@ -1,6 +1,6 @@
 import { abs, formatPlain, parseAmount, sum, type Minor } from "../money.ts";
 import type { WaveSnapshot } from "../readers/wave-api/snapshot.ts";
-import type { Account, AgingBucket, AgingRow, Entry, Issue, OpenDocument, PaymentApplication } from "./types.ts";
+import type { Account, AgingBucket, AgingRow, DocumentLine, Entry, Issue, OpenDocument, PaymentApplication } from "./types.ts";
 
 /**
  * Invoices and bills with their payments linked, rebuilt from the ledger and, when
@@ -49,7 +49,13 @@ function status(total: Minor, paid: Minor): OpenDocument["status"] {
   return paid > total ? "overpaid" : "partial";
 }
 
-export function buildOpenItems(entries: Entry[], accounts: Map<string, Account>, snapshot: WaveSnapshot | undefined, exponent: number): OpenItemsResult {
+export function buildOpenItems(
+  entries: Entry[],
+  accounts: Map<string, Account>,
+  snapshot: WaveSnapshot | undefined,
+  exponent: number,
+  accountForWaveId: (waveId: string) => string = (id) => (id ? `wave:${id}` : ""),
+): OpenItemsResult {
   const ctx: Ctx = { entries, accounts, exponent, fmt: (v) => formatPlain(v, exponent) };
   const issues: Issue[] = [];
   const payments: PaymentApplication[] = [];
@@ -80,6 +86,15 @@ export function buildOpenItems(entries: Entry[], accounts: Map<string, Account>,
         date: inv.date, dueDate: inv.dueDate, dueDateKnown: true, total: ledgerTotal || total,
         amountPaid: 0n, amountDue: 0n, wave, status: "unpaid",
         entryIds: (raised.get(inv.number) ?? []).map((e) => e.id), payments: [], waveId: inv.id,
+        poNumber: inv.poNumber, memo: inv.memo, linesFrom: "wave",
+        subtotal: parseAmount(inv.subtotal, exponent), taxTotal: parseAmount(inv.taxTotal, exponent),
+        lines: inv.items.map((it) => ({
+          description: it.description, quantity: it.quantity, unitPrice: it.unitPrice,
+          accountId: accountForWaveId(it.accountId), itemId: it.productId ? `wave:${it.productId}` : "",
+          amount: parseAmount(it.subtotal, exponent),
+          taxAmount: sum(it.taxes.map((t) => parseAmount(t.amount, exponent))),
+          taxRateIds: it.taxes.map((t) => `wave:${t.salesTaxId}`),
+        })),
       };
       for (const p of inv.payments) {
         if (!p.active) continue;
@@ -241,11 +256,30 @@ function ledgerDocument(kind: "invoice" | "bill", n: string, raisedBy: Entry[], 
     return ledgerPayment(e, ctx, kind, n, contactId);
   });
   const amountPaid = sum(payments.map((p) => p.appliedAmount));
+  // Lines rebuilt from the ledger: one per income (or expense) line, tax kept apart.
+  const lines: DocumentLine[] = [];
+  let taxTotal = 0n;
+  for (const e of raisedBy) {
+    for (const l of e.lines) {
+      const r = ctx.accounts.get(l.accountId)!.role;
+      if (r === role) continue;
+      const amount = sign * (l.credit - l.debit);
+      if (r === "salesTax") {
+        taxTotal += amount;
+        continue;
+      }
+      lines.push({
+        description: l.description || e.description, quantity: "1", unitPrice: formatPlain(amount, ctx.exponent),
+        accountId: l.accountId, itemId: "", amount, taxAmount: 0n, taxRateIds: [],
+      });
+    }
+  }
   return {
     id: kind === "invoice" ? `export-invoice:${n}` : `export-bill:${contactId}:${n}`,
     kind, number: n, contactId, date: first.date, dueDate: first.date, dueDateKnown: false,
     total, amountPaid, amountDue: total - amountPaid, status: status(total, amountPaid),
     entryIds: raisedBy.map((e) => e.id), payments, waveId: "",
+    poNumber: "", memo: first.memo, lines, linesFrom: "ledger", subtotal: sum(lines.map((l) => l.amount)), taxTotal,
   };
 }
 

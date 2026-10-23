@@ -1,0 +1,410 @@
+{
+  "format": "wave-exit/universal-package",
+  "format_version": 1,
+  "app_version": "0.3.0",
+  "created_at": "2026-01-20T10:00:00.000Z",
+  "business": {
+    "name": "Maple & Pine Design LLC",
+    "waveId": "QnVzaW5lc3M6MTExMTExMTEtMjIyMi00MzMzLTg0NDQtNTU1NTU1NTU1NTU1",
+    "currency": "USD",
+    "exponent": 2
+  },
+  "input_mode": "connected",
+  "period": {
+    "firstDate": "2025-01-01",
+    "lastDate": "2025-12-31",
+    "cutoverDate": "2025-12-31"
+  },
+  "exported_at": "2026-01-15T12:00:00.000Z",
+  "wave_fetched_at": "2026-01-16T09:00:00.000Z",
+  "scope": "full-history",
+  "fiscal_year_end_month": 12,
+  "source_files": [
+    {
+      "name": "accounting.csv",
+      "bytes": 17362,
+      "sha256": "6bf679c9d53202c6d1f2b7e3a5160205e2c3654c1d3842c15d96bf0b9f190e56",
+      "rows": 91
+    },
+    {
+      "name": "customers.csv",
+      "bytes": 574,
+      "sha256": "90354a3e77c1b76592dd6239b1062454e9a64449a6a2f950e1d10a78b483e513",
+      "rows": 3
+    },
+    {
+      "name": "vendors.csv",
+      "bytes": 367,
+      "sha256": "7b14ae43918faef7fd9740a3576e5d914fb16123ae707bcce1053ef0acc9af99",
+      "rows": 5
+    },
+    {
+      "name": "bill_items.csv",
+      "bytes": 182,
+      "sha256": "699eb62461e147a7c9a7ec048e0803aea0fb29c18edae0f7c5faf399c054ead3",
+      "rows": 1
+    }
+  ],
+  "row_counts": {
+    "accounts.csv": 25,
+    "contacts.csv": 9,
+    "items.csv": 1,
+    "tax_rates.csv": 1,
+    "journal.csv": 91,
+    "invoices.csv": 5,
+    "invoice_lines.csv": 5,
+    "bills.csv": 1,
+    "bill_lines.csv": 1,
+    "payments.csv": 7,
+    "estimates.csv": 1,
+    "estimate_lines.csv": 1,
+    "trial_balance.csv": 25,
+    "aging_ar.csv": 1,
+    "aging_ap.csv": 1,
+    "attachments.csv": 3,
+    "review_items.csv": 4,
+    "attachments/": 3
+  },
+  "checks": [
+    {
+      "id": 1,
+      "title": "Every entry balances",
+      "status": "green",
+      "summary": "All 33 entries have equal debits and credits.",
+      "details": []
+    },
+    {
+      "id": 2,
+      "title": "Total debits equal total credits",
+      "status": "green",
+      "summary": "Debits and credits both total 28,978.32.",
+      "details": []
+    },
+    {
+      "id": 3,
+      "title": "Account balances agree with Wave",
+      "status": "green",
+      "summary": "All 25 accounts match the balance Wave shows today.",
+      "details": []
+    },
+    {
+      "id": 4,
+      "title": "Invoices and payments agree",
+      "status": "amber",
+      "summary": "5 invoices: some amounts need a look (see detail).",
+      "details": [
+        "Wave lists 5 posted invoices; 5 were found in the export.",
+        "Still owed per Wave: 582.50. Still owed per the export's payments: 582.50.",
+        "Accounts receivable balance: 532.50. Open invoices total: 582.50.",
+        "Difference (50.00): receivable entries without an invoice number (customer credits, overpayments, write-offs) usually explain it."
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Bills add up to accounts payable",
+      "status": "green",
+      "summary": "1 bill; open bills total 200.00, equal to accounts payable.",
+      "details": [
+        "Bill handling hasn't yet been checked against a real Wave export that uses bills. Review bills carefully."
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Nothing lost in reading",
+      "status": "green",
+      "summary": "All 91 ledger lines, 8 contacts and 3 receipts were read.",
+      "details": [
+        "accounting.csv: 91 lines in, 91 lines in 33 entries.",
+        "customers.csv + vendors.csv: 8 contacts in.",
+        "Receipts: 3 files in, 1 linked to transactions, 2 kept unlinked."
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Dates are plausible",
+      "status": "green",
+      "summary": "All entries fall between 2025-01-01 and 2025-12-31, before the export date 2026-01-15.",
+      "details": []
+    }
+  ],
+  "settings": {
+    "resolutions": {
+      "ambiguous-account:Expense|Operating Expense|Software": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjE="
+    },
+    "rules": [
+      {
+        "id": "invoice",
+        "enabled": true,
+        "label": "Invoice",
+        "type": "invoice",
+        "when": {
+          "has": [
+            "receivable"
+          ],
+          "only": [
+            "receivable",
+            "income",
+            "salesTax",
+            "expense"
+          ],
+          "net": [
+            {
+              "role": "receivable",
+              "side": "debit"
+            }
+          ],
+          "invoiceNumber": true
+        },
+        "why": "Charges a customer: it increases accounts receivable against income and carries an invoice number."
+      },
+      {
+        "id": "invoice-payment",
+        "enabled": true,
+        "label": "Invoice payment",
+        "type": "invoice-payment",
+        "when": {
+          "has": [
+            "receivable",
+            "money"
+          ],
+          "only": [
+            "receivable",
+            "money",
+            "expense"
+          ],
+          "net": [
+            {
+              "role": "receivable",
+              "side": "credit"
+            }
+          ],
+          "invoiceNumber": true
+        },
+        "why": "Money received against an invoice: it reduces accounts receivable and carries the invoice number."
+      },
+      {
+        "id": "bill",
+        "enabled": true,
+        "label": "Bill",
+        "type": "bill",
+        "when": {
+          "has": [
+            "payable"
+          ],
+          "only": [
+            "payable",
+            "expense",
+            "salesTax",
+            "otherAsset"
+          ],
+          "net": [
+            {
+              "role": "payable",
+              "side": "credit"
+            }
+          ],
+          "billNumber": true
+        },
+        "why": "A vendor's bill: it increases accounts payable against expenses and carries a bill number."
+      },
+      {
+        "id": "bill-payment",
+        "enabled": true,
+        "label": "Bill payment",
+        "type": "bill-payment",
+        "when": {
+          "has": [
+            "payable",
+            "money"
+          ],
+          "only": [
+            "payable",
+            "money"
+          ],
+          "net": [
+            {
+              "role": "payable",
+              "side": "debit"
+            }
+          ],
+          "billNumber": true
+        },
+        "why": "Money paid against a bill: it reduces accounts payable and carries the bill number."
+      },
+      {
+        "id": "transfer-direct",
+        "enabled": true,
+        "label": "Transfer between bank accounts",
+        "type": "transfer",
+        "when": {
+          "only": [
+            "bank"
+          ],
+          "count": [
+            {
+              "role": "bank",
+              "n": 2
+            }
+          ]
+        },
+        "why": "Money moved directly between two bank accounts."
+      },
+      {
+        "id": "credit-card-payment-direct",
+        "enabled": true,
+        "label": "Credit card payment",
+        "type": "credit-card-payment",
+        "when": {
+          "only": [
+            "bank",
+            "creditCard"
+          ],
+          "count": [
+            {
+              "role": "bank",
+              "n": 1
+            },
+            {
+              "role": "creditCard",
+              "n": 1
+            }
+          ],
+          "net": [
+            {
+              "role": "bank",
+              "side": "credit"
+            }
+          ]
+        },
+        "why": "A bank account paid down a credit card."
+      },
+      {
+        "id": "transfer-leg",
+        "enabled": true,
+        "label": "One side of a transfer (through Transfer Clearing)",
+        "type": "transfer-leg",
+        "when": {
+          "has": [
+            "transferClearing",
+            "money"
+          ],
+          "only": [
+            "transferClearing",
+            "money"
+          ],
+          "count": [
+            {
+              "role": "money",
+              "n": 1
+            }
+          ]
+        },
+        "why": "One side of a transfer: Wave records transfers as two entries that meet in a Transfer Clearing account."
+      },
+      {
+        "id": "expense",
+        "enabled": true,
+        "label": "Expense",
+        "type": "expense",
+        "when": {
+          "has": [
+            "money",
+            "expense"
+          ],
+          "only": [
+            "money",
+            "expense"
+          ],
+          "count": [
+            {
+              "role": "money",
+              "n": 1
+            }
+          ],
+          "net": [
+            {
+              "role": "money",
+              "side": "credit"
+            }
+          ]
+        },
+        "why": "Paid from a bank or credit card account to expense accounts."
+      },
+      {
+        "id": "refund",
+        "enabled": true,
+        "label": "Expense refund",
+        "type": "refund",
+        "when": {
+          "has": [
+            "money",
+            "expense"
+          ],
+          "only": [
+            "money",
+            "expense"
+          ],
+          "count": [
+            {
+              "role": "money",
+              "n": 1
+            }
+          ],
+          "net": [
+            {
+              "role": "money",
+              "side": "debit"
+            }
+          ]
+        },
+        "why": "Money came back into a bank or credit card account from expense accounts, such as a vendor refund."
+      },
+      {
+        "id": "deposit",
+        "enabled": true,
+        "label": "Deposit",
+        "type": "deposit",
+        "typeIfCustomer": "sales-receipt",
+        "when": {
+          "has": [
+            "money",
+            "income"
+          ],
+          "only": [
+            "money",
+            "income",
+            "otherAsset",
+            "otherLiability",
+            "salesTax",
+            "expense"
+          ],
+          "count": [
+            {
+              "role": "money",
+              "n": 1
+            }
+          ],
+          "net": [
+            {
+              "role": "money",
+              "side": "debit"
+            },
+            {
+              "role": "income",
+              "side": "credit"
+            }
+          ],
+          "invoiceNumber": false
+        },
+        "why": "Money received into a bank account as income, without an invoice (a sales receipt when a customer is named)."
+      }
+    ],
+    "rules_edited": false
+  },
+  "reader_notes": [
+    {
+      "severity": "info",
+      "message": "bill_items.csv has 1 rows. Wave Exit hasn't yet been checked against a real export that uses bills, so review the bills carefully."
+    }
+  ]
+}

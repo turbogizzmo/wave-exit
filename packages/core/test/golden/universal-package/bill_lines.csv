@@ -1,0 +1,2 @@
+bill_id,line_no,description,quantity,unit_price,account_id,account_code,item_id,amount,tax_amount,tax_rate_ids
+export-bill:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMw==:B-77,1,Bill B-77,1,600.00,wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjQ=,5010,,600.00,0.00,[]

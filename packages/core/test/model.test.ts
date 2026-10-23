@@ -139,7 +139,7 @@ describe("open items", () => {
     expect(card!.refs).toEqual([E(28).id]);
     const c4 = b.checks.find((c) => c.id === 4)!;
     expect(c4.status).toBe("amber");
-    expect(c4.details.join("\n")).toContain("Difference -50.00");
+    expect(c4.details.join("\n")).toContain("Difference (50.00)");
   });
 
   it("builds bills and their payments from the ledger", async () => {
@@ -189,7 +189,7 @@ describe("tie-out checks", () => {
     const b = await books({ api: { balanceOverrides: { checking: "1.00" } } });
     const c3 = b.checks.find((c) => c.id === 3)!;
     expect(c3.status).toBe("red");
-    expect(c3.details[0]).toMatch(/^Business Checking: export [\d.]+, Wave 1\.00/);
+    expect(c3.details[0]).toMatch(/^Business Checking: export [\d,.]+, Wave 1\.00/);
     const card = issue(b, "balance-difference")[0]!;
     expect(card.explanation).toContain("newest change in this export is dated 2025-12-31");
     const accepted = await books({ api: { balanceOverrides: { checking: "1.00" } }, settings: { resolutions: { "balance-difference": "accept" } } });

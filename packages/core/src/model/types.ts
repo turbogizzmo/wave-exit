@@ -9,6 +9,8 @@ export type InputMode = "connected" | "export-file-only";
 export interface Account {
   /** Stable across re-runs: `wave:<id>` when matched to Wave, else `export:<group>:<type>:<name>`. */
   id: string;
+  /** Chart code: Wave's account number when it has a unique one, else assigned by type (1000s assets …). May change if the chart changes; `id` doesn't. */
+  code: string;
   name: string;
   group: AccountGroup;
   type: WaveAccountType;
@@ -126,6 +128,64 @@ export interface OpenDocument {
   entryIds: string[];
   payments: PaymentApplication[];
   waveId: string;
+  poNumber: string;
+  memo: string;
+  /** Line items: from Wave when connected, else rebuilt from the ledger lines. */
+  lines: DocumentLine[];
+  /** Where the lines came from. */
+  linesFrom: "wave" | "ledger";
+  subtotal: Minor;
+  taxTotal: Minor;
+}
+
+export interface DocumentLine {
+  description: string;
+  /** Decimal text as Wave gives it ("12", "1.5"); "1" for rebuilt lines. */
+  quantity: string;
+  unitPrice: string;
+  accountId: string;
+  itemId: string;
+  /** Before tax. Negative for discount lines. */
+  amount: Minor;
+  taxAmount: Minor;
+  taxRateIds: string[];
+}
+
+export interface Item {
+  id: string;
+  name: string;
+  description: string;
+  unitPrice: string;
+  isSold: boolean;
+  isBought: boolean;
+  incomeAccountId: string;
+  expenseAccountId: string;
+  taxRateIds: string[];
+  isArchived: boolean;
+}
+
+export interface TaxRate {
+  id: string;
+  name: string;
+  abbreviation: string;
+  taxNumber: string;
+  /** Rate in force on the last ledger date, as a decimal fraction ("0.0825"). */
+  rate: string;
+  rates: { effective: string; rate: string }[];
+  isCompound: boolean;
+  isRecoverable: boolean;
+  isArchived: boolean;
+}
+
+export interface Estimate {
+  id: string;
+  number: string;
+  contactId: string;
+  date: string;
+  expiryDate: string;
+  status: string;
+  total: Minor;
+  lines: DocumentLine[];
 }
 
 export interface AgingRow {
@@ -177,7 +237,8 @@ export interface Issue {
     | "unlinked-payable"
     | "balance-difference"
     | "wrong-business"
-    | "reader-note";
+    | "reader-note"
+    | "output-limit";
   severity: Severity;
   title: string;
   explanation: string;
@@ -204,6 +265,8 @@ export interface Settings {
   resolutions: Record<string, string>;
   /** Replaces the default classification table when set. */
   rules?: ClassificationRule[];
+  /** Month (1–12) the fiscal year ends in, for the yearly reports. Wave's API doesn't expose it; default 12. */
+  fiscalYearEndMonth?: number;
 }
 
 export interface Books {
@@ -218,6 +281,9 @@ export interface Books {
   invoices: OpenDocument[];
   bills: OpenDocument[];
   payments: PaymentApplication[];
+  items: Item[];
+  taxRates: TaxRate[];
+  estimates: Estimate[];
   agingAr: AgingRow[];
   agingAp: AgingRow[];
   receipts: ReceiptLink[];

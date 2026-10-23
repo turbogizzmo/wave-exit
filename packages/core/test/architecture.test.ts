@@ -24,6 +24,12 @@ describe("layering", () => {
     }
   });
 
+  it("readers and the model never import outputs", () => {
+    for (const f of [...files(join(SRC, "readers")), ...files(join(SRC, "model"))]) {
+      expect(imports(f).filter((i) => i.includes("outputs/")), relative(SRC, f)).toEqual([]);
+    }
+  });
+
   it("no UI, Node or file-system dependencies in the library", () => {
     for (const f of files(SRC)) {
       expect(imports(f).filter((i) => /^(node:|fs$|path$|react|electron|@tauri)/.test(i)), relative(SRC, f)).toEqual([]);

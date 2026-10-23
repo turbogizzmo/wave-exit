@@ -18,3 +18,18 @@ export { agingAt, bucketFor } from "./model/open-items.ts";
 
 export * from "./money.ts";
 export * from "./problems.ts";
+
+// Layer 3: output plug-ins over the books.
+export * from "./outputs/types.ts";
+export * from "./outputs/catalog.ts";
+export { universalPackage, writeUniversalPackage, packageFileName, PACKAGE_FORMAT, type Manifest } from "./outputs/package/universal-package.ts";
+export { readUniversalPackage } from "./outputs/package/read-package.ts";
+export { TABLES, type TableSpec } from "./outputs/package/tables.ts";
+export { glCsv, glRows, GL_COLUMNS } from "./outputs/gl-csv.ts";
+export { excelWorkbook, workbookSheets } from "./outputs/excel.ts";
+export { pdfReportPack } from "./outputs/pdf-pack.ts";
+export { reportPack, tieOutReport } from "./outputs/reports/reports.ts";
+export { renderText, type ReportDocument } from "./outputs/reports/document.ts";
+export { renderPdf } from "./outputs/reports/pdf.ts";
+export * from "./outputs/reports/statements.ts";
+export { scopedLedger, fiscalYearStart, OPENING_ENTRY_ID } from "./model/opening.ts";

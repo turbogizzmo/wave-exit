@@ -1,0 +1,2 @@
+item_id,name,description,unit_price,sold,bought,income_account_id,income_account_code,expense_account_id,expense_account_code,tax_rate_ids,active
+wave:UHJvZHVjdDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=,Services,,125,true,false,wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTY=,4010,,,[],true

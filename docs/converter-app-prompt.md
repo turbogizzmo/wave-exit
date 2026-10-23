@@ -120,6 +120,7 @@ kind, because it is the archive.
 | Import files | **Xero** | Xero's import CSVs; history as manual journals. |
 | Import files | **Zoho Books, FreshBooks, Sage** | Each target's own import templates (VERIFY each format; ship after QBO and Xero). |
 | Import files | **Generic general ledger CSV** | One row per line, debit/credit columns — for any other system. |
+| Import files | **Bank statement files** | One file per bank and credit card account, in the formats accounting systems take as manual bank uploads: OFX, QFX, QBO (Web Connect) and CSV (QBO's 3- or 4-column layout, Xero's statement CSV). History lands in the target's banking screen as "for review" items. Keeps: bank and card reports, reconciliation from there on. Loses: Wave's categories (the accountant categorises or uses bank rules), and anything not in a bank or card account. Overlaps the live bank feed for the same dates. Intuit's help confirms the 3- and 4-column CSV and lists QFX/QBO/OFX ([Intuit](https://quickbooks.intuit.com/learn-support/en-ca/help-article/bank-transactions/format-csv-files-excel-get-bank-transactions/L4BjLWckq_CA_en_CA), read 2026-10-23). VERIFY: whether QBO rejects Web Connect files with an unknown `INTU.BID`, Xero's own list of accepted formats (third-party guides disagree on QIF), and date-format rules per region. Added on request, after step 3. |
 | Direct load | **QuickBooks Online** | The premium output: history as proper typed transactions. See *Direct load*. |
 | Direct load | **Xero** | Same, for Xero. |
 | Plain-text | **Beancount**, **hledger** | One `.beancount` / `.journal` file with open directives, transactions, balance assertions at cutover; receipts linked as `document` entries. |
@@ -576,7 +577,26 @@ Recommend the PDF report pack for each closed year.
    the Wave API (key or OAuth) and checks 1–7. Not yet: payroll CSVs (format unknown,
    Canada only), the Excel variant, and the collection file (step 7).
 3. Outputs that work for everyone: universal package, Excel workbook, PDF report pack,
-   generic GL CSV.
+   generic GL CSV. **Done 2026-10-23** in `packages/core/src/outputs`. Decisions made
+   while building:
+   - The universal package is **always full history**: it is the archive. Scope and
+     cutover are recorded in its manifest. The GL CSV follows the scope setting. The
+     Excel workbook has the full journal, and its trial balance shows both the end date
+     and the cutover date.
+   - **Opening-balances scope**, one opening entry at the cutover date:
+     - balance-sheet accounts at their cutover balances, except AR/AP;
+     - income and expense accounts year to date;
+     - earlier years' profit in retained earnings;
+     - the AR/AP amount left out in an "Opening Balance Equity" line, which importing
+       the open invoices and bills against Opening Balance Equity clears.
+   - **Account codes:** Wave's account number when it is set and unique; otherwise
+     assigned by type (1000s assets … 5000s expenses). The stable key is `account_id`.
+   - **Fiscal year:** calendar unless set (`fiscalYearEndMonth`). Wave's API doesn't
+     expose the business's fiscal year end.
+   - **PDF font:** standard Helvetica (Western European characters only). Other
+     characters print as "?", and the output raises an amber card first.
+   - **README.html** is generated from the same table definitions as the CSV files, so
+     the published column spec can't drift.
 4. The three screens and the project list, including export-file-only mode.
 5. Direct load into QuickBooks Online (sandbox first) with preview, resume and undo.
 6. QBO and Xero import files; Xero direct load; Beancount/hledger.

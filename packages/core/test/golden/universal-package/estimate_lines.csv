@@ -1,0 +1,2 @@
+estimate_id,line_no,description,quantity,unit_price,account_id,account_code,item_id,amount,tax_amount,tax_rate_ids
+wave:RXN0aW1hdGU6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx,1,"Rebrand, phase 1",16,150,wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTY=,4010,wave:UHJvZHVjdDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=,2400.00,0.00,[]

@@ -18,6 +18,7 @@ real/
 !**/test/fixtures/**/*.xlsx
 *.csv
 !**/test/fixtures/**/*.csv
+!**/test/golden/**
 !docs/**/*.csv
 accounts-snapshot-*.json
 invoices-*.json

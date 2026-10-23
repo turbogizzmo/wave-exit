@@ -2,6 +2,7 @@ import type { ReceiptsExport } from "../readers/receipts-export.ts";
 import type { TransactionsExport } from "../readers/transactions-export.ts";
 import type { WaveSnapshot } from "../readers/wave-api/snapshot.ts";
 import { resolveAccounts } from "./accounts.ts";
+import { buildCatalog, waveAccountLookup } from "./catalog.ts";
 import { runChecks } from "./checks.ts";
 import { resolveContacts } from "./contacts.ts";
 import { buildEntries, classifyEntries, pairTransferLegs } from "./entries.ts";
@@ -35,6 +36,7 @@ export function buildBooks(input: BuildInputs): Books {
     resolutions: input.settings?.resolutions ?? {},
     ...(input.settings?.cutoverDate ? { cutoverDate: input.settings.cutoverDate } : {}),
     ...(input.settings?.rules ? { rules: input.settings.rules } : {}),
+    ...(input.settings?.fiscalYearEndMonth ? { fiscalYearEndMonth: input.settings.fiscalYearEndMonth } : {}),
   };
   const rules = settings.rules ?? [...DEFAULT_RULES];
   const exponent = wave?.business.currency.exponent ?? input.business?.exponent ?? 2;
@@ -49,7 +51,8 @@ export function buildBooks(input: BuildInputs): Books {
   classifyEntries(entries, accounts, rules);
   const transferIssues = pairTransferLegs(entries, accounts, settings.resolutions, exponent);
 
-  const open = buildOpenItems(entries, accounts, wave, exponent);
+  const accountFor = waveAccountLookup(acct.accounts);
+  const open = buildOpenItems(entries, accounts, wave, exponent, accountFor);
   const receiptLinks = receipts ? linkReceipts(receipts.receipts, entries, settings.resolutions) : { links: [], issues: [] };
 
   const firstDate = entries[0]?.date ?? "";
@@ -57,6 +60,7 @@ export function buildBooks(input: BuildInputs): Books {
   const cutoverDate = settings.cutoverDate ?? lastDate;
   const exportDate = tx.exportedAt?.toISOString().slice(0, 10) ?? wave?.fetchedAt.slice(0, 10) ?? input.today ?? new Date().toISOString().slice(0, 10);
 
+  const catalog = buildCatalog(wave, accountFor, lastDate, exponent);
   const preIssues: Issue[] = [...acct.issues, ...transferIssues, ...open.issues, ...receiptLinks.issues];
   const checked = runChecks({
     mode,
@@ -97,6 +101,9 @@ export function buildBooks(input: BuildInputs): Books {
     invoices: open.invoices,
     bills: open.bills,
     payments: open.payments,
+    items: catalog.items,
+    taxRates: catalog.taxRates,
+    estimates: catalog.estimates,
     agingAr: agingAt(open.invoices, cutoverDate),
     agingAp: agingAt(open.bills, cutoverDate),
     receipts: receiptLinks.links,

@@ -1,4 +1,4 @@
-import { formatPlain, sum, type Minor } from "../money.ts";
+import { formatDisplay, sum, type Minor } from "../money.ts";
 import type { BusinessMatch } from "./identity.ts";
 import { trialBalance } from "./ledger.ts";
 import type { Account, CheckResult, Entry, Issue, OpenDocument, ReceiptLink, Severity } from "./types.ts";
@@ -29,7 +29,7 @@ export interface CheckInputs {
 }
 
 export function runChecks(x: CheckInputs): { checks: CheckResult[]; issues: Issue[] } {
-  const fmt = (v: Minor) => formatPlain(v, x.exponent);
+  const fmt = (v: Minor) => formatDisplay(v, x.exponent);
   const acc = new Map(x.accounts.map((a) => [a.id, a] as const));
   const name = (id: string) => acc.get(id)?.name ?? id;
   const issues: Issue[] = [];
@@ -150,7 +150,7 @@ export function runChecks(x: CheckInputs): { checks: CheckResult[]; issues: Issu
       id: 5, title: "Bills add up to accounts payable",
       status: ok ? "green" : "amber",
       summary: x.bills.length
-        ? ok ? `${x.bills.length} bills; open bills total ${fmt(openAp)}, equal to accounts payable.` : `Open bills total ${fmt(openAp)} but accounts payable is ${fmt(apBalance)}.`
+        ? ok ? `${x.bills.length} ${x.bills.length === 1 ? "bill" : "bills"}; open bills total ${fmt(openAp)}, equal to accounts payable.` : `Open bills total ${fmt(openAp)} but accounts payable is ${fmt(apBalance)}.`
         : apBalance ? `No bills found, but accounts payable is ${fmt(apBalance)}.` : "No bills in these books.",
       details: x.bills.length ? ["Bill handling hasn't yet been checked against a real Wave export that uses bills. Review bills carefully."] : [],
     });

@@ -437,7 +437,12 @@ export function fakeWaveApi(opts: FakeApiOptions = {}): { fetch: Fetch; calls: {
       case "Products": return biz({ products: page(variables.archived ? [] : [{ id: gid("Product", 1), name: "Services", description: "", unitPrice: "125", isSold: true, isBought: false, isArchived: false, incomeAccount: { id: acct("consulting").waveId }, expenseAccount: null, defaultSalesTaxes: [] }], p, 200) });
       case "SalesTaxes": return biz({ salesTaxes: page(variables.archived ? [] : [{ id: gid("SalesTax", 1), name: "State Sales Tax", abbreviation: "ST", description: "", taxNumber: "", isCompound: false, isRecoverable: false, isArchived: false, rates: [{ effective: "2024-01-01", rate: "0.0825" }] }], p, 200) });
       case "Invoices": return biz({ invoices: page(INVOICES.map(invoiceNode), p, 50) });
-      case "Estimates": return biz({ estimates: page([], p, 50) });
+      case "Estimates": return biz({ estimates: page([{
+        id: gid("Estimate", 1), estimateNumber: "E-12", estimateDate: "2025-11-01", dueDate: "2025-12-01", status: "SENT", title: "Estimate", poNumber: "", memo: "",
+        currency: { code: "USD", exponent: 2 }, customer: { id: CUSTOMERS[3]!.waveId, name: CUSTOMERS[3]!.name },
+        subtotal: money(240000), taxTotal: money(0), discountTotal: money(0), total: money(240000),
+        items: [{ description: "Rebrand, phase 1", quantity: "16", unitPrice: "150", total: money(240000), account: { id: acct("consulting").waveId }, product: { id: gid("Product", 1) } }],
+      }], p, 50) });
       default: return reply(200, { errors: [{ message: `unexpected operation ${operation}` }] });
     }
   };
