@@ -1,0 +1,40 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+*.token
+tokens.json
+*.pem
+*.key
+
+# Real Wave data — never commit (synthetic fixtures live in test/fixtures/ and are allowed)
+data/
+exports/
+real/
+*.zip
+!test/fixtures/**/*.zip
+*.waveexit
+*.xlsx
+!test/fixtures/**/*.xlsx
+*.csv
+!test/fixtures/**/*.csv
+!docs/**/*.csv
+accounts-snapshot-*.json
+invoices-*.json
+
+# Local scratch / introspection dumps that may echo business data
+scratch/
+.introspection/
+
+# Node / Rust / build
+node_modules/
+dist/
+build/
+target/
+*.log
+coverage/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
