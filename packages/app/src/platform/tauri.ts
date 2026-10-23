@@ -90,5 +90,12 @@ export function tauriPlatform(): Platform {
     openExternal: (url) => openUrl(url),
     waveFetch: ((url, init) => tauriFetch(url, init)) as Fetch,
     waveUrl: "https://gql.waveapps.com/graphql/public",
+    qbo: {
+      available: true,
+      fetch: ((url, init) => tauriFetch(url, init)) as Fetch,
+      redirectUri: "http://localhost:53682/callback",
+      // The native side opens Intuit's page in the browser and listens on localhost for the reply.
+      signIn: (authorizeUrl) => invoke<string>("intuit_sign_in", { authorizeUrl }),
+    },
   };
 }

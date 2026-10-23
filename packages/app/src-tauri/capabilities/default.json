@@ -1,12 +1,40 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Wave Exit's main window: talk to Wave's API, open Wave's help pages, show saved outputs. Files are read and written only through the app's own commands.",
-  "windows": ["main"],
+  "description": "Wave Exit's main window: talk to Wave's API and QuickBooks Online (only when the user loads a company), open Wave's help pages, show saved outputs. Files are read and written only through the app's own commands.",
+  "windows": [
+    "main"
+  ],
   "permissions": [
     "core:default",
-    { "identifier": "http:default", "allow": [{ "url": "https://gql.waveapps.com/*" }] },
-    { "identifier": "opener:allow-open-url", "allow": [{ "url": "https://developer.waveapps.com/*" }, { "url": "https://support.waveapps.com/*" }] },
+    {
+      "identifier": "http:default",
+      "allow": [
+        {
+          "url": "https://gql.waveapps.com/*"
+        },
+        {
+          "url": "https://quickbooks.api.intuit.com/*"
+        },
+        {
+          "url": "https://sandbox-quickbooks.api.intuit.com/*"
+        },
+        {
+          "url": "https://oauth.platform.intuit.com/*"
+        }
+      ]
+    },
+    {
+      "identifier": "opener:allow-open-url",
+      "allow": [
+        {
+          "url": "https://developer.waveapps.com/*"
+        },
+        {
+          "url": "https://support.waveapps.com/*"
+        }
+      ]
+    },
     "opener:allow-reveal-item-in-dir"
   ]
 }

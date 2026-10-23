@@ -111,6 +111,12 @@ export class QboClient {
     }
   }
 
+  /** How many records of a type the company has (one read). */
+  async count(entity: string): Promise<number> {
+    const r = (await this.call("GET", `/query?query=${encodeURIComponent(`select count(*) from ${entity}`)}`)) as { QueryResponse?: { totalCount?: number } };
+    return r.QueryResponse?.totalCount ?? 0;
+  }
+
   async create(entity: string, body: Record<string, unknown>, requestId: string): Promise<Record<string, unknown>> {
     const r = (await this.call("POST", `/${entity.toLowerCase()}?requestid=${encodeURIComponent(requestId)}`, body)) as Record<string, Record<string, unknown>>;
     return r[entity]!;

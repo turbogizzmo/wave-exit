@@ -1,0 +1,13 @@
+{
+  "name": "@wave-exit/token-exchange",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Stateless sign-in helper for Wave Exit: swaps Intuit sign-in codes and refresh tokens for tokens, and hosts the https sign-in redirect. Sees no accounting data.",
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p ."
+  }
+}

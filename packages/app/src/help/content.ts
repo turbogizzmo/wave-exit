@@ -220,6 +220,7 @@ export const HELP: HelpSection[] = [
             ["Review the books in a spreadsheet", "Excel workbook"],
             ["Load the history as journal entries into another system", "General ledger CSV"],
             ["Get bank and card history into the new system's banking screen", "Bank statement files"],
+            ["Put the whole history into QuickBooks Online as real transactions", "Load into QuickBooks Online"],
           ] } },
           { p: "Each card says what that destination keeps and what it loses. You choose where to save; Wave Exit never overwrites a file." },
         ],
@@ -237,6 +238,45 @@ export const HELP: HelpSection[] = [
             "If the new system's bank feed is connected, it may download the same transactions. Start the feed the day after the last date in the files, or match instead of adding.",
             "QuickBooks .qbo files need the bank's Intuit ID: open a .qbo file the bank gave you in a text editor, find <INTU.BID>, and enter the number on the card.",
           ] },
+        ],
+      },
+      {
+        id: "qbo-load",
+        title: "Loading into QuickBooks Online",
+        summary: "History as real QuickBooks transactions, with preview, pause, check and undo.",
+        blocks: [
+          { p: "Instead of importing history as journal entries, Wave Exit can create real QuickBooks transactions: expenses, deposits, transfers, credit card payments, invoices with their payments, and bills with theirs. QuickBooks's banking, vendor and sales reports then work for the whole history." },
+          { steps: [
+            "Connect: choose a sandbox (test) company first. Wave Exit opens QuickBooks's sign-in page in your web browser; approve it there.",
+            "The company: Wave Exit checks whether it already has transactions. An empty company is safest; if it isn't empty, you have to confirm.",
+            "Accounts: each Wave account matches an account the company already has (it keeps one accounts receivable, accounts payable and retained earnings), or is created. Change any of them.",
+            "Preview: how many of each record will be created, and the amount going into each account. Wave Exit checks this adds up to the books before you can load.",
+            "Load: you can pause at any time. If something stops it, fix the cause and press Continue; nothing already loaded is created again.",
+            "Check: when it finishes, Wave Exit reads QuickBooks's own trial balance and A/R and A/P aging and compares them with the books.",
+          ] },
+          { list: [
+            "Invoices go in with online payment turned off, so QuickBooks won't email them to your client's customers.",
+            "Each record notes its Wave transaction number in its memo.",
+            "If the company is connected to the bank, start the bank feed the day after the last date loaded, or match feed items instead of adding them.",
+            "Historical sales tax comes in as its own line; set up QuickBooks's sales tax for new transactions.",
+          ] },
+          { p: "Remove everything Wave Exit loaded deletes the transactions it created, newest first, and makes its accounts, contacts and products inactive (QuickBooks doesn't allow deleting those). Anything changed in QuickBooks since is left alone and listed." },
+          { note: "For now, loading works with sandbox (test) companies, using your own free Intuit developer keys. Loading a real company needs Wave Exit's own QuickBooks connection, which is being registered with Intuit." },
+        ],
+      },
+      {
+        id: "qbo-keys",
+        title: "Setting up Intuit developer keys (for testing)",
+        summary: "Free keys from Intuit that let Wave Exit load sandbox companies.",
+        blocks: [
+          { steps: [
+            "Go to developer.intuit.com and sign up (it's free). Intuit creates a sandbox company for you to test in.",
+            "Create an app for QuickBooks Online that uses the Accounting scope.",
+            "In the app, open Keys & credentials (Development). Under Redirect URIs, add exactly: http://localhost:53682/callback",
+            "Copy the Development Client ID and Client Secret into Wave Exit. They're kept in this computer's keychain.",
+            "Back in Wave Exit, choose the sandbox company and press Connect to QuickBooks.",
+          ] },
+          { p: "The keys reach only your own sandbox companies. Keep the Client Secret private; you can make new keys in Intuit's portal at any time." },
         ],
       },
       {

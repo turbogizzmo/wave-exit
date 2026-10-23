@@ -232,6 +232,8 @@ export function fakeQbo(options: FakeQboOptions = {}): FakeQbo {
     if (requestId && replay.has(requestId)) return reply(200, replay.get(requestId));
 
     if (init.method === "GET" && path === "/query") {
+      const c = /select count\(\*\) from (\w+)/i.exec(u.searchParams.get("query") ?? "");
+      if (c) return reply(200, { QueryResponse: { totalCount: table(c[1]!).size } });
       const m = /select \* from (\w+)/i.exec(u.searchParams.get("query") ?? "")!;
       return reply(200, { QueryResponse: { [m[1]!]: [...table(m[1]!).values()] } });
     }

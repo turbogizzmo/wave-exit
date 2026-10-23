@@ -38,4 +38,17 @@ export interface Platform {
   /** fetch for Wave's API (native in the desktop build, proxied in the browser). */
   waveFetch: Fetch;
   waveUrl: string;
+
+  /** QuickBooks Online: sign-in and API calls (desktop only). */
+  qbo: {
+    /** False in builds that can't sign in to QuickBooks, with the reason. */
+    available: boolean;
+    reason?: string;
+    /** fetch for QuickBooks's API and Intuit's token endpoint. */
+    fetch: Fetch;
+    /** The fixed local address Intuit redirects to after sign-in (registered on the Intuit app). */
+    redirectUri: string;
+    /** Open Intuit's sign-in page in the browser and wait for its reply; returns the reply URL. */
+    signIn(authorizeUrl: string): Promise<string>;
+  };
 }

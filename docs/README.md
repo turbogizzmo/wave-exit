@@ -12,3 +12,4 @@
 - [Wave's Data Export file formats](wave-formats.md)
 - [What Wave's public API offers](wave-api.md), and the [full schema](wave-api-schema.txt)
 - [Bank statement file formats](bank-statement-formats.md)
+- [Direct load into QuickBooks Online](qbo-direct-load.md)

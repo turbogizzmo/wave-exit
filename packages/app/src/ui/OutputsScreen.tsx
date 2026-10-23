@@ -6,6 +6,7 @@ import { EngineError } from "../engine/client.ts";
 import type { Problem } from "../engine/protocol.ts";
 import { HelpLink } from "../help/HelpPanel.tsx";
 import { formatDate, plural, ProblemBox, Progress } from "./common.tsx";
+import { QboLoad } from "./QboLoad.tsx";
 
 /** Outputs: tick any number of cards and press Create. The universal package is always made. */
 
@@ -14,7 +15,6 @@ const GROUPS: [OutputGroup, string][] = [["archive", "Archive"], ["review", "Rev
 const COMING: { group: OutputGroup; title: string; summary: string }[] = [
   { group: "import-files", title: "QuickBooks Online import files", summary: "QuickBooks' own import templates, with history as journal entries." },
   { group: "import-files", title: "Xero import files", summary: "Xero's import files, with history as manual journals." },
-  { group: "direct-load", title: "Load into QuickBooks Online", summary: "History as real QuickBooks transactions, with preview, resume and undo." },
   { group: "direct-load", title: "Load into Xero", summary: "The same, for Xero." },
   { group: "plain-text", title: "Beancount and hledger", summary: "One plain-text ledger file with balance checks." },
 ];
@@ -29,12 +29,14 @@ export function OutputsScreen({ session, goReview }: { session: Session; goRevie
   const [problem, setProblem] = useState<Problem | null>(null);
   const [done, setDone] = useState<{ folder: string; files: string[] } | null>(null);
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
+  const [loadingQbo, setLoadingQbo] = useState(false);
 
   useEffect(() => {
     if (books) void engine.validate().then(setWarnings, () => setWarnings({}));
   }, [engine, books]);
 
   if (!books) return <div className="card"><h2>No books yet</h2><p>Add the transactions export on the Inputs screen first.</p></div>;
+  if (loadingQbo) return <QboLoad session={session} onClose={() => setLoadingQbo(false)} />;
 
   const toggle = (id: string) => setChosen((s) => {
     const n = new Set(s);
@@ -77,7 +79,7 @@ export function OutputsScreen({ session, goReview }: { session: Session; goRevie
       {GROUPS.map(([group, label]) => {
         const plugins = OUTPUTS.filter((o) => o.group === group);
         const coming = COMING.filter((c) => c.group === group);
-        if (!plugins.length && !coming.length) return null;
+        if (!plugins.length && !coming.length && group !== "direct-load") return null;
         return (
           <section key={group}>
             <div className="group-title">{label}</div>
@@ -113,6 +115,23 @@ export function OutputsScreen({ session, goReview }: { session: Session; goRevie
                   </div>
                 );
               })}
+              {group === "direct-load" ? (
+                <div className="card output-card">
+                  <span aria-hidden="true" style={{ width: 18 }} />
+                  <div className="stack">
+                    <h3>Load into QuickBooks Online {p.qbo?.record?.status === "finished" ? <span className="badge green">Loaded into {p.qbo.companyName}</span> : null}</h3>
+                    <p className="small">History as real QuickBooks transactions (expenses, deposits, transfers, invoices and payments), with a preview first, pause and continue, a check against QuickBooks's own reports, and undo.</p>
+                    <div className="row" style={{ alignItems: "flex-start", gap: 24 }}>
+                      <div style={{ flex: "1 1 280px" }}><div className="small muted">Keeps</div><ul className="keeps small plain"><li>Every transaction, as the matching QuickBooks type</li><li>Invoices and bills linked to their payments, so aging works</li><li>Customers, vendors and the chart of accounts</li></ul></div>
+                      <div style={{ flex: "1 1 280px" }}><div className="small muted">Loses</div><ul className="loses small plain"><li>Receipt files (keep the universal package)</li><li>Sales tax as QuickBooks calculates it: historical tax comes in as its own line</li></ul></div>
+                    </div>
+                    <div className="row">
+                      <button className="button" disabled={!!session.blocked} onClick={() => setLoadingQbo(true)}>{p.qbo ? "Open the QuickBooks load" : "Set up loading into QuickBooks"}</button>
+                      <HelpLink to="qbo-load">How it works</HelpLink>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
               {coming.map((c) => (
                 <div key={c.title} className="card output-card" aria-disabled="true" style={{ opacity: 0.6 }}>
                   <input type="checkbox" disabled aria-label={`${c.title} (not available yet)`} />

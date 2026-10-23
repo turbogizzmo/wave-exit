@@ -46,7 +46,25 @@ export interface Project {
   status: ProjectStatus | null;
   outputs: { at: string; ids: string[]; folder: string; files: string[] }[];
   outputOptions: Record<string, Record<string, unknown>>;
+  /** Loading into QuickBooks Online: the company, the mapping-screen answers and the load record. */
+  qbo?: QboState;
 }
+
+export interface QboState {
+  environment: "sandbox" | "production";
+  realmId: string;
+  companyName: string;
+  /** Wave Exit account ID → QuickBooks account ID or "create". */
+  overrides: Record<string, string>;
+  /** The user confirmed loading into a company that already has transactions. */
+  confirmedNotEmpty: boolean;
+  record: import("@wave-exit/core").qbo.LoadRecord | null;
+  lastCheck: import("@wave-exit/core").CheckResult | null;
+}
+
+/** Keychain entries for QuickBooks: the company's tokens, and the developer's own Intuit keys (testing). */
+export const qboTokensName = (projectId: string, realmId: string) => `qbo-tokens:${projectId}:${realmId}`;
+export const INTUIT_DEV_KEYS = "intuit-dev-keys";
 
 export const SCHEMA = 1;
 
@@ -107,8 +125,10 @@ export class ProjectStore {
   }
 
   async remove(id: string): Promise<void> {
+    const p = await this.load(id).catch(() => null);
     await this.platform.storage.removeProject(id);
     await this.platform.keychain.remove(waveKeyName(id));
+    if (p?.qbo) await this.platform.keychain.remove(qboTokensName(id, p.qbo.realmId));
   }
 
   /** Keep an input exactly as given: one file stays as is, several are kept together in a ZIP. */

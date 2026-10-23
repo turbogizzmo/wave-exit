@@ -135,5 +135,12 @@ export function webPlatform(opts: { fetch?: Fetch } = {}): Platform {
     openExternal: async (url) => void window.open(url, "_blank", "noopener"),
     waveFetch: opts.fetch ?? (((url, init) => fetch(url, init)) as Fetch),
     waveUrl: "/wave-graphql",
+    qbo: {
+      available: false,
+      reason: "Loading into QuickBooks works in the desktop app, which can sign in to QuickBooks and keep the connection in the computer's keychain.",
+      fetch: (() => Promise.reject(new Error("not available in the browser build"))) as unknown as Fetch,
+      redirectUri: "http://localhost:53682/callback",
+      signIn: () => Promise.reject(new Error("not available in the browser build")),
+    },
   };
 }

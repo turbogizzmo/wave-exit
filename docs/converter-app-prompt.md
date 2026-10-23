@@ -618,6 +618,11 @@ Recommend the PDF report pack for each closed year.
      - a Linux keychain backend;
      - signing (step 9).
 5. Direct load into QuickBooks Online (sandbox first) with preview, resume and undo.
+   **Built 2026-10-23, sandbox only** (`packages/core/src/targets/qbo`, the app's Direct
+   load screen, `packages/token-exchange`). Tested against an in-memory QuickBooks that
+   enforces Intuit's documented rules; not yet run against a real Intuit sandbox, which
+   needs the user's own developer keys. Loading into a real company stays off until then.
+   Details, verified facts and open items: `docs/qbo-direct-load.md`.
 6. QBO and Xero import files; Xero direct load; Beancount/hledger.
 7. Collect mode.
 8. Zoho Books, FreshBooks, Sage import files.

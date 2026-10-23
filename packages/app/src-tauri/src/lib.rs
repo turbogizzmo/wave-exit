@@ -269,6 +269,69 @@ fn write_output(granted: State<'_, Granted>, request: Request<'_>) -> Res<String
     Ok(target.to_string_lossy().into_owned())
 }
 
+// ---- QuickBooks sign-in -----------------------------------------------------------
+
+/// The local address Intuit redirects to after sign-in. It must match the redirect
+/// URI registered on the Intuit app exactly (Intuit allows http://localhost only for
+/// sandbox/development keys; production uses the token-exchange service's https page).
+const INTUIT_LOOPBACK_PORT: u16 = 53682;
+
+/// Open Intuit's sign-in page in the user's browser, wait (up to 5 minutes) for the
+/// redirect on localhost, and return its URL. Only Intuit's own sign-in address is opened.
+#[tauri::command]
+async fn intuit_sign_in(app: AppHandle, authorize_url: String) -> Res<String> {
+    use tauri_plugin_opener::OpenerExt;
+    if !authorize_url.starts_with("https://appcenter.intuit.com/connect/oauth2?") {
+        return Err("not an Intuit sign-in address".into());
+    }
+    let listeners: Vec<std::net::TcpListener> = ["127.0.0.1", "[::1]"]
+        .iter()
+        .filter_map(|h| std::net::TcpListener::bind(format!("{h}:{INTUIT_LOOPBACK_PORT}")).ok())
+        .collect();
+    if listeners.is_empty() {
+        return Err(format!("Port {INTUIT_LOOPBACK_PORT} is in use by another program, so the QuickBooks sign-in reply can't be received. Close it and try again."));
+    }
+    for l in &listeners {
+        l.set_nonblocking(true).map_err(err)?;
+    }
+    app.opener().open_url(&authorize_url, None::<&str>).map_err(err)?;
+    tauri::async_runtime::spawn_blocking(move || wait_for_callback(listeners))
+        .await
+        .map_err(err)?
+}
+
+fn wait_for_callback(listeners: Vec<std::net::TcpListener>) -> Res<String> {
+    use std::io::{Read, Write};
+    let deadline = std::time::Instant::now() + std::time::Duration::from_secs(300);
+    while std::time::Instant::now() < deadline {
+        for l in &listeners {
+            let Ok((mut stream, _)) = l.accept() else { continue };
+            let _ = stream.set_nonblocking(false);
+            let _ = stream.set_read_timeout(Some(std::time::Duration::from_secs(5)));
+            let mut buf = [0u8; 8192];
+            let n = stream.read(&mut buf).unwrap_or(0);
+            let head = String::from_utf8_lossy(&buf[..n]);
+            let path = head.lines().next().and_then(|l| l.split_whitespace().nth(1)).unwrap_or("").to_string();
+            if !path.starts_with("/callback?") {
+                let _ = stream.write_all(b"HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\nConnection: close\r\n\r\n");
+                continue;
+            }
+            let ok = !path.contains("error=");
+            let body = format!(
+                "<!doctype html><meta charset=utf-8><title>Wave Exit</title><body style=\"font:16px -apple-system,Segoe UI,sans-serif;max-width:32em;margin:15vh auto;padding:0 16px\"><h1>{}</h1><p>{}</p></body>",
+                if ok { "Connected to QuickBooks" } else { "QuickBooks didn't connect" },
+                if ok { "You can close this tab and go back to Wave Exit." } else { "Go back to Wave Exit to see what happened and try again." }
+            );
+            let _ = stream.write_all(
+                format!("HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\nCache-Control: no-store\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{}", body.len(), body).as_bytes(),
+            );
+            return Ok(format!("http://localhost:{INTUIT_LOOPBACK_PORT}{path}"));
+        }
+        std::thread::sleep(std::time::Duration::from_millis(100));
+    }
+    Err("No reply from QuickBooks within 5 minutes. Try connecting again.".into())
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -296,7 +359,8 @@ pub fn run() {
             list_dropped,
             read_input_file,
             pick_output_folder,
-            write_output
+            write_output,
+            intuit_sign_in
         ])
         .run(tauri::generate_context!())
         .expect("error while running Wave Exit");
