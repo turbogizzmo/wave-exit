@@ -4,10 +4,11 @@ import { excelWorkbook } from "./excel.ts";
 import { glCsv } from "./gl-csv.ts";
 import { universalPackage } from "./package/universal-package.ts";
 import { pdfReportPack } from "./pdf-pack.ts";
+import { bankStatementFiles } from "./statements/bank-statements.ts";
 import type { OutputContext, OutputFile, OutputPlugin } from "./types.ts";
 
 /** Every output card, in the order the Outputs screen shows them. A new destination is one line here. */
-export const OUTPUTS: readonly OutputPlugin[] = [universalPackage, pdfReportPack, excelWorkbook, glCsv];
+export const OUTPUTS: readonly OutputPlugin[] = [universalPackage, pdfReportPack, excelWorkbook, glCsv, bankStatementFiles];
 
 export class OutputsBlocked extends Error {
   readonly issues: Issue[];

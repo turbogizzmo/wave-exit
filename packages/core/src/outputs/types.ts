@@ -29,6 +29,8 @@ export type Aspect =
   | "tie-out"
   | "yearly-statements"
   | "review-answers"
+  | "bank-transactions"
+  | "categories"
   | "source-checksums";
 
 export interface Claim {
@@ -57,6 +59,8 @@ export interface OutputContext {
   appVersion: string;
   /** Receipt files by name, for outputs that carry attachments. */
   attachments: ReadonlyMap<string, Uint8Array>;
+  /** Per-output settings the user chose on the output card, by output ID. */
+  options?: Readonly<Record<string, Readonly<Record<string, unknown>>>>;
 }
 
 export interface OutputPlugin {

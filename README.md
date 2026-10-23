@@ -24,6 +24,7 @@ packages/core/            pure TypeScript, no UI or Node dependencies
     reports/              statements, tie-out report and report pack, PDF renderer
     excel.ts, xlsx.ts     review workbook on a small built-in XLSX writer
     gl-csv.ts             generic general ledger CSV
+    statements/           bank statement files (OFX/QFX/QBO, QuickBooks and Xero CSV)
   test/fixtures/          synthetic business (generator + committed ZIPs and API JSON)
   test/golden/            golden output files (update with `npx vitest run -u` after checking the diff)
 ```
@@ -51,5 +52,6 @@ After changing `packages/core/test/fixtures/synthetic.ts`, run `npm run fixtures
 - [`docs/wave-formats.md`](docs/wave-formats.md): the Data Export file formats, profiled from a real export
 - [`docs/wave-api.md`](docs/wave-api.md): what the Wave public API offers, tested live
 - [`docs/wave-api-schema.txt`](docs/wave-api-schema.txt): the full introspected schema
+- [`docs/bank-statement-formats.md`](docs/bank-statement-formats.md): bank statement file formats, with sources
 
 Real Wave data and access keys never go in this repo. Tests use synthetic fixtures only.

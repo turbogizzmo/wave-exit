@@ -28,6 +28,8 @@ export { TABLES, type TableSpec } from "./outputs/package/tables.ts";
 export { glCsv, glRows, GL_COLUMNS } from "./outputs/gl-csv.ts";
 export { excelWorkbook, workbookSheets } from "./outputs/excel.ts";
 export { pdfReportPack } from "./outputs/pdf-pack.ts";
+export { bankStatementFiles, accountStatements, splitStatement, quickBooksCsv, xeroCsv, type BankStatementOptions } from "./outputs/statements/bank-statements.ts";
+export { writeOfx, ofxText, type Statement, type StatementLine } from "./outputs/statements/ofx.ts";
 export { reportPack, tieOutReport } from "./outputs/reports/reports.ts";
 export { renderText, type ReportDocument } from "./outputs/reports/document.ts";
 export { renderPdf } from "./outputs/reports/pdf.ts";
