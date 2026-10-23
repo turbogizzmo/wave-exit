@@ -1,0 +1,1454 @@
+[
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Business Checking",
+      "AccountType": "Bank",
+      "AccountSubType": "Checking"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDg=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Transfer Clearing",
+      "AccountType": "Other Current Asset",
+      "AccountSubType": "OtherCurrentAssets"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDI=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Business Savings",
+      "AccountType": "Bank",
+      "AccountSubType": "Savings"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDM=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Visa Card",
+      "AccountType": "Credit Card",
+      "AccountSubType": "CreditCard"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjc=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Depreciation",
+      "AccountType": "Expense",
+      "AccountSubType": "OfficeGeneralAdministrativeExpenses"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjE=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Software",
+      "AccountType": "Expense",
+      "AccountSubType": "OfficeGeneralAdministrativeExpenses"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjg=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Equipment",
+      "AccountType": "Fixed Asset",
+      "AccountSubType": "MachineryAndEquipment"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjk=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Prepaid Expenses",
+      "AccountType": "Other Current Asset",
+      "AccountSubType": "OtherCurrentAssets"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjM=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Old Printer Lease",
+      "AccountType": "Expense",
+      "AccountSubType": "OfficeGeneralAdministrativeExpenses"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjQ=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Printing",
+      "AccountType": "Cost of Goods Sold",
+      "AccountSubType": "SuppliesMaterialsCogs"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjU=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Payment Processing Fees",
+      "AccountType": "Expense",
+      "AccountSubType": "BankCharges"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjY=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Meals & Entertainment",
+      "AccountType": "Expense",
+      "AccountSubType": "OfficeGeneralAdministrativeExpenses"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTc=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Interest Income",
+      "AccountType": "Other Income",
+      "AccountSubType": "OtherMiscellaneousIncome"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTg=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Discounts Given",
+      "AccountType": "Income",
+      "AccountSubType": "DiscountsRefundsGiven"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTk=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Office Supplies",
+      "AccountType": "Expense",
+      "AccountSubType": "OfficeGeneralAdministrativeExpenses"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTM=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Sales Tax Payable",
+      "AccountType": "Other Current Liability",
+      "AccountSubType": "SalesTaxPayable"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTQ=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Owner Investment / Drawings",
+      "AccountType": "Equity",
+      "AccountSubType": "OwnersEquity"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTU=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Sales",
+      "AccountType": "Income",
+      "AccountSubType": "ServiceFeeIncome"
+    }
+  },
+  {
+    "key": "account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTY=",
+    "entity": "Account",
+    "phase": 0,
+    "body": {
+      "Name": "Consulting Income",
+      "AccountType": "Income",
+      "AccountSubType": "ServiceFeeIncome"
+    }
+  },
+  {
+    "key": "contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx",
+    "entity": "Customer",
+    "phase": 1,
+    "body": {
+      "DisplayName": "Birch Studio",
+      "PrimaryEmailAddr": {
+        "Address": "accounts@birch.example"
+      },
+      "BillAddr": {
+        "Line1": "",
+        "Line2": "",
+        "City": "Portland",
+        "CountrySubDivisionCode": "",
+        "PostalCode": "",
+        "Country": ""
+      }
+    }
+  },
+  {
+    "key": "contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAy",
+    "entity": "Customer",
+    "phase": 1,
+    "body": {
+      "DisplayName": "Cedar & Co",
+      "PrimaryEmailAddr": {
+        "Address": "ap@cedar.example"
+      },
+      "BillAddr": {
+        "Line1": "",
+        "Line2": "",
+        "City": "",
+        "CountrySubDivisionCode": "",
+        "PostalCode": "",
+        "Country": ""
+      }
+    }
+  },
+  {
+    "key": "contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAz",
+    "entity": "Customer",
+    "phase": 1,
+    "body": {
+      "DisplayName": "Walk-in Customer",
+      "BillAddr": {
+        "Line1": "",
+        "Line2": "",
+        "City": "",
+        "CountrySubDivisionCode": "",
+        "PostalCode": "",
+        "Country": ""
+      }
+    }
+  },
+  {
+    "key": "contact:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMg==",
+    "entity": "Vendor",
+    "phase": 1,
+    "body": {
+      "DisplayName": "Cloudware Inc"
+    }
+  },
+  {
+    "key": "contact:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMQ==",
+    "entity": "Vendor",
+    "phase": 1,
+    "body": {
+      "DisplayName": "Paper Planet"
+    }
+  },
+  {
+    "key": "contact:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMw==",
+    "entity": "Vendor",
+    "phase": 1,
+    "body": {
+      "DisplayName": "Granite Print Co"
+    }
+  },
+  {
+    "key": "contact:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwNA==",
+    "entity": "Vendor",
+    "phase": 1,
+    "body": {
+      "DisplayName": "Corner Coffee"
+    }
+  },
+  {
+    "key": "contact:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwNQ==",
+    "entity": "Vendor",
+    "phase": 1,
+    "body": {
+      "DisplayName": "Lease Masters"
+    }
+  },
+  {
+    "key": "item:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTg=",
+    "entity": "Item",
+    "phase": 2,
+    "body": {
+      "Name": "Discounts Given (from Wave)",
+      "Type": "Service",
+      "IncomeAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTg=>"
+      }
+    }
+  },
+  {
+    "key": "item:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTM=",
+    "entity": "Item",
+    "phase": 2,
+    "body": {
+      "Name": "Sales Tax Payable (from Wave)",
+      "Type": "Service",
+      "IncomeAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTM=>"
+      }
+    }
+  },
+  {
+    "key": "item:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTU=",
+    "entity": "Item",
+    "phase": 2,
+    "body": {
+      "Name": "Sales (from Wave)",
+      "Type": "Service",
+      "IncomeAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTU=>"
+      }
+    }
+  },
+  {
+    "key": "item:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTY=",
+    "entity": "Item",
+    "phase": 2,
+    "body": {
+      "Name": "Consulting Income (from Wave)",
+      "Type": "Service",
+      "IncomeAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTY=>"
+      }
+    }
+  },
+  {
+    "key": "doc:wave:SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+    "entity": "Invoice",
+    "phase": 3,
+    "body": {
+      "TxnDate": "2025-02-01",
+      "DueDate": "2025-03-03",
+      "DocNumber": "1001",
+      "PrivateNote": "Wave #9000000000000000006",
+      "ARAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDQ=>"
+      },
+      "CustomerRef": {
+        "value": "<contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx>"
+      },
+      "AllowOnlineCreditCardPayment": false,
+      "AllowOnlineACHPayment": false,
+      "Line": [
+        {
+          "DetailType": "SalesItemLineDetail",
+          "Amount": 1440,
+          "Description": "Brand workshop",
+          "SalesItemLineDetail": {
+            "ItemRef": {
+              "value": "<item:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTY=>"
+            },
+            "Qty": 12,
+            "UnitPrice": 120
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "doc:wave:SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDI=",
+    "entity": "Invoice",
+    "phase": 3,
+    "body": {
+      "TxnDate": "2025-02-10",
+      "DueDate": "2025-03-12",
+      "DocNumber": "1002",
+      "PrivateNote": "Wave #9000000000000000009",
+      "ARAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDQ=>"
+      },
+      "CustomerRef": {
+        "value": "<contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAy>"
+      },
+      "AllowOnlineCreditCardPayment": false,
+      "AllowOnlineACHPayment": false,
+      "Line": [
+        {
+          "DetailType": "SalesItemLineDetail",
+          "Amount": 1000,
+          "Description": "Logo package",
+          "SalesItemLineDetail": {
+            "ItemRef": {
+              "value": "<item:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTU=>"
+            },
+            "Qty": 1,
+            "UnitPrice": 1000
+          }
+        },
+        {
+          "DetailType": "SalesItemLineDetail",
+          "Amount": 82.5,
+          "Description": "Sales tax",
+          "SalesItemLineDetail": {
+            "ItemRef": {
+              "value": "<item:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTM=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "doc:wave:SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDM=",
+    "entity": "Invoice",
+    "phase": 3,
+    "body": {
+      "TxnDate": "2025-03-15",
+      "DueDate": "2025-04-14",
+      "DocNumber": "1003",
+      "PrivateNote": "Wave #9000000000000000011",
+      "ARAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDQ=>"
+      },
+      "CustomerRef": {
+        "value": "<contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx>"
+      },
+      "AllowOnlineCreditCardPayment": false,
+      "AllowOnlineACHPayment": false,
+      "Line": [
+        {
+          "DetailType": "SalesItemLineDetail",
+          "Amount": 1960,
+          "Description": "Website build",
+          "SalesItemLineDetail": {
+            "ItemRef": {
+              "value": "<item:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTY=>"
+            },
+            "Qty": 16,
+            "UnitPrice": 122.5
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "doc:wave:SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDQ=",
+    "entity": "Invoice",
+    "phase": 3,
+    "body": {
+      "TxnDate": "2025-03-16",
+      "DueDate": "2025-04-15",
+      "DocNumber": "1004",
+      "PrivateNote": "Wave #9000000000000000012",
+      "ARAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDQ=>"
+      },
+      "CustomerRef": {
+        "value": "<contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx>"
+      },
+      "AllowOnlineCreditCardPayment": false,
+      "AllowOnlineACHPayment": false,
+      "Line": [
+        {
+          "DetailType": "SalesItemLineDetail",
+          "Amount": 750,
+          "Description": "Print run",
+          "SalesItemLineDetail": {
+            "ItemRef": {
+              "value": "<item:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTU=>"
+            },
+            "Qty": 3,
+            "UnitPrice": 250
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "doc:wave:SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDU=",
+    "entity": "Invoice",
+    "phase": 3,
+    "body": {
+      "TxnDate": "2025-04-05",
+      "DueDate": "2025-05-05",
+      "DocNumber": "1005",
+      "PrivateNote": "Wave #9000000000000000014",
+      "ARAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDQ=>"
+      },
+      "CustomerRef": {
+        "value": "<contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAy>"
+      },
+      "AllowOnlineCreditCardPayment": false,
+      "AllowOnlineACHPayment": false,
+      "Line": [
+        {
+          "DetailType": "SalesItemLineDetail",
+          "Amount": 1000,
+          "Description": "Invoice 1005",
+          "SalesItemLineDetail": {
+            "ItemRef": {
+              "value": "<item:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTU=>"
+            }
+          }
+        },
+        {
+          "DetailType": "SalesItemLineDetail",
+          "Amount": -100,
+          "Description": "Loyalty discount",
+          "SalesItemLineDetail": {
+            "ItemRef": {
+              "value": "<item:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTg=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "doc:export-bill:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMw==:B-77",
+    "entity": "Bill",
+    "phase": 3,
+    "body": {
+      "TxnDate": "2025-07-01",
+      "DueDate": "2025-07-31",
+      "DocNumber": "B-77",
+      "PrivateNote": "Wave #9000000000000000024",
+      "APAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTI=>"
+      },
+      "VendorRef": {
+        "value": "<contact:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMw==>"
+      },
+      "Line": [
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 600,
+          "Description": "Bill B-77",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjQ=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000007",
+    "entity": "Payment",
+    "phase": 4,
+    "body": {
+      "CustomerRef": {
+        "value": "<contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx>"
+      },
+      "TotalAmt": 500,
+      "TxnDate": "2025-02-15",
+      "DepositToAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+      },
+      "PrivateNote": "Wave #9000000000000000007 – Payment for invoice 1001",
+      "Line": [
+        {
+          "Amount": 500,
+          "LinkedTxn": [
+            {
+              "TxnId": "<doc:wave:SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>",
+              "TxnType": "Invoice"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000008",
+    "entity": "Payment",
+    "phase": 4,
+    "body": {
+      "CustomerRef": {
+        "value": "<contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx>"
+      },
+      "TotalAmt": 940,
+      "TxnDate": "2025-03-01",
+      "DepositToAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+      },
+      "PrivateNote": "Wave #9000000000000000008 – Payment for invoice 1001",
+      "Line": [
+        {
+          "Amount": 940,
+          "LinkedTxn": [
+            {
+              "TxnId": "<doc:wave:SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>",
+              "TxnType": "Invoice"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000010",
+    "entity": "Payment",
+    "phase": 4,
+    "body": {
+      "CustomerRef": {
+        "value": "<contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAy>"
+      },
+      "TotalAmt": 500,
+      "TxnDate": "2025-03-10",
+      "DepositToAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+      },
+      "PrivateNote": "Wave #9000000000000000010 – Payment for invoice 1002",
+      "Line": [
+        {
+          "Amount": 500,
+          "LinkedTxn": [
+            {
+              "TxnId": "<doc:wave:SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDI=>",
+              "TxnType": "Invoice"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000013",
+    "entity": "Payment",
+    "phase": 4,
+    "body": {
+      "CustomerRef": {
+        "value": "<contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx>"
+      },
+      "TotalAmt": 2710,
+      "TxnDate": "2025-04-01",
+      "DepositToAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+      },
+      "PrivateNote": "Wave #9000000000000000013 – Payment for invoices 1003, 1004",
+      "Line": [
+        {
+          "Amount": 1960,
+          "LinkedTxn": [
+            {
+              "TxnId": "<doc:wave:SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDM=>",
+              "TxnType": "Invoice"
+            }
+          ]
+        },
+        {
+          "Amount": 750,
+          "LinkedTxn": [
+            {
+              "TxnId": "<doc:wave:SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDQ=>",
+              "TxnType": "Invoice"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000015",
+    "entity": "Payment",
+    "phase": 4,
+    "body": {
+      "CustomerRef": {
+        "value": "<contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAy>"
+      },
+      "TotalAmt": 900,
+      "TxnDate": "2025-04-20",
+      "DepositToAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+      },
+      "PrivateNote": "Wave #9000000000000000015 – Payment for invoice 1005",
+      "Line": [
+        {
+          "Amount": 900,
+          "LinkedTxn": [
+            {
+              "TxnId": "<doc:wave:SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDU=>",
+              "TxnType": "Invoice"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000025",
+    "entity": "BillPayment",
+    "phase": 4,
+    "body": {
+      "VendorRef": {
+        "value": "<contact:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMw==>"
+      },
+      "TotalAmt": 400,
+      "TxnDate": "2025-07-15",
+      "PrivateNote": "Wave #9000000000000000025 – Payment for bill B-77",
+      "Line": [
+        {
+          "Amount": 400,
+          "LinkedTxn": [
+            {
+              "TxnId": "<doc:export-bill:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMw==:B-77>",
+              "TxnType": "Bill"
+            }
+          ]
+        }
+      ],
+      "PayType": "Check",
+      "CheckPayment": {
+        "BankAccountRef": {
+          "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+        }
+      }
+    }
+  },
+  {
+    "key": "txn:9000000000000000002",
+    "entity": "Purchase",
+    "phase": 5,
+    "body": {
+      "PaymentType": "Cash",
+      "AccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+      },
+      "TxnDate": "2025-01-05",
+      "PrivateNote": "Wave #9000000000000000002 – PAPER PLANET #221",
+      "EntityRef": {
+        "value": "<contact:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMQ==>",
+        "type": "Vendor"
+      },
+      "Line": [
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 123.45,
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTk=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000003",
+    "entity": "Purchase",
+    "phase": 5,
+    "body": {
+      "PaymentType": "CreditCard",
+      "AccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDM=>"
+      },
+      "TxnDate": "2025-01-06",
+      "PrivateNote": "Wave #9000000000000000003 – CLOUDWARE INC",
+      "EntityRef": {
+        "value": "<contact:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMg==>",
+        "type": "Vendor"
+      },
+      "Line": [
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 49,
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjE=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000005",
+    "entity": "Purchase",
+    "phase": 5,
+    "body": {
+      "PaymentType": "Cash",
+      "AccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+      },
+      "TxnDate": "2025-01-10",
+      "PrivateNote": "Wave #9000000000000000005 – LEASE MASTERS JAN",
+      "EntityRef": {
+        "value": "<contact:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwNQ==>",
+        "type": "Vendor"
+      },
+      "Line": [
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 75,
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjM=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000004",
+    "entity": "Purchase",
+    "phase": 5,
+    "body": {
+      "PaymentType": "CreditCard",
+      "AccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDM=>"
+      },
+      "TxnDate": "2025-01-20",
+      "PrivateNote": "Wave #9000000000000000004 – CLOUDWARE INC REFUND",
+      "Credit": true,
+      "EntityRef": {
+        "value": "<contact:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMg==>",
+        "type": "Vendor"
+      },
+      "Line": [
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 49,
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjE=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000016",
+    "entity": "Transfer",
+    "phase": 5,
+    "body": {
+      "FromAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+      },
+      "ToAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDI=>"
+      },
+      "Amount": 1800,
+      "TxnDate": "2025-05-01",
+      "PrivateNote": "Wave #9000000000000000016 – Move to savings"
+    }
+  },
+  {
+    "key": "txn:9000000000000000017+9000000000000000018",
+    "entity": "Transfer",
+    "phase": 5,
+    "body": {
+      "FromAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+      },
+      "ToAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDI=>"
+      },
+      "Amount": 300,
+      "TxnDate": "2025-05-15",
+      "PrivateNote": "Wave #9000000000000000017+9000000000000000018 – ONLINE TRANSFER TO SAVINGS"
+    }
+  },
+  {
+    "key": "txn:9000000000000000019+9000000000000000020",
+    "entity": "CreditCardPayment",
+    "phase": 5,
+    "body": {
+      "TxnDate": "2025-05-20",
+      "Amount": 450,
+      "BankAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+      },
+      "CreditCardAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDM=>"
+      },
+      "PrivateNote": "Wave #9000000000000000019+9000000000000000020 – VISA PAYMENT"
+    }
+  },
+  {
+    "key": "txn:9000000000000000022",
+    "entity": "SalesReceipt",
+    "phase": 5,
+    "body": {
+      "CustomerRef": {
+        "value": "<contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAz>"
+      },
+      "TxnDate": "2025-06-05",
+      "DepositToAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+      },
+      "PrivateNote": "Wave #9000000000000000022 – Cash sale",
+      "Line": [
+        {
+          "DetailType": "SalesItemLineDetail",
+          "Amount": 250,
+          "SalesItemLineDetail": {
+            "ItemRef": {
+              "value": "<item:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTU=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000023",
+    "entity": "Deposit",
+    "phase": 5,
+    "body": {
+      "DepositToAccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+      },
+      "TxnDate": "2025-06-30",
+      "PrivateNote": "Wave #9000000000000000023 – INTEREST PAID",
+      "Line": [
+        {
+          "DetailType": "DepositLineDetail",
+          "Amount": 4.12,
+          "DepositLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTc=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000026",
+    "entity": "Purchase",
+    "phase": 5,
+    "body": {
+      "PaymentType": "Cash",
+      "AccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+      },
+      "TxnDate": "2025-08-01",
+      "PrivateNote": "Wave #9000000000000000026 – TEAM OFFSITE SPLIT",
+      "Line": [
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 10.25,
+          "Description": "Split line 1",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTk=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 11.25,
+          "Description": "Split line 2",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjY=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 12.25,
+          "Description": "Split line 3",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTk=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 13.25,
+          "Description": "Split line 4",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjY=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 14.25,
+          "Description": "Split line 5",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTk=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 15.25,
+          "Description": "Split line 6",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjY=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 16.25,
+          "Description": "Split line 7",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTk=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 17.25,
+          "Description": "Split line 8",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjY=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 18.25,
+          "Description": "Split line 9",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTk=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 19.25,
+          "Description": "Split line 10",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjY=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 20.25,
+          "Description": "Split line 11",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTk=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 21.25,
+          "Description": "Split line 12",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjY=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 22.25,
+          "Description": "Split line 13",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTk=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 23.25,
+          "Description": "Split line 14",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjY=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 24.25,
+          "Description": "Split line 15",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTk=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 25.25,
+          "Description": "Split line 16",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjY=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 26.25,
+          "Description": "Split line 17",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTk=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 27.25,
+          "Description": "Split line 18",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjY=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 28.25,
+          "Description": "Split line 19",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTk=>"
+            }
+          }
+        },
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 29.25,
+          "Description": "Split line 20",
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjY=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000029",
+    "entity": "Purchase",
+    "phase": 5,
+    "body": {
+      "PaymentType": "CreditCard",
+      "AccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDM=>"
+      },
+      "TxnDate": "2025-09-10",
+      "PrivateNote": "Wave #9000000000000000029 – PAPER PLANET RETURN",
+      "Credit": true,
+      "EntityRef": {
+        "value": "<contact:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMQ==>",
+        "type": "Vendor"
+      },
+      "Line": [
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 30,
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTk=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000030",
+    "entity": "Purchase",
+    "phase": 5,
+    "body": {
+      "PaymentType": "CreditCard",
+      "AccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDM=>"
+      },
+      "TxnDate": "2025-09-12",
+      "PrivateNote": "Wave #9000000000000000030 – CORNER COFFEE",
+      "EntityRef": {
+        "value": "<contact:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwNA==>",
+        "type": "Vendor"
+      },
+      "Line": [
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 8.5,
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjY=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000031",
+    "entity": "Purchase",
+    "phase": 5,
+    "body": {
+      "PaymentType": "CreditCard",
+      "AccountRef": {
+        "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDM=>"
+      },
+      "TxnDate": "2025-09-12",
+      "PrivateNote": "Wave #9000000000000000031 – CORNER COFFEE",
+      "EntityRef": {
+        "value": "<contact:wave:VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwNA==>",
+        "type": "Vendor"
+      },
+      "Line": [
+        {
+          "DetailType": "AccountBasedExpenseLineDetail",
+          "Amount": 12.75,
+          "AccountBasedExpenseLineDetail": {
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjY=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000033",
+    "entity": "JournalEntry",
+    "phase": 6,
+    "body": {
+      "TxnDate": "2025-01-01",
+      "PrivateNote": "Wave #9000000000000000033 – Equipment purchase",
+      "Line": [
+        {
+          "DetailType": "JournalEntryLineDetail",
+          "Amount": 1200,
+          "Description": "Equipment purchase",
+          "JournalEntryLineDetail": {
+            "PostingType": "Debit",
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjg=>"
+            }
+          }
+        },
+        {
+          "DetailType": "JournalEntryLineDetail",
+          "Amount": 250,
+          "Description": "Equipment purchase",
+          "JournalEntryLineDetail": {
+            "PostingType": "Debit",
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjk=>"
+            }
+          }
+        },
+        {
+          "DetailType": "JournalEntryLineDetail",
+          "Amount": 1450,
+          "Description": "Equipment purchase",
+          "JournalEntryLineDetail": {
+            "PostingType": "Credit",
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000001",
+    "entity": "JournalEntry",
+    "phase": 6,
+    "body": {
+      "TxnDate": "2025-01-02",
+      "PrivateNote": "Wave #9000000000000000001 – Owner investment",
+      "Line": [
+        {
+          "DetailType": "JournalEntryLineDetail",
+          "Amount": 10000,
+          "Description": "Owner investment",
+          "JournalEntryLineDetail": {
+            "PostingType": "Debit",
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+            }
+          }
+        },
+        {
+          "DetailType": "JournalEntryLineDetail",
+          "Amount": 10000,
+          "Description": "Owner investment",
+          "JournalEntryLineDetail": {
+            "PostingType": "Credit",
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTQ=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000015:rest",
+    "entity": "JournalEntry",
+    "phase": 6,
+    "body": {
+      "TxnDate": "2025-04-20",
+      "PrivateNote": "Wave #9000000000000000015 (rest of payment) – Payment for invoice 1005",
+      "Line": [
+        {
+          "DetailType": "JournalEntryLineDetail",
+          "Amount": 26.4,
+          "JournalEntryLineDetail": {
+            "PostingType": "Credit",
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+            }
+          }
+        },
+        {
+          "DetailType": "JournalEntryLineDetail",
+          "Amount": 26.4,
+          "JournalEntryLineDetail": {
+            "PostingType": "Debit",
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjU=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000021",
+    "entity": "JournalEntry",
+    "phase": 6,
+    "body": {
+      "TxnDate": "2025-06-01",
+      "PrivateNote": "Wave #9000000000000000021 – TRANSFER OUT 5521",
+      "Line": [
+        {
+          "DetailType": "JournalEntryLineDetail",
+          "Amount": 99,
+          "Description": "TRANSFER OUT 5521",
+          "JournalEntryLineDetail": {
+            "PostingType": "Credit",
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=>"
+            }
+          }
+        },
+        {
+          "DetailType": "JournalEntryLineDetail",
+          "Amount": 99,
+          "Description": "TRANSFER OUT 5521",
+          "JournalEntryLineDetail": {
+            "PostingType": "Debit",
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDg=>"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000028",
+    "entity": "JournalEntry",
+    "phase": 6,
+    "body": {
+      "TxnDate": "2025-09-01",
+      "PrivateNote": "Wave #9000000000000000028 – Customer credit",
+      "Line": [
+        {
+          "DetailType": "JournalEntryLineDetail",
+          "Amount": 50,
+          "Description": "Customer credit",
+          "JournalEntryLineDetail": {
+            "PostingType": "Debit",
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTU=>"
+            }
+          }
+        },
+        {
+          "DetailType": "JournalEntryLineDetail",
+          "Amount": 50,
+          "Description": "Customer credit",
+          "JournalEntryLineDetail": {
+            "PostingType": "Credit",
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDQ=>"
+            },
+            "Entity": {
+              "Type": "Customer",
+              "EntityRef": {
+                "value": "<contact:wave:Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAy>"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "txn:9000000000000000027",
+    "entity": "JournalEntry",
+    "phase": 6,
+    "body": {
+      "TxnDate": "2025-12-31",
+      "PrivateNote": "Wave #9000000000000000027 – Year-end adjustment",
+      "Line": [
+        {
+          "DetailType": "JournalEntryLineDetail",
+          "Amount": 300,
+          "Description": "Year-end adjustment",
+          "JournalEntryLineDetail": {
+            "PostingType": "Debit",
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjc=>"
+            }
+          }
+        },
+        {
+          "DetailType": "JournalEntryLineDetail",
+          "Amount": 200,
+          "Description": "Year-end adjustment",
+          "JournalEntryLineDetail": {
+            "PostingType": "Credit",
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjg=>"
+            }
+          }
+        },
+        {
+          "DetailType": "JournalEntryLineDetail",
+          "Amount": 100,
+          "Description": "Year-end adjustment",
+          "JournalEntryLineDetail": {
+            "PostingType": "Credit",
+            "AccountRef": {
+              "value": "<account:wave:QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjk=>"
+            }
+          }
+        }
+      ]
+    }
+  }
+]

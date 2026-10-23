@@ -35,3 +35,6 @@ export { renderText, type ReportDocument } from "./outputs/reports/document.ts";
 export { renderPdf } from "./outputs/reports/pdf.ts";
 export * from "./outputs/reports/statements.ts";
 export { scopedLedger, fiscalYearStart, OPENING_ENTRY_ID } from "./model/opening.ts";
+
+// Direct-load targets.
+export * as qbo from "./targets/qbo/index.ts";

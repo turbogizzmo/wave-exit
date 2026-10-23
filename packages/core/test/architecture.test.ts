@@ -30,6 +30,12 @@ describe("layering", () => {
     }
   });
 
+  it("readers, the model and file outputs never import direct-load targets", () => {
+    for (const f of [...files(join(SRC, "readers")), ...files(join(SRC, "model")), ...files(join(SRC, "outputs"))]) {
+      expect(imports(f).filter((i) => i.includes("targets/")), relative(SRC, f)).toEqual([]);
+    }
+  });
+
   it("no UI, Node or file-system dependencies in the library", () => {
     for (const f of files(SRC)) {
       expect(imports(f).filter((i) => /^(node:|fs$|path$|react|electron|@tauri)/.test(i)), relative(SRC, f)).toEqual([]);
