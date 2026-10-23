@@ -18,6 +18,7 @@ export default defineConfig({
     fs: { allow: ["../.."] },
   },
   worker: { format: "es" },
-  build: { target: "es2022", outDir: "dist" },
+  // No inlining: the app's content security policy only allows fetching its own files.
+  build: { target: "es2022", outDir: "dist", assetsInlineLimit: 0 },
   test: { environment: "jsdom", setupFiles: ["./test/setup.ts"] },
 });

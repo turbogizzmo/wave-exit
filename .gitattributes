@@ -1,3 +1,9 @@
+# Same line endings on every platform (Windows runners would otherwise check out CRLF).
+* text=auto eol=lf
+
 # Golden files are compared byte for byte (BOM, CRLF): never normalise them.
 packages/core/test/golden/** -text
 packages/core/test/fixtures/synthetic/** -text
+*.png binary
+*.ico binary
+*.icns binary

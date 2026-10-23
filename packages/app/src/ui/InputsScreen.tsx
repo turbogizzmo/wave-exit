@@ -3,6 +3,7 @@ import { useServices } from "../app/context.tsx";
 import type { Session } from "../app/session.ts";
 import type { SlotId } from "../store/projects.ts";
 import { formatDate, plural, ProblemBox } from "./common.tsx";
+import { HelpLink } from "../help/HelpPanel.tsx";
 import { Guide, WaveConnection } from "./WaveConnection.tsx";
 
 /** Inputs: a slot for each source, what it holds, and what is lost without it. */
@@ -39,7 +40,10 @@ export function InputsScreen({ session, onPick }: { session: Session; onPick: (s
 
   return (
     <div className="stack">
-      <p className="muted">Drop Wave's files anywhere on this window: Wave Exit works out which slot they go in. A ZIP, the unzipped folder or the individual files all work.</p>
+      <div className="spread">
+        <p className="muted" style={{ margin: 0 }}>Drop Wave's files anywhere on this window: Wave Exit works out which slot they go in. A ZIP, the unzipped folder or the individual files all work.</p>
+        <HelpLink to="whose-books">Which files do I need?</HelpLink>
+      </div>
 
       <Slot
         title="Transactions export"
@@ -69,6 +73,7 @@ export function InputsScreen({ session, onPick }: { session: Session; onPick: (s
           : <><strong>Strongly recommended.</strong> Without it: no empty accounts or Wave account types, no invoice line items, products or estimates, and no check against Wave's balances.</>}
       >
         <WaveConnection session={session} />
+        <div className="row"><HelpLink to="wave-connection">About connecting to Wave</HelpLink><HelpLink to="without-connection">Working without a connection</HelpLink></div>
       </Slot>
 
       <Slot

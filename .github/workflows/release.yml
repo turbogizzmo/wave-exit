@@ -1,0 +1,81 @@
+name: Release
+
+# Builds the desktop app for macOS (universal) and Windows when a version tag
+# (v1.2.3) is pushed, attaches the installers to a draft release, and publishes
+# it once every build has succeeded. Builds are not yet signed by Apple or
+# Microsoft (step 9); the release notes and site/help.html explain how to open them.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing tag to build, e.g. v0.4.0"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: macos-latest
+            args: --target universal-apple-darwin
+            rust-targets: aarch64-apple-darwin,x86_64-apple-darwin
+          - platform: windows-latest
+            args: ""
+            rust-targets: ""
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.rust-targets }}
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: packages/app/src-tauri -> target
+      - run: npm ci
+      - run: npm test
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          projectPath: packages/app
+          tauriScript: npx tauri
+          args: ${{ matrix.args }}
+          tagName: ${{ inputs.tag || github.ref_name }}
+          releaseName: "Wave Exit __VERSION__ (preview)"
+          releaseDraft: true
+          prerelease: false
+          releaseBody: |
+            **Preview release.** Wave Exit reads Wave Accounting's export files (and, optionally, a read-only Wave connection), checks the books, and makes an archive, report PDFs, an Excel workbook, a general ledger CSV and bank statement files. Loading straight into QuickBooks Online and Xero is still to come.
+
+            **Which file do I download?**
+            - Mac (Apple silicon or Intel): `Wave.Exit_..._universal.dmg`
+            - Windows: `Wave.Exit_..._x64_en-US.msi` or `Wave.Exit_..._x64-setup.exe`
+
+            **These builds aren't signed by Apple or Microsoft yet**, so your computer asks before opening them the first time:
+            - **Mac:** open the app once and click **Done**, then open **System Settings → Privacy & Security**, scroll down to the message about Wave Exit, and click **Open Anyway**.
+            - **Windows:** if SmartScreen says it protected your PC, click **More info**, then **Run anyway**.
+
+            Step-by-step help: https://turbogizzmo.github.io/wave-exit/help.html
+
+            Your clients' books stay on your computer: there is no Wave Exit server, no analytics and no upload.
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish the draft release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release edit "${{ inputs.tag || github.ref_name }}" --repo "${{ github.repository }}" --draft=false --latest

@@ -1,6 +1,7 @@
 import { sum, type AgingBucket, type AgingRow, type Books, type Issue } from "@wave-exit/core";
 import { useMemo, useState } from "react";
 import type { Session } from "../app/session.ts";
+import { HelpLink } from "../help/HelpPanel.tsx";
 import { formatDate, Money, plural, ProblemBox, Progress, StatusBadge } from "./common.tsx";
 
 /** Review: the checks, the questions that need a person, the settings, and open items. */
@@ -126,7 +127,7 @@ export function ReviewScreen({ session }: { session: Session }) {
       </div>
 
       <section className="card">
-        <h2>Checks</h2>
+        <div className="spread"><h2>Checks</h2><HelpLink to="checks">What the checks mean</HelpLink></div>
         {books.checks.map((c) => (
           <details key={c.id} className="check">
             <summary><StatusBadge status={c.status} /><span><strong>{c.title}.</strong> {c.summary}</span></summary>
@@ -136,7 +137,7 @@ export function ReviewScreen({ session }: { session: Session }) {
       </section>
 
       <section className="stack">
-        <h2>Questions and notes</h2>
+        <div className="spread"><h2>Questions and notes</h2><HelpLink to="questions">About these questions</HelpLink></div>
         {groups.length === 0 ? <p className="muted">Nothing needs a person's attention.</p> : groups.map(([k, items]) => {
           if (k.startsWith("single:")) return <IssueCard key={k} issue={items[0]!} onAnswer={(v) => void answer(items[0]!.id, v)} />;
           const shown = showAllOf === k ? items : items.slice(0, 3);
@@ -152,7 +153,7 @@ export function ReviewScreen({ session }: { session: Session }) {
       </section>
 
       <section className="card stack">
-        <h2>Settings for every output</h2>
+        <div className="spread"><h2>Settings for every output</h2><HelpLink to="settings">Which should I choose?</HelpLink></div>
         <label className="field">
           <span>Cutover date: the day the books move to the new system</span>
           <input type="date" value={books.period.cutoverDate} min={books.period.firstDate} max={books.period.lastDate}

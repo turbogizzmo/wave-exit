@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc --noEmit -p .",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "help": "node scripts/build-help.ts"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.12.2",

@@ -7,10 +7,16 @@ Wave Exit is a desktop app for accountants and bookkeepers. You give it what Wav
 and you make as many outputs as you need: an archive for the client file, an Excel review
 workbook, a PDF report pack, import files for the new system, and more.
 
-> **Status: in development, not yet released.** The converter and the desktop app work end to
-> end (steps 1–4 of the [build plan](docs/converter-app-prompt.md#build-order)). Signed installers,
-> direct loading into QuickBooks Online and Xero, and the client collection file are still to
-> come. See [Status](#status).
+> **Status: preview.** The converter and the desktop app work end to end (steps 1–4 of the
+> [build plan](docs/converter-app-prompt.md#build-order)). Direct loading into QuickBooks Online
+> and Xero, the client collection file and signed installers are still to come. See [Status](#status).
+
+**[Download the preview](https://github.com/turbogizzmo/wave-exit/releases/latest)** for macOS
+(Apple silicon and Intel) or Windows · **[Help](https://turbogizzmo.github.io/wave-exit/help.html)** ·
+**[Website](https://turbogizzmo.github.io/wave-exit/)**
+
+Preview builds aren't signed by Apple or Microsoft yet. The first time you open one, your
+computer asks first: see [Installing the app](https://turbogizzmo.github.io/wave-exit/help.html#install).
 
 Wave Exit is not affiliated with, endorsed by or sponsored by Wave Financial Inc. "Wave" is
 used only to describe the books it converts. QuickBooks and Xero are trademarks of their
@@ -50,6 +56,8 @@ encrypted (AES-256-GCM, with the key in the operating system's keychain). See
 
 ## Documentation
 
+- [Help](https://turbogizzmo.github.io/wave-exit/help.html): the same help as the app's Help panel
+  (written in `packages/app/src/help/content.ts`; `npm run help -w @wave-exit/app` regenerates `site/help.html`).
 - [User guide](docs/user-guide.md): getting the files from Wave, the three screens, the outputs.
 - [Privacy and security](docs/privacy.md)
 - [Architecture](docs/architecture.md): how the code is organised, for contributors.
@@ -109,12 +117,18 @@ explored without a Wave login.
 ```
 packages/core/   input readers, the books model and output plug-ins (pure TypeScript)
 packages/app/    the desktop app (React + TypeScript, Tauri shell in src-tauri/)
-site/            the project website (GitHub Pages)
+site/            the project website (GitHub Pages); help.html is generated from the app's help
 docs/            documentation
 ```
 
 Real Wave data and access keys never go in this repository: tests use an invented business
 (see `packages/core/test/fixtures/`).
+
+## Releasing
+
+Push a version tag (matching `version` in `packages/app/src-tauri/tauri.conf.json`), for example
+`v0.4.0`. The Release workflow builds the macOS (universal) and Windows installers, attaches them
+to a draft release, and publishes it when every build has passed.
 
 ## License
 

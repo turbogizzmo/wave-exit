@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wave Exit help</title>
+<meta name="description" content="How to use Wave Exit: getting files from Wave, connecting, the checks, the outputs, and common messages.">
+<link rel="icon" href="icon.png">
+<!-- Generated from packages/app/src/help/content.ts by packages/app/scripts/build-help.ts. Edit the content there, not here. -->
+<style>
+:root {
+  --bg: #fbfbf9; --surface: #ffffff; --surface-2: #f1f1ed; --text: #1b1b19; --muted: #5d5d58;
+  --border: #deded8; --accent: #1f5fbf; --accent-2: #e8effa; --green: #1d7a3e; --red: #b3261e;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141413; --surface: #1d1d1b; --surface-2: #262623; --text: #ececea; --muted: #a8a8a2;
+    --border: #35352f; --accent: #82acff; --accent-2: #1b2638; --green: #7dd394; --red: #ff9a90;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141413; --surface: #1d1d1b; --surface-2: #262623; --text: #ececea; --muted: #a8a8a2;
+  --border: #35352f; --accent: #82acff; --accent-2: #1b2638; --green: #7dd394; --red: #ff9a90;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--accent); }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--border); background: var(--surface); }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; padding-bottom: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text); text-decoration: none; }
+.brand img { width: 28px; height: 28px; border-radius: 6px; }
+nav a { color: var(--muted); text-decoration: none; margin-left: 18px; font-size: 15px; }
+nav a:hover { color: var(--text); }
+.hero { padding-top: 72px; padding-bottom: 48px; }
+.hero h1 { font-size: clamp(32px, 5vw, 52px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 16px; max-width: 14em; }
+.lead { font-size: clamp(18px, 2.2vw, 21px); color: var(--muted); max-width: 40em; margin: 0 0 28px; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.button { display: inline-block; padding: 12px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; border: 1px solid var(--border); color: var(--text); background: var(--surface); }
+.button.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.note { font-size: 14px; color: var(--muted); }
+section { padding: 48px 0; border-top: 1px solid var(--border); }
+h2 { font-size: 28px; letter-spacing: -0.01em; margin: 0 0 12px; }
+h3 { font-size: 18px; margin: 0 0 6px; }
+.sub { color: var(--muted); max-width: 44em; margin: 0 0 28px; }
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.step-num { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent-2); color: var(--accent); font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+.flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 12px; align-items: stretch; }
+.flow .arrow { align-self: center; color: var(--muted); font-size: 22px; }
+.flow ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); font-size: 15px; }
+@media (max-width: 760px) { .flow { grid-template-columns: 1fr; } .flow .arrow { transform: rotate(90deg); justify-self: center; } nav { display: none; } }
+.outputs .card p { color: var(--muted); font-size: 15px; margin: 0 0 10px; }
+.keeps, .loses { list-style: none; padding: 0; margin: 0; font-size: 14px; }
+.keeps li::before { content: "✓ "; color: var(--green); font-weight: 700; }
+.loses li::before { content: "✗ "; color: var(--red); font-weight: 700; }
+.tag { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--surface-2); color: var(--muted); margin-left: 6px; vertical-align: middle; }
+.checks { counter-reset: c; list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.checks li { counter-increment: c; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px 12px 48px; position: relative; font-size: 15px; }
+.checks li::before { content: counter(c); position: absolute; left: 14px; top: 12px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent-2); color: var(--accent); font-weight: 700; font-size: 13px; display: grid; place-items: center; }
+.privacy { background: var(--surface); }
+.privacy ul { padding-left: 20px; margin: 0; }
+.privacy li + li { margin-top: 6px; }
+details { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+details + details { margin-top: 10px; }
+summary { cursor: pointer; font-weight: 600; }
+details p { margin: 10px 0 0; color: var(--muted); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { font-size: 13px; color: var(--muted); }
+.scroll { overflow-x: auto; }
+footer { padding: 32px 0 48px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
+footer p { margin: 0 0 8px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+</style>
+<style>
+.toc { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.toc-group h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 0 0 6px; }
+.toc-group ul { list-style: none; padding: 0; margin: 0; }
+.toc-group li + li { margin-top: 4px; }
+.topic { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-top: 16px; scroll-margin-top: 16px; }
+.topic ol, .topic ul { padding-left: 22px; }
+.topic li + li { margin-top: 6px; }
+.callout { background: var(--accent-2); border-radius: 8px; padding: 10px 14px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="icon.png" alt=""> Wave Exit</a>
+    <nav aria-label="Sections">
+      <a href="index.html">Home</a>
+      <a href="index.html#download">Download</a>
+      <a href="https://github.com/turbogizzmo/wave-exit">GitHub</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap hero" style="padding-bottom: 24px">
+    <h1>Help</h1>
+    <p class="lead">Everything in Wave Exit's Help panel, on one page. In the app, click Help at the top right, or any “?” link next to the thing you're looking at.</p>
+    <nav class="toc" aria-label="Help topics"><div class="toc-group"><h3>Getting started</h3><ul><li><a href="#overview">What Wave Exit does</a></li><li><a href="#install">Installing the app</a></li><li><a href="#whose-books">Whose books are these?</a></li></ul></div><div class="toc-group"><h3>Inputs</h3><ul><li><a href="#transactions-export">Getting the transactions export</a></li><li><a href="#receipts-export">Getting the receipts export</a></li><li><a href="#wave-connection">Connecting to Wave</a></li><li><a href="#without-connection">Working without a connection</a></li></ul></div><div class="toc-group"><h3>Review</h3><ul><li><a href="#checks">The checks, and what to do when one isn't OK</a></li><li><a href="#questions">Answering questions</a></li><li><a href="#settings">Cutover date, scope and fiscal year</a></li></ul></div><div class="toc-group"><h3>Outputs</h3><ul><li><a href="#which-output">Which output do I need?</a></li><li><a href="#bank-files">Using the bank statement files</a></li><li><a href="#not-in-wave">What can't be brought out of Wave</a></li></ul></div><div class="toc-group"><h3>Help with problems</h3><ul><li><a href="#troubleshooting">Common messages</a></li><li><a href="#support">Getting support</a></li><li><a href="#privacy">Privacy</a></li></ul></div></nav>
+  </div>
+<section><div class="wrap"><h2>Getting started</h2><article id="overview" class="topic"><h3>What Wave Exit does</h3><p>Wave Exit takes one Wave Accounting business at a time out of Wave. You give it what Wave can provide, it merges and checks the books, and you make the outputs you need: an archive for the client file, report PDFs, an Excel review workbook, and files for the new system.</p>
+<p>Each client business is a project. A project has three screens:</p>
+<ol><li>Inputs: add Wave's export files, and connect to Wave if you can.</li><li>Review: look at the checks and answer any questions.</li><li>Outputs: tick what you want and press Create.</li></ol>
+<p>You can come back next month with a newer export and make more outputs without asking the client again.</p>
+<p class="callout">To look around first, click “Try a sample business” on the home screen. It opens an invented business with everything already added.</p></article>
+<article id="install" class="topic"><h3>Installing the app</h3><p>Download the installer for your computer from the project's Releases page on GitHub: the .dmg file for a Mac, or the .msi or -setup.exe file for Windows.</p>
+<p>Preview builds aren't signed by Apple or Microsoft yet, so your computer asks before opening them the first time.</p>
+<p>On a Mac:</p>
+<ol><li>Open the .dmg file and drag Wave Exit into Applications.</li><li>Open Wave Exit from Applications. macOS says it can't check the app; click Done (not Move to Trash).</li><li>Open System Settings, then Privacy &amp; Security. Scroll down to the message about Wave Exit and click Open Anyway, then confirm.</li><li>From then on it opens normally.</li></ol>
+<p>On Windows:</p>
+<ol><li>Run the installer. If Windows SmartScreen says it protected your PC, click More info, then Run anyway.</li><li>Wave Exit appears in the Start menu.</li></ol>
+<p class="callout">Only download Wave Exit from the project's GitHub Releases page.</p></article>
+<article id="whose-books" class="topic"><h3>Whose books are these?</h3><div class="scroll"><table><thead><tr><th>Situation</th><th>What you can use</th></tr></thead><tbody><tr><td>Your own business (you're the owner or an Admin in Wave)</td><td>Everything: Wave's export files and a Wave connection.</td></tr><tr><td>A client's, and you have access (Admin on their business, which needs Wave's Pro plan, or Wave Advisors)</td><td>Everything, with your own Wave login.</td></tr><tr><td>A client's, and you don't (most clients on Wave's free plan)</td><td>The export files the client sends you. Wave Exit works without a connection and tells you what that loses.</td></tr></tbody></table></div>
+<p>Wave only lets the owner or an Admin export data, and on Wave's free plan a client can't make an accountant an Admin. So the client downloads the files and sends them to you.</p>
+<p class="callout">Never ask a client to email you their Wave access key. It opens their whole Wave account.</p></article></div></section>
+<section><div class="wrap"><h2>Inputs</h2><article id="transactions-export" class="topic"><h3>Getting the transactions export</h3><ol><li>Sign in to Wave at waveapps.com and choose the business at the top right.</li><li>Click the business name, then Business settings.</li><li>In the Settings menu, scroll down to Other and click Data Export.</li><li>Under Accounting, click “Export all transactions as CSV”.</li><li>Wave emails a download link to the Wave account's main email address. Click “Download data export” in the email and save the ZIP file.</li><li>Drop the ZIP file anywhere on Wave Exit's window.</li></ol>
+<ul><li>The email link only works for 24 hours. If it has expired, export again.</li><li>Choose “as CSV”, not “for Excel”.</li><li>The ZIP's name is a long code. That's normal: nothing in it names the business, so Wave Exit checks it against the connected business if there is one.</li><li>Unzipped already? Drop the folder, or the four files inside it.</li></ul></article>
+<article id="receipts-export" class="topic"><h3>Getting the receipts export</h3><ol><li>On the same Data Export page in Wave, under Receipts, click “Export all receipts as a ZIP file”.</li><li>Open Wave's email, click “Download data export”, and save the ZIP file.</li><li>Drop it on Wave Exit's window.</li></ol>
+<p>Wave Exit links each receipt to its transaction by date and description. Any it can't place for certain appear on the Review screen for you to pick, or are kept as unlinked attachments.</p></article>
+<article id="wave-connection" class="topic"><h3>Connecting to Wave</h3><p>A connection adds accounts that were never used, Wave's account types, invoice line items, due dates, products, sales taxes and estimates. It also lets Wave Exit check every balance against Wave.</p>
+<ol><li>On the Inputs screen choose Mine, or A client's, and I have access.</li><li>Click Open Wave's key page. Sign in to Wave's Developer Portal with the login that can see the business.</li><li>Create an application. Any name will do, for example “Wave Exit”.</li><li>Click Create token, and copy the key Wave shows.</li><li>Paste it into Wave Exit and click Check key. A green tick shows the Wave login it belongs to.</li><li>Click the business.</li></ol>
+<ul><li>Wave Exit keeps the key in your computer's keychain, for that project only, and only reads with it. It never changes anything in Wave.</li><li>Forget this key removes it from your computer. When you've finished, also revoke the key on the same page in Wave.</li><li>If transactions were entered in Wave after the export was made, click Read from Wave again after downloading a fresh export.</li></ul></article>
+<article id="without-connection" class="topic"><h3>Working without a connection</h3><p>Choose A client's, and I don't on the Inputs screen. Without a connection Wave Exit doesn't have:</p>
+<ul><li>accounts that have never been used;</li><li>Wave's own account types (it works them out from the export instead, which is usually right);</li><li>invoice line items, products and services, sales tax rates and estimates (invoices are rebuilt from the ledger);</li><li>due dates, so invoices are aged from their invoice date;</li><li>the check that each balance matches Wave (check 3 is skipped).</li></ul>
+<p>Pick the currency of the books; nothing in the export says.</p></article></div></section>
+<section><div class="wrap"><h2>Review</h2><article id="checks" class="topic"><h3>The checks, and what to do when one isn't OK</h3><div class="scroll"><table><thead><tr><th>Check</th><th>What it proves</th><th>If it isn't OK</th></tr></thead><tbody><tr><td>1. Every entry balances</td><td>Debits equal credits in every transaction.</td><td>Wave's exports have always balanced. The file may have been edited or cut off: download it again from Wave.</td></tr><tr><td>2. Total debits equal total credits</td><td>The whole ledger balances.</td><td>As for check 1.</td></tr><tr><td>3. Account balances agree with Wave</td><td>Each account adds up to the balance Wave shows today.</td><td>Usually transactions were entered or changed in Wave after the export was made. Request a fresh export and add it, then click Read from Wave again. If the books are meant to stop at the export, accept the difference.</td></tr><tr><td>4. Invoices and payments agree</td><td>Each invoice's total minus its payments equals what Wave says is owed, and open invoices add up to accounts receivable.</td><td>Read the detail. A difference is often a customer credit or overpayment with no invoice number; it stays in the ledger.</td></tr><tr><td>5. Bills add up to accounts payable</td><td>The same for bills.</td><td>Review the bills listed. Bills haven't yet been checked against a real export that uses them.</td></tr><tr><td>6. Nothing lost in reading</td><td>Every line, contact and receipt that went in was read.</td><td>Copy the details for support: this shouldn't happen.</td></tr><tr><td>7. Dates are plausible</td><td>Nothing is dated after the export.</td><td>Check the listed transactions in Wave; future-dated entries are sometimes intentional.</td></tr></tbody></table></div>
+<p>Green means OK, amber means read the note, red means it needs an answer. Outputs stay locked until nothing is red.</p></article>
+<article id="questions" class="topic"><h3>Answering questions</h3><div class="scroll"><table><thead><tr><th>Question</th><th>What it means</th></tr></thead><tbody><tr><td>Accounts with the same name</td><td>Wave's export names accounts only by name, and Wave has two that match. Pick the one these transactions belong to (the list shows each account's balance in Wave).</td></tr><tr><td>Transfer with no other side</td><td>Wave records a transfer as two entries that meet in Transfer Clearing. One side was found but not the other. Pick the matching entry, or keep it as a journal entry.</td></tr><tr><td>Receipt fits several transactions</td><td>Several transactions that day have the receipt's description. Pick the right one; the amounts are shown.</td></tr><tr><td>Receipt doesn't match a transaction</td><td>Pick the transaction, or keep the receipt as an unlinked attachment.</td></tr><tr><td>Receivable entries with no invoice number</td><td>Customer credits, overpayments or write-offs. They stay in the ledger; keep them as unapplied credits.</td></tr><tr><td>Export from a different business</td><td>Few of the export's customers and vendors are in the connected business. Check which business was selected in Wave when the export was made.</td></tr></tbody></table></div>
+<p>Answers are saved with the project and apply again when you add a newer export. Click Change to undo an answer.</p></article>
+<article id="settings" class="topic"><h3>Cutover date, scope and fiscal year</h3><ul><li>Cutover date: the day the books move to the new system. Aging is worked out at this date.</li><li>Full history: every transaction since the business started in Wave.</li><li>Opening balances at the cutover date: balance-sheet accounts at their balances, income and expenses for the year to date, earlier years' profit in retained earnings, and every open invoice and bill carried separately so aging works on day one. Receivables and payables are balanced by an Opening Balance Equity line that clears when the open invoices and bills are entered.</li><li>Fiscal year end: Wave doesn't make it available, so set it here. It defaults to December. The yearly reports use it.</li></ul>
+<p>The archive (universal package) always keeps the full history; these settings apply to the files meant for the new system.</p></article></div></section>
+<section><div class="wrap"><h2>Outputs</h2><article id="which-output" class="topic"><h3>Which output do I need?</h3><div class="scroll"><table><thead><tr><th>If you want to…</th><th>Make</th></tr></thead><tbody><tr><td>Keep a complete record for the client file</td><td>Universal package (always made) and PDF report pack</td></tr><tr><td>Review the books in a spreadsheet</td><td>Excel workbook</td></tr><tr><td>Load the history as journal entries into another system</td><td>General ledger CSV</td></tr><tr><td>Get bank and card history into the new system's banking screen</td><td>Bank statement files</td></tr></tbody></table></div>
+<p>Each card says what that destination keeps and what it loses. You choose where to save; Wave Exit never overwrites a file.</p></article>
+<article id="bank-files" class="topic"><h3>Using the bank statement files</h3><p>QuickBooks Online: Bank transactions, Link account, Upload from file. Choose the matching bank or credit card account (not a sub-account) and upload the parts in order. QuickBooks takes at most 1,000 lines and 350 KB per file, which is why long histories come in parts.</p>
+<p>Xero: Accounting, Bank accounts, the account's menu, Import a Statement. Use the .ofx file. The .csv file also works: assign Date, Amount, Payee, Description and Reference the first time.</p>
+<ul><li>The transactions arrive to be matched or categorised; Wave's categories don't come across. Bank rules help.</li><li>A transfer between two of the accounts appears in both files: record it once, as a transfer.</li><li>If the new system's bank feed is connected, it may download the same transactions. Start the feed the day after the last date in the files, or match instead of adding.</li><li>QuickBooks .qbo files need the bank's Intuit ID: open a .qbo file the bank gave you in a text editor, find &lt;INTU.BID&gt;, and enter the number on the card.</li></ul></article>
+<article id="not-in-wave" class="topic"><h3>What can't be brought out of Wave</h3><ul><li>Recurring invoice schedules</li><li>Bank reconciliation status</li><li>Bank-feed connections</li><li>Payroll detail beyond Wave's payroll exports (Canadian businesses only)</li></ul>
+<p>Keep the PDF report pack for each closed year.</p></article></div></section>
+<section><div class="wrap"><h2>Help with problems</h2><article id="troubleshooting" class="topic"><h3>Common messages</h3><div class="scroll"><table><thead><tr><th>Message</th><th>What to do</th></tr></thead><tbody><tr><td>“doesn't look like a Wave export”</td><td>Use the ZIP from Wave's Data Export email, or the folder it unzips to. Receipts and transactions are two separate exports.</td></tr><tr><td>“damaged or incomplete”</td><td>The download was probably cut off. Download it again from Wave's email; the link works for 24 hours.</td></tr><tr><td>“the Excel version of the transactions export”</td><td>Export again choosing “Export all transactions as CSV”.</td></tr><tr><td>“The export is incomplete”</td><td>Add the whole ZIP rather than single files.</td></tr><tr><td>“Wave didn't accept this access key”</td><td>The key may have been revoked or copied incompletely. Create a new one in Wave and paste it again.</td></tr><tr><td>“Wave is limiting how fast Wave Exit can read”</td><td>Wait a few minutes and try again.</td></tr><tr><td>“This export looks like it's from a different business”</td><td>Check which business was selected in Wave when the export was made, and export again.</td></tr><tr><td>“balances differ from Wave”</td><td>See check 3 under The checks.</td></tr></tbody></table></div></article>
+<article id="support" class="topic"><h3>Getting support</h3><p>Every error message has a Copy details for support button. It copies a technical description, not the books.</p>
+<p>Report problems on the project's GitHub page under Issues. Never attach a client's export files or post account names, amounts or access keys.</p>
+<p>Security problems: report them privately through the project's Security tab on GitHub.</p></article>
+<article id="privacy" class="topic"><h3>Privacy</h3><ul><li>Your clients' books stay on your computer, stored encrypted, with the key in your computer's keychain.</li><li>Wave Exit reads from Wave and never changes anything there.</li><li>Outputs are written only to the folders you choose.</li><li>There is no Wave Exit server, no analytics and no upload.</li><li>Deleting a project removes its files and its Wave key from your computer.</li></ul></article></div></section>
+</main>
+<footer>
+  <div class="wrap">
+    <p>Wave Exit is open source under the MIT license. <a href="https://github.com/turbogizzmo/wave-exit">Source on GitHub</a>.</p>
+    <p>Wave Exit is not affiliated with, endorsed by or sponsored by Wave Financial Inc. "Wave" is used only to describe the books it converts. QuickBooks and Xero are trademarks of their respective owners.</p>
+  </div>
+</footer>
+</body>
+</html>

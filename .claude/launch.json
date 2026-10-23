@@ -25,6 +25,20 @@
         "site"
       ],
       "port": 5318
+    },
+    {
+      "name": "wave-exit-dist",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "5319",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "packages/app/dist"
+      ],
+      "port": 5319
     }
   ]
 }

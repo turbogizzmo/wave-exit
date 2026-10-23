@@ -10,7 +10,17 @@
     "beforeBuildCommand": "npm run build"
   },
   "app": {
-    "windows": [{ "label": "main", "title": "Wave Exit", "width": 1180, "height": 820, "minWidth": 720, "minHeight": 560, "dragDropEnabled": true }],
+    "windows": [
+      {
+        "label": "main",
+        "title": "Wave Exit",
+        "width": 1180,
+        "height": 820,
+        "minWidth": 720,
+        "minHeight": 560,
+        "dragDropEnabled": true
+      }
+    ],
     "security": {
       "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' ipc: http://ipc.localhost; worker-src 'self' blob:"
     }
@@ -18,6 +28,20 @@
   "bundle": {
     "active": true,
     "targets": "all",
-    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"]
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "macOS": {
+      "signingIdentity": "-",
+      "minimumSystemVersion": "11.0"
+    },
+    "shortDescription": "Convert Wave Accounting books for any destination",
+    "longDescription": "Wave Exit takes a business's books out of Wave Accounting, checks them, and makes an archive, report PDFs, an Excel workbook and import files for other accounting systems. Your clients' books stay on your computer.",
+    "copyright": "MIT License. Wave Exit contributors.",
+    "category": "Finance"
   }
 }

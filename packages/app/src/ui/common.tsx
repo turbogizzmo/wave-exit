@@ -1,6 +1,7 @@
 import { formatDisplay, type Minor, type Severity } from "@wave-exit/core";
 import { useState, type ReactNode } from "react";
 import type { Problem } from "../engine/protocol.ts";
+import { HelpLink } from "../help/HelpPanel.tsx";
 
 /** Money for people: thousands separators, negatives in parentheses, business currency. */
 export function Money({ value, exponent = 2, currency }: { value: Minor; exponent?: number; currency?: string }) {
@@ -44,6 +45,7 @@ export function ProblemBox({ problem, onDismiss }: { problem: Problem; onDismiss
           </button>
         ) : null}
         {onDismiss ? <button className="button" onClick={onDismiss}>Dismiss</button> : null}
+        <HelpLink to="troubleshooting">Common messages</HelpLink>
       </div>
     </div>
   );

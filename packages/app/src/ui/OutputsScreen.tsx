@@ -4,6 +4,7 @@ import { useServices } from "../app/context.tsx";
 import type { Session } from "../app/session.ts";
 import { EngineError } from "../engine/client.ts";
 import type { Problem } from "../engine/protocol.ts";
+import { HelpLink } from "../help/HelpPanel.tsx";
 import { formatDate, plural, ProblemBox, Progress } from "./common.tsx";
 
 /** Outputs: tick any number of cards and press Create. The universal package is always made. */
@@ -72,6 +73,7 @@ export function OutputsScreen({ session, goReview }: { session: Session; goRevie
         </div>
       ) : null}
 
+      <div className="row"><HelpLink to="which-output">Which output do I need?</HelpLink><HelpLink to="bank-files">Using the bank statement files</HelpLink></div>
       {GROUPS.map(([group, label]) => {
         const plugins = OUTPUTS.filter((o) => o.group === group);
         const coming = COMING.filter((c) => c.group === group);

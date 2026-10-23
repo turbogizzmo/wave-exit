@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Services, type AppServices } from "./app/context.tsx";
 import { createSampleProject } from "./app/sample.ts";
+import { HelpProvider, useHelp } from "./help/HelpPanel.tsx";
 import { Home } from "./ui/Home.tsx";
 import { ProjectView, type Tab } from "./ui/ProjectView.tsx";
 
@@ -15,11 +16,14 @@ export function App({ services }: { services: AppServices }) {
 
   return (
     <Services.Provider value={services}>
+      <HelpProvider>
       <div className="app">
         <header className="topbar">
           <span className="brand">Wave Exit</span>
           <span className="small muted">Convert Wave Accounting books for any destination</span>
           {services.platform.kind === "browser" ? <span className="badge amber" title="Storage in this build isn't the computer's keychain">Development build</span> : null}
+          <span className="spacer" />
+          <HelpButton />
         </header>
         <main>
           {route.view === "home" ? (
@@ -29,6 +33,12 @@ export function App({ services }: { services: AppServices }) {
           )}
         </main>
       </div>
+      </HelpProvider>
     </Services.Provider>
   );
+}
+
+function HelpButton() {
+  const open = useHelp();
+  return <button className="button" onClick={() => open()}>Help</button>;
 }
