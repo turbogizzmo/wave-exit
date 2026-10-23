@@ -53,7 +53,8 @@ export function buildBooks(input: BuildInputs): Books {
 
   const accountFor = waveAccountLookup(acct.accounts);
   const open = buildOpenItems(entries, accounts, wave, exponent, accountFor);
-  const receiptLinks = receipts ? linkReceipts(receipts.receipts, entries, settings.resolutions) : { links: [], issues: [] };
+  applyBillDueDates(open.bills, tx.billItems);
+  const receiptLinks = receipts ? linkReceipts(receipts.receipts, entries, settings.resolutions, exponent) : { links: [], issues: [] };
 
   const firstDate = entries[0]?.date ?? "";
   const lastDate = entries.at(-1)?.date ?? "";
@@ -114,6 +115,27 @@ export function buildBooks(input: BuildInputs): Books {
     settings,
     rules,
   };
+}
+
+/**
+ * Wave's bill_items.csv has a due_date column. Its format hasn't been seen in a real
+ * export yet, so only a plain YYYY-MM-DD date is used; anything else leaves the
+ * bill aged from its own date.
+ */
+function applyBillDueDates(bills: Books["bills"], items: BuildInputs["transactions"]["billItems"]): void {
+  const due = new Map<string, string>();
+  for (const i of items) {
+    const n = (i.fields.invoice_num ?? "").trim();
+    const d = (i.fields.due_date ?? "").trim();
+    if (n && /^\d{4}-\d{2}-\d{2}$/.test(d)) due.set(n, d);
+  }
+  for (const b of bills) {
+    const d = due.get(b.number);
+    if (d) {
+      b.dueDate = d;
+      b.dueDateKnown = true;
+    }
+  }
 }
 
 /** Red items that still need an answer. Outputs stay disabled while any remain. */

@@ -1,3 +1,4 @@
+import { formatDisplay } from "../money.ts";
 import type { ReceiptFile } from "../readers/receipts-export.ts";
 import type { Entry, Issue, ReceiptLink } from "./types.ts";
 
@@ -7,7 +8,7 @@ import type { Entry, Issue, ReceiptLink } from "./types.ts";
  * description (spaces, case and punctuation ignored, since file names can't carry
  * every character). A unique match links; several or none become a Review card.
  */
-export function linkReceipts(receipts: readonly ReceiptFile[], entries: Entry[], resolutions: Record<string, string>): { links: ReceiptLink[]; issues: Issue[] } {
+export function linkReceipts(receipts: readonly ReceiptFile[], entries: Entry[], resolutions: Record<string, string>, exponent = 2): { links: ReceiptLink[]; issues: Issue[] } {
   const key = (date: string, text: string) => `${date}|${squash(text)}`;
   const byKey = new Map<string, Entry[]>();
   const byDate = new Map<string, Entry[]>();
@@ -42,7 +43,7 @@ export function linkReceipts(receipts: readonly ReceiptFile[], entries: Entry[],
       link.status = "linked";
     } else {
       link.status = candidates.length ? "ambiguous" : "unmatched";
-      const options = (candidates.length ? candidates : (byDate.get(r.date) ?? [])).slice(0, 20).map((c) => ({ value: c.id, label: `${c.date}: ${c.description}` }));
+      const options = (candidates.length ? candidates : (byDate.get(r.date) ?? [])).slice(0, 20).map((c) => ({ value: c.id, label: `${c.date}: ${c.description} (${formatDisplay(c.debitTotal, exponent)})` }));
       issues.push({
         id: issueId,
         kind: candidates.length ? "receipt-ambiguous" : "receipt-unmatched",

@@ -108,7 +108,7 @@ export const universalPackage: OutputPlugin = {
       { aspect: "aging", text: "AR and AP aging at the cutover date." },
       { aspect: "tie-out", text: "The tie-out report, as evidence for the client file." },
       { aspect: "review-answers", text: "Every review item and the answer given." },
-      { aspect: "source-checksums", text: "SHA-256 of every source file." },
+      { aspect: "source-checksums", text: "A fingerprint (checksum) of every source file, to show which files were used." },
     ],
     loses: [{ aspect: "yearly-statements", text: "No P&L or balance sheet by year: use the PDF report pack." }],
     withoutConnection: books.mode === "export-file-only"

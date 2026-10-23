@@ -598,6 +598,25 @@ Recommend the PDF report pack for each closed year.
    - **README.html** is generated from the same table definitions as the CSV files, so
      the published column spec can't drift.
 4. The three screens and the project list, including export-file-only mode.
+   **Done 2026-10-23** in `packages/app`: React + TypeScript on Tauri 2.
+   - **Storage:** projects are encrypted at rest (AES-256-GCM via WebCrypto, one
+     random key kept in the OS keychain), and each project has its own Wave access key
+     in the keychain.
+   - **Responsiveness:** the books and outputs are built in a worker, so the window stays
+     responsive.
+   - **Native side:** it only reads files the user picked or dropped (dropped paths
+     are recorded natively), only writes into a folder chosen in its own dialog, and
+     never overwrites. The window may call only `gql.waveapps.com` and open only Wave's
+     help pages.
+   - **Sample business:** "Try a sample business" loads the synthetic fixture.
+   - **Not yet:**
+     - "Connect to Wave" (OAuth): shown as planned, since it is Pro/Advisor-only;
+     - the client request email/PDF and collection file (step 7);
+     - reading payroll CSVs: the slot explains they are Canada-only;
+     - screenshot illustrations in the how-to guides: steps are text, using Wave's
+       exact labels;
+     - a Linux keychain backend;
+     - signing (step 9).
 5. Direct load into QuickBooks Online (sandbox first) with preview, resume and undo.
 6. QBO and Xero import files; Xero direct load; Beancount/hledger.
 7. Collect mode.

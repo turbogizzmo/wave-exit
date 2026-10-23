@@ -133,7 +133,7 @@ export function runChecks(x: CheckInputs): { checks: CheckResult[]; issues: Issu
       summary: x.invoices.length
         ? status === "green"
           ? `${x.invoices.length} invoices: every total, payment and amount still owed agrees, and they add up to accounts receivable.`
-          : `${x.invoices.length} invoices: some amounts need a look (see detail).`
+          : `${x.invoices.length} invoices: ${mismatches.length ? `${mismatches.length} ${mismatches.length === 1 ? "needs" : "need"} a look` : arBalance !== openAr ? `accounts receivable (${fmt(arBalance)}) differs from open invoices (${fmt(openAr)}) by ${fmt(arBalance - openAr)}, usually credits without an invoice number` : "Wave's figures differ from the export's"}.`
         : "No invoices in these books.",
       details,
     });

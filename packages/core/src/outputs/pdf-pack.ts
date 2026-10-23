@@ -22,7 +22,7 @@ export const pdfReportPack: OutputPlugin = {
       { aspect: "aging", text: "AR and AP aging at the cutover date, by contact and document." },
       { aspect: "ledger", text: "The general ledger, account by account with running balances." },
       { aspect: "review-answers", text: "Every review item and its answer." },
-      { aspect: "source-checksums", text: "SHA-256 of every source file." },
+      { aspect: "source-checksums", text: "A fingerprint (checksum) of every source file, to show which files were used." },
     ],
     loses: [
       { aspect: "attachments", text: "No receipt files." },

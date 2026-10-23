@@ -4,14 +4,21 @@ A desktop converter that takes a Wave Accounting business out of Wave: Wave API 
 and Data Export ZIPs in, many outputs out (universal archive package, Excel, PDF report
 pack, QuickBooks/Xero import files and direct load, Beancount/hledger).
 
-Status: **build steps 1–3 done.** Wave facts are verified, the input readers and the
-books model are built, and so are the outputs anyone can use: the universal package, the
-Excel workbook, the PDF report pack and a generic GL CSV. There are no screens yet
-(step 4).
+Status: **build steps 1–4 done.** Wave facts verified; input readers and the books
+model; outputs (universal package, Excel workbook, PDF report pack, GL CSV, bank
+statement files); and the desktop app: project list, Inputs, Review and Outputs, including
+export-file-only mode. Not yet: direct load, QuickBooks/Xero import files, collect mode,
+signed installers.
 
 ## Layout
 
 ```
+packages/app/             the desktop app (React + TypeScript; Tauri shell in src-tauri/)
+  src/platform/           desktop (Tauri) and browser implementations of one Platform interface
+  src/store/              projects, encrypted at rest (AES-256-GCM, key in the OS keychain)
+  src/engine/             builds the books and outputs in a worker
+  src/ui/                 Home, Inputs, Review, Outputs
+  src-tauri/              native side: storage, keychain, file access limited to what the user picks or drops
 packages/core/            pure TypeScript, no UI or Node dependencies
   src/input/              files, ZIPs, CSV tables
   src/readers/            one reader per input slot
@@ -42,6 +49,21 @@ npm test
 ```bash
 npm run typecheck
 ```
+
+Run the app in a browser (development build; storage is not the OS keychain):
+
+```bash
+npm run dev -w @wave-exit/app
+```
+
+Run the desktop app (needs Rust; from `packages/app`):
+
+```bash
+npx tauri dev
+```
+
+"Try a sample business" on the home screen loads the invented Maple & Pine Design LLC,
+so every screen can be seen without a Wave login.
 
 After changing `packages/core/test/fixtures/synthetic.ts`, run `npm run fixtures` in
 `packages/core` to regenerate the committed fixture files.

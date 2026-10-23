@@ -1,4 +1,4 @@
-import { formatPlain, sum, type Minor } from "../money.ts";
+import { formatDisplay, sum, type Minor } from "../money.ts";
 import type { LedgerRow } from "../readers/transactions-export.ts";
 import { exportKey } from "./accounts.ts";
 import { classify, type ClassificationRule, type EntryShape } from "./rules.ts";
@@ -178,9 +178,9 @@ export function pairTransferLegs(
       kind: "unpaired-transfer",
       severity: "amber",
       title: `Transfer on ${l.e.date} has no matching other side`,
-      explanation: `${formatPlain(l.amount, exponent)} moved ${l.out ? "out of" : "into"} ${acct?.name ?? "an account"} through Transfer Clearing, but no entry moving the same amount ${l.out ? "into" : "out of"} another account was found nearby. Pick the matching entry, or keep it as a journal entry.`,
+      explanation: `${formatDisplay(l.amount, exponent)} moved ${l.out ? "out of" : "into"} ${acct?.name ?? "an account"} through Transfer Clearing, but no entry moving the same amount ${l.out ? "into" : "out of"} another account was found nearby. Pick the matching entry, or keep it as a journal entry.`,
       options: [
-        ...candidates.map((c) => ({ value: c.e.id, label: `${c.e.date}: ${c.e.description}` })),
+        ...candidates.map((c) => ({ value: c.e.id, label: `${c.e.date}: ${c.e.description} (${formatDisplay(c.amount, exponent)})` })),
         { value: "keep-journal", label: "Keep as a journal entry" },
       ],
       refs: [l.e.id],

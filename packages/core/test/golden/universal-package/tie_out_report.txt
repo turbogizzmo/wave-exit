@@ -8,11 +8,11 @@ Period: 2025-01-01 to 2025-12-31. Cutover date: 2025-12-31. Scope: full history.
 Built from Wave's transactions export and a Wave connection (read 2026-01-16).
 33 entries, 91 lines, 25 accounts, 9 contacts, 5 invoices, 1 bill, 3 receipts.
 Check                                Result  Finding
------------------------------------  ------  --------------------------------------------------------------------------------------
+-----------------------------------  ------  -----------------------------------------------------------------------------------------------------------------------------------
 1. Every entry balances              OK      All 33 entries have equal debits and credits.
 2. Total debits equal total credits  OK      Debits and credits both total 28,978.32.
 3. Account balances agree with Wave  OK      All 25 accounts match the balance Wave shows today.
-4. Invoices and payments agree       Review  5 invoices: some amounts need a look (see detail).
+4. Invoices and payments agree       Review  5 invoices: accounts receivable (532.50) differs from open invoices (582.50) by (50.00), usually credits without an invoice number.
 5. Bills add up to accounts payable  OK      1 bill; open bills total 200.00, equal to accounts payable.
 6. Nothing lost in reading           OK      All 91 ledger lines, 8 contacts and 3 receipts were read.
 7. Dates are plausible               OK      All entries fall between 2025-01-01 and 2025-12-31, before the export date 2026-01-15.
@@ -39,7 +39,7 @@ OK. All 25 accounts match the balance Wave shows today.
 No further detail.
 
 ## Check 4: Invoices and payments agree
-Review. 5 invoices: some amounts need a look (see detail).
+Review. 5 invoices: accounts receivable (532.50) differs from open invoices (582.50) by (50.00), usually credits without an invoice number.
 Wave lists 5 posted invoices; 5 were found in the export.
 Still owed per Wave: 582.50. Still owed per the export's payments: 582.50.
 Accounts receivable balance: 532.50. Open invoices total: 582.50.

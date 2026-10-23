@@ -1,4 +1,4 @@
-import { abs, formatPlain, parseAmount, sum, type Minor } from "../money.ts";
+import { abs, formatDisplay, formatPlain, parseAmount, sum, type Minor } from "../money.ts";
 import type { WaveSnapshot } from "../readers/wave-api/snapshot.ts";
 import type { Account, AgingBucket, AgingRow, DocumentLine, Entry, Issue, OpenDocument, PaymentApplication } from "./types.ts";
 
@@ -56,7 +56,7 @@ export function buildOpenItems(
   exponent: number,
   accountForWaveId: (waveId: string) => string = (id) => (id ? `wave:${id}` : ""),
 ): OpenItemsResult {
-  const ctx: Ctx = { entries, accounts, exponent, fmt: (v) => formatPlain(v, exponent) };
+  const ctx: Ctx = { entries, accounts, exponent, fmt: (v) => formatDisplay(v, exponent) };
   const issues: Issue[] = [];
   const payments: PaymentApplication[] = [];
 

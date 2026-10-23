@@ -160,7 +160,7 @@ export async function readTransactionsExport(
   if (billItems.length) {
     notes.push({
       severity: "info",
-      message: `bill_items.csv has ${billItems.length} rows. Wave Exit hasn't yet been checked against a real export that uses bills, so review the bills carefully.`,
+      message: `bill_items.csv has ${billItems.length} ${billItems.length === 1 ? "row" : "rows"}. Wave Exit hasn't yet been checked against a real export that uses bills, so review the bills carefully.`,
     });
   }
 

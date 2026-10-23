@@ -91,7 +91,7 @@
       "id": 4,
       "title": "Invoices and payments agree",
       "status": "amber",
-      "summary": "5 invoices: some amounts need a look (see detail).",
+      "summary": "5 invoices: accounts receivable (532.50) differs from open invoices (582.50) by (50.00), usually credits without an invoice number.",
       "details": [
         "Wave lists 5 posted invoices; 5 were found in the export.",
         "Still owed per Wave: 582.50. Still owed per the export's payments: 582.50.",
@@ -404,7 +404,7 @@
   "reader_notes": [
     {
       "severity": "info",
-      "message": "bill_items.csv has 1 rows. Wave Exit hasn't yet been checked against a real export that uses bills, so review the bills carefully."
+      "message": "bill_items.csv has 1 row. Wave Exit hasn't yet been checked against a real export that uses bills, so review the bills carefully."
     }
   ]
 }
