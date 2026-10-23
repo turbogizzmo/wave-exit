@@ -1,42 +1,83 @@
 # Wave Exit
 
-A desktop converter that takes a Wave Accounting business out of Wave: Wave API data
-and Data Export ZIPs in, many outputs out (universal archive package, Excel, PDF report
-pack, QuickBooks/Xero import files and direct load, Beancount/hledger).
+**Take a business's books out of Wave Accounting, checked and complete, in whatever form the next system needs.**
 
-Status: **build steps 1–4 done.** Wave facts verified; input readers and the books
-model; outputs (universal package, Excel workbook, PDF report pack, GL CSV, bank
-statement files); and the desktop app: project list, Inputs, Review and Outputs, including
-export-file-only mode. Not yet: direct load, QuickBooks/Xero import files, collect mode,
-signed installers.
+Wave Exit is a desktop app for accountants and bookkeepers. You give it what Wave can provide
+(its export files and, ideally, a read-only connection), it merges and checks the books once,
+and you make as many outputs as you need: an archive for the client file, an Excel review
+workbook, a PDF report pack, import files for the new system, and more.
 
-## Layout
+> **Status: in development, not yet released.** The converter and the desktop app work end to
+> end (steps 1–4 of the [build plan](docs/converter-app-prompt.md#build-order)). Signed installers,
+> direct loading into QuickBooks Online and Xero, and the client collection file are still to
+> come. See [Status](#status).
 
-```
-packages/app/             the desktop app (React + TypeScript; Tauri shell in src-tauri/)
-  src/platform/           desktop (Tauri) and browser implementations of one Platform interface
-  src/store/              projects, encrypted at rest (AES-256-GCM, key in the OS keychain)
-  src/engine/             builds the books and outputs in a worker
-  src/ui/                 Home, Inputs, Review, Outputs
-  src-tauri/              native side: storage, keychain, file access limited to what the user picks or drops
-packages/core/            pure TypeScript, no UI or Node dependencies
-  src/input/              files, ZIPs, CSV tables
-  src/readers/            one reader per input slot
-    transactions-export.ts  Wave "Export all transactions as CSV" ZIP
-    receipts-export.ts      Wave "Export all receipts as a ZIP file"
-    wave-api/               read-only Wave API client: access key or OAuth → snapshot
-  src/model/              merge, classify, open items, aging, tie-out checks → Books
-  src/outputs/            output plug-ins (catalog.ts lists them)
-    package/              universal package: tables (the spec), writer, reader, README
-    reports/              statements, tie-out report and report pack, PDF renderer
-    excel.ts, xlsx.ts     review workbook on a small built-in XLSX writer
-    gl-csv.ts             generic general ledger CSV
-    statements/           bank statement files (OFX/QFX/QBO, QuickBooks and Xero CSV)
-  test/fixtures/          synthetic business (generator + committed ZIPs and API JSON)
-  test/golden/            golden output files (update with `npx vitest run -u` after checking the diff)
-```
+Wave Exit is not affiliated with, endorsed by or sponsored by Wave Financial Inc. "Wave" is
+used only to describe the books it converts. QuickBooks and Xero are trademarks of their
+owners.
 
-## Develop
+## Why it exists
+
+- **Wave can't hand over the whole ledger through its API.** Its public API can't read
+  transactions at all; the general ledger only comes out through *Settings → Data Export*.
+  Wave Exit combines that export with the API for everything else (the full chart of accounts,
+  invoice line items, products, sales taxes).
+- **Accountants need several outputs, not one.** Migration tools feed only their own product.
+  Wave Exit converts once and produces any number of destinations, now or later.
+- **Trust.** Every conversion runs tie-out checks (every entry balances, balances agree with
+  Wave, invoices and payments agree, nothing lost in reading) and writes a tie-out report you
+  can put in the client file.
+
+## What it makes
+
+| Output | What it's for |
+|---|---|
+| **Universal package** (always made) | The archive: every record as documented CSV files, with receipts, a manifest and the tie-out report. Every other output can be rebuilt from it. |
+| **PDF report pack** | Tie-out summary, trial balance, P&L and balance sheet for each year, AR/AP aging and the general ledger, for the client file. |
+| **Excel workbook** | Every table on its own sheet with filters, and a trial balance whose formulas recompute from the journal. |
+| **General ledger CSV** | One row per line with debit and credit columns, for any system that imports journals. |
+| **Bank statement files** | Each bank and card account as OFX and CSV for QuickBooks Online, Xero and others, so history lands in their banking screens. |
+| *Coming:* QuickBooks Online and Xero import files, direct load into QuickBooks Online and Xero, Beancount/hledger | |
+
+Each output says up front what it keeps and what it loses.
+
+## Privacy
+
+Your clients' books stay on your computer. Wave Exit reads from Wave and writes only to the
+folders you choose. Nothing is sent to Wave Exit or anyone else, and projects are stored
+encrypted (AES-256-GCM, with the key in the operating system's keychain). See
+[docs/privacy.md](docs/privacy.md).
+
+## Documentation
+
+- [User guide](docs/user-guide.md): getting the files from Wave, the three screens, the outputs.
+- [Privacy and security](docs/privacy.md)
+- [Architecture](docs/architecture.md): how the code is organised, for contributors.
+- Reference: [Wave export formats](docs/wave-formats.md), [what Wave's API offers](docs/wave-api.md),
+  [bank statement formats](docs/bank-statement-formats.md), [product brief and build plan](docs/converter-app-prompt.md).
+
+## Status
+
+| Step | | |
+|---|---|---|
+| 1 | Verify Wave's schema, export format and target platforms' rules | Done |
+| 2 | Input readers and the books model (merge, classify, open items, tie-out checks) | Done |
+| 3 | Universal package, Excel workbook, PDF report pack, GL CSV (and bank statement files) | Done |
+| 4 | Desktop app: project list, Inputs, Review, Outputs, export-file-only mode | Done |
+| 5 | Direct load into QuickBooks Online | Next |
+| 6 | QuickBooks Online and Xero import files, Xero direct load, Beancount/hledger | |
+| 7 | Collect mode: a client gathers their files into one encrypted file | |
+| 8 | Zoho Books, FreshBooks, Sage import files | |
+| 9 | Signed installers for macOS and Windows, auto-update | |
+
+**Open question:** Wave's developer docs say apps published for other Wave users must use
+OAuth ("Connect to Wave"), which Wave allows only for businesses on its Pro or Advisor plans.
+Wave Exit currently connects with an access key the user creates themselves. This is being
+raised with Wave before release.
+
+## Development
+
+Requires Node.js 24 or later. The desktop app also needs Rust (stable) and, on macOS, Xcode.
 
 ```bash
 npm install
@@ -50,30 +91,31 @@ npm test
 npm run typecheck
 ```
 
-Run the app in a browser (development build; storage is not the OS keychain):
+Run the app in a browser (development build; storage is the browser's, not the keychain):
 
 ```bash
 npm run dev -w @wave-exit/app
 ```
 
-Run the desktop app (needs Rust; from `packages/app`):
+Run the desktop app (from `packages/app`):
 
 ```bash
 npx tauri dev
 ```
 
-"Try a sample business" on the home screen loads the invented Maple & Pine Design LLC,
-so every screen can be seen without a Wave login.
+"Try a sample business" on the home screen loads an invented business, so every screen can be
+explored without a Wave login.
 
-After changing `packages/core/test/fixtures/synthetic.ts`, run `npm run fixtures` in
-`packages/core` to regenerate the committed fixture files.
+```
+packages/core/   input readers, the books model and output plug-ins (pure TypeScript)
+packages/app/    the desktop app (React + TypeScript, Tauri shell in src-tauri/)
+site/            the project website (GitHub Pages)
+docs/            documentation
+```
 
-## Docs
+Real Wave data and access keys never go in this repository: tests use an invented business
+(see `packages/core/test/fixtures/`).
 
-- [`docs/converter-app-prompt.md`](docs/converter-app-prompt.md): the product brief and build order
-- [`docs/wave-formats.md`](docs/wave-formats.md): the Data Export file formats, profiled from a real export
-- [`docs/wave-api.md`](docs/wave-api.md): what the Wave public API offers, tested live
-- [`docs/wave-api-schema.txt`](docs/wave-api-schema.txt): the full introspected schema
-- [`docs/bank-statement-formats.md`](docs/bank-statement-formats.md): bank statement file formats, with sources
+## License
 
-Real Wave data and access keys never go in this repo. Tests use synthetic fixtures only.
+[MIT](LICENSE)

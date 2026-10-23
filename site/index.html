@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wave Exit – take your books out of Wave Accounting</title>
+<meta name="description" content="A desktop converter for accountants and bookkeepers: Wave Accounting books in, checked once, out to any number of destinations. Your clients' books stay on your computer.">
+<link rel="icon" href="icon.png">
+<style>
+:root {
+  --bg: #fbfbf9; --surface: #ffffff; --surface-2: #f1f1ed; --text: #1b1b19; --muted: #5d5d58;
+  --border: #deded8; --accent: #1f5fbf; --accent-2: #e8effa; --green: #1d7a3e; --red: #b3261e;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141413; --surface: #1d1d1b; --surface-2: #262623; --text: #ececea; --muted: #a8a8a2;
+    --border: #35352f; --accent: #82acff; --accent-2: #1b2638; --green: #7dd394; --red: #ff9a90;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141413; --surface: #1d1d1b; --surface-2: #262623; --text: #ececea; --muted: #a8a8a2;
+  --border: #35352f; --accent: #82acff; --accent-2: #1b2638; --green: #7dd394; --red: #ff9a90;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+a { color: var(--accent); }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--border); background: var(--surface); }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; padding-bottom: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text); text-decoration: none; }
+.brand img { width: 28px; height: 28px; border-radius: 6px; }
+nav a { color: var(--muted); text-decoration: none; margin-left: 18px; font-size: 15px; }
+nav a:hover { color: var(--text); }
+.hero { padding-top: 72px; padding-bottom: 48px; }
+.hero h1 { font-size: clamp(32px, 5vw, 52px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 16px; max-width: 14em; }
+.lead { font-size: clamp(18px, 2.2vw, 21px); color: var(--muted); max-width: 40em; margin: 0 0 28px; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.button { display: inline-block; padding: 12px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; border: 1px solid var(--border); color: var(--text); background: var(--surface); }
+.button.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.note { font-size: 14px; color: var(--muted); }
+section { padding: 48px 0; border-top: 1px solid var(--border); }
+h2 { font-size: 28px; letter-spacing: -0.01em; margin: 0 0 12px; }
+h3 { font-size: 18px; margin: 0 0 6px; }
+.sub { color: var(--muted); max-width: 44em; margin: 0 0 28px; }
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.step-num { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent-2); color: var(--accent); font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+.flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 12px; align-items: stretch; }
+.flow .arrow { align-self: center; color: var(--muted); font-size: 22px; }
+.flow ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); font-size: 15px; }
+@media (max-width: 760px) { .flow { grid-template-columns: 1fr; } .flow .arrow { transform: rotate(90deg); justify-self: center; } nav { display: none; } }
+.outputs .card p { color: var(--muted); font-size: 15px; margin: 0 0 10px; }
+.keeps, .loses { list-style: none; padding: 0; margin: 0; font-size: 14px; }
+.keeps li::before { content: "✓ "; color: var(--green); font-weight: 700; }
+.loses li::before { content: "✗ "; color: var(--red); font-weight: 700; }
+.tag { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--surface-2); color: var(--muted); margin-left: 6px; vertical-align: middle; }
+.checks { counter-reset: c; list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.checks li { counter-increment: c; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px 12px 48px; position: relative; font-size: 15px; }
+.checks li::before { content: counter(c); position: absolute; left: 14px; top: 12px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent-2); color: var(--accent); font-weight: 700; font-size: 13px; display: grid; place-items: center; }
+.privacy { background: var(--surface); }
+.privacy ul { padding-left: 20px; margin: 0; }
+.privacy li + li { margin-top: 6px; }
+details { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+details + details { margin-top: 10px; }
+summary { cursor: pointer; font-weight: 600; }
+details p { margin: 10px 0 0; color: var(--muted); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { font-size: 13px; color: var(--muted); }
+.scroll { overflow-x: auto; }
+footer { padding: 32px 0 48px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
+footer p { margin: 0 0 8px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="icon.png" alt=""> Wave Exit</a>
+    <nav aria-label="Sections">
+      <a href="#how">How it works</a>
+      <a href="#outputs">Outputs</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#faq">Questions</a>
+      <a href="https://github.com/turbogizzmo/wave-exit">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <h1>Take the books out of Wave Accounting, checked and complete.</h1>
+    <p class="lead">A desktop app for accountants and bookkeepers. Load what Wave can give you, let Wave Exit merge and check it once, then make as many outputs as you need: an archive for the client file, a review workbook, report PDFs, and files for the new system.</p>
+    <div class="cta">
+      <a class="button primary" href="https://github.com/turbogizzmo/wave-exit">See the project</a>
+      <a class="button" href="https://github.com/turbogizzmo/wave-exit/blob/main/docs/user-guide.md">Read the guide</a>
+      <span class="note">In development: installers for macOS and Windows are coming.</span>
+    </div>
+  </div>
+
+  <section id="how">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <p class="sub">One project per client business. Three screens. Convert once, make outputs now or next month without asking the client again.</p>
+      <div class="flow">
+        <div class="card">
+          <span class="step-num">1</span>
+          <h3>Inputs</h3>
+          <p class="note" style="margin:0">Drop Wave's files on the window. Wave Exit puts them in the right place.</p>
+          <ul>
+            <li>Transactions export (the ledger)</li>
+            <li>Wave connection (read-only)</li>
+            <li>Receipts export</li>
+          </ul>
+        </div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="card">
+          <span class="step-num">2</span>
+          <h3>Review</h3>
+          <p class="note" style="margin:0">Seven tie-out checks, and plain questions where a person has to decide.</p>
+          <ul>
+            <li>Cutover date and scope</li>
+            <li>AR and AP aging, invoice by invoice</li>
+            <li>Every transaction classified once</li>
+          </ul>
+        </div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="card">
+          <span class="step-num">3</span>
+          <h3>Outputs</h3>
+          <p class="note" style="margin:0">Tick any number. Each one says up front what it keeps and what it loses.</p>
+          <ul>
+            <li>Archive and report PDFs</li>
+            <li>Excel review workbook</li>
+            <li>Files for the new system</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Why Wave's own export isn't enough</h2>
+      <p class="sub">No single Wave channel has everything, so Wave Exit uses both and merges them.</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>What you need</th><th>Wave's connection</th><th>Wave's export files</th></tr></thead>
+          <tbody>
+            <tr><td>The general ledger (every transaction)</td><td>No: it can't read transactions at all</td><td><strong>Yes</strong></td></tr>
+            <tr><td>Full chart of accounts, including unused and archived accounts</td><td><strong>Yes</strong></td><td>Only accounts with activity</td></tr>
+            <tr><td>Invoices with line items, due dates and payments</td><td><strong>Yes</strong></td><td>Invoice numbers on ledger lines</td></tr>
+            <tr><td>Bills</td><td>No</td><td><strong>Yes</strong></td></tr>
+            <tr><td>Products, sales taxes, estimates</td><td><strong>Yes</strong></td><td>No</td></tr>
+            <tr><td>Receipt files</td><td>No</td><td><strong>Yes</strong> (separate export)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="margin-top:12px">No connection? Wave Exit still works from the export files alone, and tells you what that loses before you start.</p>
+    </div>
+  </section>
+
+  <section id="outputs" class="outputs">
+    <div class="wrap">
+      <h2>Outputs</h2>
+      <p class="sub">The universal package is always made: it's the archive, and every other output can be rebuilt from it.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Universal package <span class="tag">always</span></h3>
+          <p>Every record as documented CSV files, with receipts, a manifest and the tie-out report.</p>
+          <ul class="keeps"><li>Ledger, chart, contacts, invoices, bills, payments</li><li>Receipts, linked to their transactions</li><li>Tie-out report and every review answer</li></ul>
+        </div>
+        <div class="card">
+          <h3>PDF report pack</h3>
+          <p>For the client file.</p>
+          <ul class="keeps"><li>Trial balance, P&amp;L and balance sheet by year</li><li>AR/AP aging and general ledger</li></ul>
+          <ul class="loses"><li>No receipts or line items</li></ul>
+        </div>
+        <div class="card">
+          <h3>Excel workbook</h3>
+          <p>For review: every table on its own sheet, with filters.</p>
+          <ul class="keeps"><li>A trial balance that recomputes from the journal</li><li>Aging sheets</li></ul>
+          <ul class="loses"><li>No receipt files</li></ul>
+        </div>
+        <div class="card">
+          <h3>General ledger CSV</h3>
+          <p>One row per line with debit and credit, for any system that imports journals.</p>
+          <ul class="keeps"><li>Full history, or opening balances plus later activity</li></ul>
+          <ul class="loses"><li>No line items or payment links</li></ul>
+        </div>
+        <div class="card">
+          <h3>Bank statement files</h3>
+          <p>Bank and card history as OFX and CSV for QuickBooks Online, Xero and others.</p>
+          <ul class="keeps"><li>History in the new system's banking screen</li></ul>
+          <ul class="loses"><li>Wave's categories: categorise there or use bank rules</li></ul>
+        </div>
+        <div class="card">
+          <h3>Coming <span class="tag">planned</span></h3>
+          <p>QuickBooks Online and Xero import files, direct load into QuickBooks Online and Xero with preview, resume and undo, and Beancount/hledger.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>The tie-out checks</h2>
+      <p class="sub">Run on every conversion, shown on the Review screen and written to a one-page report for the client file.</p>
+      <ol class="checks">
+        <li>Every entry balances</li>
+        <li>Total debits equal total credits</li>
+        <li>Every account balance agrees with Wave</li>
+        <li>Invoices, payments and accounts receivable agree</li>
+        <li>Bills add up to accounts payable</li>
+        <li>Nothing lost in reading: rows in equal rows out</li>
+        <li>No transactions dated after the export</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="privacy" class="privacy">
+    <div class="wrap">
+      <h2>Your clients' books stay on your computer</h2>
+      <ul>
+        <li>Wave Exit reads from Wave and writes only to the folders you choose. There is no Wave Exit server, no analytics and no upload.</li>
+        <li>Projects are stored encrypted, with the key in your computer's keychain.</li>
+        <li>It only reads from Wave. It never changes anything in Wave.</li>
+        <li>The app can only open the files you pick or drop, and can only contact Wave.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <h2>Questions</h2>
+      <details>
+        <summary>My client is on Wave's free plan and can't give me access. Can I still convert their books?</summary>
+        <p>Yes. The client downloads the transactions export (and receipts) from Wave's Data Export page and sends you the files. Wave Exit works from those alone and shows you what is lost without a connection: unused accounts, invoice line items, products, sales taxes, due dates and the balance check against Wave.</p>
+      </details>
+      <details>
+        <summary>Is it safe to give Wave Exit a Wave access key?</summary>
+        <p>The key is kept in your computer's keychain, for that one project, and Wave Exit only reads with it. Create the key yourself in Wave's Developer Portal, never ask a client to email you theirs, and revoke it in Wave when you're done.</p>
+      </details>
+      <details>
+        <summary>Which systems can I move the books to?</summary>
+        <p>Today: anything that imports a general ledger CSV or bank statement files (QuickBooks Online, Xero and most others), plus the archive, Excel and PDF outputs. QuickBooks Online and Xero import files, and loading directly into them, are next.</p>
+      </details>
+      <details>
+        <summary>What can't be brought out of Wave?</summary>
+        <p>Recurring invoice schedules, bank reconciliation status, bank-feed connections, and payroll detail beyond Wave's payroll exports, which Wave offers only for Canadian businesses. No supported route gives these. Keep the PDF report pack for each closed year.</p>
+      </details>
+      <details>
+        <summary>When can I download it?</summary>
+        <p>Wave Exit is in development. Signed installers for macOS and Windows come once the remaining steps are finished. Follow the project on GitHub.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Wave Exit is open source under the MIT license. <a href="https://github.com/turbogizzmo/wave-exit">Source on GitHub</a>.</p>
+    <p>Wave Exit is not affiliated with, endorsed by or sponsored by Wave Financial Inc. "Wave" is used only to describe the books it converts. QuickBooks and Xero are trademarks of their respective owners.</p>
+  </div>
+</footer>
+</body>
+</html>

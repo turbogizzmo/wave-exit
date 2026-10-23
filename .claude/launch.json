@@ -4,8 +4,27 @@
     {
       "name": "wave-exit-web",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "-w", "@wave-exit/app"],
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "-w",
+        "@wave-exit/app"
+      ],
       "port": 5317
+    },
+    {
+      "name": "wave-exit-site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "5318",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "site"
+      ],
+      "port": 5318
     }
   ]
 }
