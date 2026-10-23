@@ -51,7 +51,7 @@ One row per transaction line. Example business: 2,016 rows, 974 transactions,
 | `Amount (One column)` | Signed, **positive in the account's normal-balance direction** (see below) |
 | `" "` (a single space) | A spacer column with no values. **Its header is one space, so parse by header name, never by position.** |
 | `Debit Amount (Two Column Approach)` | Positive decimal or blank |
-| `Credit Amount (Two Column Approach)` | Positive decimal or blank. A row never has both. Zero-amount rows have neither. |
+| `Credit Amount (Two Column Approach)` | Positive decimal or blank. A row never has both non-zero. A zero-amount transaction does occur (1 in the real export): its rows carry `0.00` rather than blanks. |
 | `Other Accounts for this Transaction` | The account names on the other side, comma-joined when there are several. **Don't parse it**: account names can contain commas. Rebuild the other side by grouping on `Transaction ID`. |
 | `Customer`, `Vendor` | Name, filled where linked |
 | `Invoice Number` | Filled on invoice and invoice-payment lines |
@@ -179,14 +179,20 @@ until we see an export from a business that uses bills.
 ## Receipts ZIP
 
 - Flat list of the original uploaded files (PDFs here), no manifest.
-- Filenames follow `YYYY-MM-DD-NNNNNN_<description>.<ext>`, where the date is the
-  transaction date and `<description>` is the bank-feed description with spaces turned
-  into `_`.
-- `NNNNNN` is **not** the ledger's `Transaction ID`.
-- Linking a receipt to its transaction therefore means matching on date plus description.
-  In the example, 16 of 19 receipts matched exactly one transaction and 3 matched two
-  same-day transactions. Those three need the user to pick (or a match on amount, if the
-  file can be read).
+- Filenames are `YYYY-MM-DD-<description>.<ext>`: the transaction date, then the
+  transaction's `Transaction Description` with spaces turned into `_` and some
+  characters dropped (`/` disappears, so `1/31/25` becomes `13125`).
+- **Correction (2026-10-23).** These notes used to describe the name as
+  `YYYY-MM-DD-NNNNNN_<description>`, with `NNNNNN` as a separate serial. In the real
+  export, every receipt's description began with a 6-digit bank reference, and the
+  ledger's `Transaction Description` begins with the same 6 digits. The number is part
+  of the description. It is still not the `Transaction ID`.
+- Matching on date + the whole name after the date, ignoring case, spaces and
+  punctuation, links **19 of 19** real receipts to exactly one transaction each. The
+  earlier figure of 16 of 19 came from leaving the number out.
+- When the description was edited after the receipt was uploaded, or a name was cut
+  short, the match can fail or find several candidates. Wave Exit then accepts a
+  prefix match and otherwise asks the user.
 
 ## Still unverified
 

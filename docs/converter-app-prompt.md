@@ -319,9 +319,11 @@ API data say so. The universal package's manifest records the mode.
   (in the real example, 34 of 103 accounts appeared in the ledger).
 - Archived accounts still carry history — include them, flag them as inactive.
 - Group ZIP rows into entries by Transaction ID; every entry must balance.
-- Receipts link to transactions by date + description (the filename's number is not
-  the Transaction ID). In the real example 16 of 19 linked uniquely. Raise a Review
-  card for the rest, showing the candidate transactions.
+- Receipts link to transactions by date + description. The file name is the date
+  plus the full description; the leading number is part of the bank description,
+  not the Transaction ID. In the real example **19 of 19** linked uniquely (an
+  earlier count of 16 of 19 left the number out). Raise a Review card for the rest,
+  showing the candidate transactions.
 - **Classify every entry** by the account types of its lines, once, in the model — so
   every output uses the same classification. Each entry gets a type and a human-readable
   "why":
@@ -570,6 +572,9 @@ Recommend the PDF report pack for each closed year.
    the Excel variant and bill/tax/currency formats, which need a test-business export,
    and the Full Access key decision.
 2. Input readers and the model: merge, classification, open items, tie-out checks.
+   **Done 2026-10-23** in `packages/core`. Covers the transactions and receipts ZIPs,
+   the Wave API (key or OAuth) and checks 1–7. Not yet: payroll CSVs (format unknown,
+   Canada only), the Excel variant, and the collection file (step 7).
 3. Outputs that work for everyone: universal package, Excel workbook, PDF report pack,
    generic GL CSV.
 4. The three screens and the project list, including export-file-only mode.

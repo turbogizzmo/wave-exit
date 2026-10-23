@@ -1,0 +1,25 @@
+{
+  "name": "@wave-exit/core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Wave Exit input readers and the merged books model. Pure TypeScript, no UI dependencies.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "fixtures": "node scripts/write-fixtures.ts"
+  },
+  "dependencies": {
+    "csv-parse": "^7.0.3",
+    "fflate": "^0.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "fast-check": "^4.10.2",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}

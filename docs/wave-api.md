@@ -73,6 +73,20 @@ a Wave connection exists.
    `page`/`pageSize` with `pageInfo.totalPages`/`totalCount`; the default page size is
    45 almost everywhere.
 
+## The reader in `packages/core` (tested live 2026-10-23)
+
+`fetchWaveSnapshot` read the real business (Business A) in **12 requests, 5.6 s** at the default
+pace of 2 requests per second, read-only, with the Full Access token. Its output fed
+the model alongside the real export. All 12 invoice payments linked (10 by Wave's ID, 2
+by invoice number + date + amount), every invoice's total, payments and amount owed
+agreed, and check 3 flagged the same 2 accounts described below.
+
+The same reader takes OAuth credentials through one interface. Refreshing an OAuth
+token is done by a function the app supplies, because Wave's refresh needs the client
+secret. The read-only scopes it asks for are `user business account customer vendor
+product sales_tax invoice estimate` `:read` (Wave's *OAuth Scopes* page, updated
+2026-07-09: "write does not imply read").
+
 ## Other readable data worth importing
 
 | Field | Notes |

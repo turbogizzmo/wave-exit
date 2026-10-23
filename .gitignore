@@ -7,17 +7,17 @@ tokens.json
 *.pem
 *.key
 
-# Real Wave data — never commit (synthetic fixtures live in test/fixtures/ and are allowed)
+# Real Wave data — never commit (synthetic fixtures live in packages/*/test/fixtures/ and are allowed)
 data/
 exports/
 real/
 *.zip
-!test/fixtures/**/*.zip
+!**/test/fixtures/**/*.zip
 *.waveexit
 *.xlsx
-!test/fixtures/**/*.xlsx
+!**/test/fixtures/**/*.xlsx
 *.csv
-!test/fixtures/**/*.csv
+!**/test/fixtures/**/*.csv
 !docs/**/*.csv
 accounts-snapshot-*.json
 invoices-*.json

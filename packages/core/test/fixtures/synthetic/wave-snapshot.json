@@ -1,0 +1,1074 @@
+{
+  "format": "wave-exit/wave-snapshot@1",
+  "fetchedAt": "2026-01-16T09:00:00.000Z",
+  "connection": "full-access",
+  "user": {
+    "id": "VXNlcjowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+    "email": "owner@maple-pine.example",
+    "firstName": "Sam",
+    "lastName": "Maple"
+  },
+  "business": {
+    "id": "QnVzaW5lc3M6MTExMTExMTEtMjIyMi00MzMzLTg0NDQtNTU1NTU1NTU1NTU1",
+    "name": "Maple & Pine Design LLC",
+    "isPersonal": false,
+    "isArchived": false,
+    "timezone": "America/Los_Angeles",
+    "createdAt": "2024-12-01T00:00:00Z",
+    "currency": {
+      "code": "USD",
+      "symbol": "$",
+      "exponent": 2
+    },
+    "address": {
+      "line1": "",
+      "line2": "",
+      "city": "",
+      "province": "",
+      "provinceCode": "",
+      "postalCode": "",
+      "country": "",
+      "countryCode": ""
+    }
+  },
+  "accountSubtypes": [
+    {
+      "value": "CASH_AND_BANK",
+      "name": "Cash and Bank",
+      "type": "ASSET",
+      "systemCreated": false,
+      "archivable": true
+    },
+    {
+      "value": "CREDIT_CARD",
+      "name": "Credit Card",
+      "type": "LIABILITY",
+      "systemCreated": false,
+      "archivable": true
+    },
+    {
+      "value": "RECEIVABLE_INVOICES",
+      "name": "System Receivable Invoice",
+      "type": "ASSET",
+      "systemCreated": true,
+      "archivable": true
+    },
+    {
+      "value": "RECEIVABLE_OTHER",
+      "name": "System Receivable Non-Invoice",
+      "type": "ASSET",
+      "systemCreated": true,
+      "archivable": true
+    },
+    {
+      "value": "TRANSFERS",
+      "name": "Transfers",
+      "type": "ASSET",
+      "systemCreated": true,
+      "archivable": true
+    },
+    {
+      "value": "PAYABLE_BILLS",
+      "name": "System Payable Bill",
+      "type": "LIABILITY",
+      "systemCreated": true,
+      "archivable": true
+    },
+    {
+      "value": "SALES_TAX",
+      "name": "Sales Tax on Sales and Purchases",
+      "type": "LIABILITY",
+      "systemCreated": true,
+      "archivable": true
+    },
+    {
+      "value": "NON_RETAINED_EARNINGS",
+      "name": "Business Owner Contribution and Drawing",
+      "type": "EQUITY",
+      "systemCreated": false,
+      "archivable": true
+    },
+    {
+      "value": "INCOME",
+      "name": "Income",
+      "type": "INCOME",
+      "systemCreated": false,
+      "archivable": true
+    },
+    {
+      "value": "OTHER_INCOME",
+      "name": "Other Income",
+      "type": "INCOME",
+      "systemCreated": false,
+      "archivable": true
+    },
+    {
+      "value": "DISCOUNTS",
+      "name": "Discount",
+      "type": "INCOME",
+      "systemCreated": false,
+      "archivable": true
+    },
+    {
+      "value": "EXPENSE",
+      "name": "Operating Expense",
+      "type": "EXPENSE",
+      "systemCreated": false,
+      "archivable": true
+    },
+    {
+      "value": "COST_OF_GOODS_SOLD",
+      "name": "Cost of Goods Sold",
+      "type": "EXPENSE",
+      "systemCreated": false,
+      "archivable": true
+    },
+    {
+      "value": "PAYMENT_PROCESSING_FEES",
+      "name": "Payment Processing Fee",
+      "type": "EXPENSE",
+      "systemCreated": false,
+      "archivable": true
+    },
+    {
+      "value": "PROPERTY_PLANT_EQUIPMENT",
+      "name": "Property, Plant, Equipment",
+      "type": "ASSET",
+      "systemCreated": false,
+      "archivable": true
+    },
+    {
+      "value": "OTHER_CURRENT_ASSETS",
+      "name": "Other Short-Term Asset",
+      "type": "ASSET",
+      "systemCreated": false,
+      "archivable": true
+    },
+    {
+      "value": "LOANS",
+      "name": "Loan and Line of Credit",
+      "type": "LIABILITY",
+      "systemCreated": false,
+      "archivable": true
+    }
+  ],
+  "accounts": [
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+      "name": "Business Checking",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "ASSET",
+      "subtype": "CASH_AND_BANK",
+      "subtypeName": "Cash & Bank",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "10685.27",
+      "balanceInBusinessCurrency": "10685.27"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDI=",
+      "name": "Business Savings",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "ASSET",
+      "subtype": "CASH_AND_BANK",
+      "subtypeName": "Cash & Bank",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "2100.00",
+      "balanceInBusinessCurrency": "2100.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDM=",
+      "name": "Visa Card",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "LIABILITY",
+      "subtype": "CREDIT_CARD",
+      "subtypeName": "Credit Card",
+      "normalBalance": "CREDIT",
+      "isArchived": false,
+      "balance": "-458.75",
+      "balanceInBusinessCurrency": "-458.75"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDQ=",
+      "name": "Accounts Receivable",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "ASSET",
+      "subtype": "RECEIVABLE_INVOICES",
+      "subtypeName": "System Receivable Invoice",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "532.50",
+      "balanceInBusinessCurrency": "532.50"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDU=",
+      "name": "Accounts Receivable",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "ASSET",
+      "subtype": "RECEIVABLE_INVOICES",
+      "subtypeName": "System Receivable Invoice",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "0.00",
+      "balanceInBusinessCurrency": "0.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDY=",
+      "name": "Accounts Receivable",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "ASSET",
+      "subtype": "RECEIVABLE_INVOICES",
+      "subtypeName": "System Receivable Invoice",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "0.00",
+      "balanceInBusinessCurrency": "0.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDc=",
+      "name": "Accounts Receivable",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "ASSET",
+      "subtype": "RECEIVABLE_OTHER",
+      "subtypeName": "System Receivable Non-Invoice",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "0.00",
+      "balanceInBusinessCurrency": "0.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDg=",
+      "name": "Transfer Clearing",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "ASSET",
+      "subtype": "TRANSFERS",
+      "subtypeName": "Transfers",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "0.00",
+      "balanceInBusinessCurrency": "0.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDk=",
+      "name": "Transfer Clearing",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "ASSET",
+      "subtype": "TRANSFERS",
+      "subtypeName": "Transfers",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "99.00",
+      "balanceInBusinessCurrency": "99.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTA=",
+      "name": "Transfer Clearing",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "ASSET",
+      "subtype": "TRANSFERS",
+      "subtypeName": "Transfers",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "0.00",
+      "balanceInBusinessCurrency": "0.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTE=",
+      "name": "Transfer Clearing",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "ASSET",
+      "subtype": "TRANSFERS",
+      "subtypeName": "Transfers",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "0.00",
+      "balanceInBusinessCurrency": "0.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTI=",
+      "name": "Accounts Payable",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "LIABILITY",
+      "subtype": "PAYABLE_BILLS",
+      "subtypeName": "System Payable Bill",
+      "normalBalance": "CREDIT",
+      "isArchived": false,
+      "balance": "200.00",
+      "balanceInBusinessCurrency": "200.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTM=",
+      "name": "Sales Tax Payable",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "LIABILITY",
+      "subtype": "SALES_TAX",
+      "subtypeName": "Sales Tax on Sales and Purchases",
+      "normalBalance": "CREDIT",
+      "isArchived": false,
+      "balance": "82.50",
+      "balanceInBusinessCurrency": "82.50"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTQ=",
+      "name": "Owner Investment / Drawings",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "EQUITY",
+      "subtype": "NON_RETAINED_EARNINGS",
+      "subtypeName": "Business Owner Contribution and Drawing",
+      "normalBalance": "CREDIT",
+      "isArchived": false,
+      "balance": "10000.00",
+      "balanceInBusinessCurrency": "10000.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTU=",
+      "name": "Sales",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "INCOME",
+      "subtype": "INCOME",
+      "subtypeName": "Income",
+      "normalBalance": "CREDIT",
+      "isArchived": false,
+      "balance": "2950.00",
+      "balanceInBusinessCurrency": "2950.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTY=",
+      "name": "Consulting Income",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "INCOME",
+      "subtype": "INCOME",
+      "subtypeName": "Income",
+      "normalBalance": "CREDIT",
+      "isArchived": false,
+      "balance": "3400.00",
+      "balanceInBusinessCurrency": "3400.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTc=",
+      "name": "Interest Income",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "INCOME",
+      "subtype": "OTHER_INCOME",
+      "subtypeName": "Other Income",
+      "normalBalance": "CREDIT",
+      "isArchived": false,
+      "balance": "4.12",
+      "balanceInBusinessCurrency": "4.12"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTg=",
+      "name": "Discounts Given",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "INCOME",
+      "subtype": "DISCOUNTS",
+      "subtypeName": "Discount",
+      "normalBalance": "CREDIT",
+      "isArchived": false,
+      "balance": "-100.00",
+      "balanceInBusinessCurrency": "-100.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTk=",
+      "name": "Office Supplies",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "EXPENSE",
+      "subtype": "EXPENSE",
+      "subtypeName": "Expense",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "285.95",
+      "balanceInBusinessCurrency": "285.95"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjA=",
+      "name": "Office Supplies",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "EXPENSE",
+      "subtype": "EXPENSE",
+      "subtypeName": "Expense",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "0.00",
+      "balanceInBusinessCurrency": "0.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjE=",
+      "name": "Software",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "EXPENSE",
+      "subtype": "EXPENSE",
+      "subtypeName": "Expense",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "0.00",
+      "balanceInBusinessCurrency": "0.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjI=",
+      "name": "Software",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "EXPENSE",
+      "subtype": "EXPENSE",
+      "subtypeName": "Expense",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "0.00",
+      "balanceInBusinessCurrency": "0.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjQ=",
+      "name": "Printing",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "EXPENSE",
+      "subtype": "COST_OF_GOODS_SOLD",
+      "subtypeName": "Cost of Goods Sold",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "600.00",
+      "balanceInBusinessCurrency": "600.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjU=",
+      "name": "Payment Processing Fees",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "EXPENSE",
+      "subtype": "PAYMENT_PROCESSING_FEES",
+      "subtypeName": "Payment Processing Fee",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "26.40",
+      "balanceInBusinessCurrency": "26.40"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjY=",
+      "name": "Meals & Entertainment",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "EXPENSE",
+      "subtype": "EXPENSE",
+      "subtypeName": "Expense",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "223.75",
+      "balanceInBusinessCurrency": "223.75"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjc=",
+      "name": "Depreciation",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "EXPENSE",
+      "subtype": "EXPENSE",
+      "subtypeName": "Expense",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "300.00",
+      "balanceInBusinessCurrency": "300.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjg=",
+      "name": "Equipment",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "ASSET",
+      "subtype": "PROPERTY_PLANT_EQUIPMENT",
+      "subtypeName": "Property, Plant, Equipment",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "1000.00",
+      "balanceInBusinessCurrency": "1000.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjk=",
+      "name": "Prepaid Expenses",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "ASSET",
+      "subtype": "OTHER_CURRENT_ASSETS",
+      "subtypeName": "Other Short-Term Asset",
+      "normalBalance": "DEBIT",
+      "isArchived": false,
+      "balance": "150.00",
+      "balanceInBusinessCurrency": "150.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMzA=",
+      "name": "Vehicle Loan",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "LIABILITY",
+      "subtype": "LOANS",
+      "subtypeName": "Loan and Line of Credit",
+      "normalBalance": "CREDIT",
+      "isArchived": false,
+      "balance": "0.00",
+      "balanceInBusinessCurrency": "0.00"
+    },
+    {
+      "id": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMjM=",
+      "name": "Old Printer Lease",
+      "description": "",
+      "displayId": "",
+      "currency": "USD",
+      "type": "EXPENSE",
+      "subtype": "EXPENSE",
+      "subtypeName": "Expense",
+      "normalBalance": "DEBIT",
+      "isArchived": true,
+      "balance": "75.00",
+      "balanceInBusinessCurrency": "75.00"
+    }
+  ],
+  "customers": [
+    {
+      "id": "Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx",
+      "name": "Birch Studio",
+      "firstName": "",
+      "lastName": "",
+      "displayId": "",
+      "email": "accounts@birch.example",
+      "phone": "",
+      "mobile": "",
+      "fax": "",
+      "tollFree": "",
+      "website": "",
+      "currency": "USD",
+      "isArchived": false,
+      "address": {
+        "line1": "",
+        "line2": "",
+        "city": "Portland",
+        "province": "",
+        "provinceCode": "",
+        "postalCode": "",
+        "country": "",
+        "countryCode": ""
+      },
+      "shipping": null
+    },
+    {
+      "id": "Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAy",
+      "name": "Cedar & Co",
+      "firstName": "",
+      "lastName": "",
+      "displayId": "",
+      "email": "ap@cedar.example",
+      "phone": "",
+      "mobile": "",
+      "fax": "",
+      "tollFree": "",
+      "website": "",
+      "currency": "USD",
+      "isArchived": false,
+      "address": {
+        "line1": "",
+        "line2": "",
+        "city": "",
+        "province": "",
+        "provinceCode": "",
+        "postalCode": "",
+        "country": "",
+        "countryCode": ""
+      },
+      "shipping": null
+    },
+    {
+      "id": "Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAz",
+      "name": "Walk-in Customer",
+      "firstName": "",
+      "lastName": "",
+      "displayId": "",
+      "email": "",
+      "phone": "",
+      "mobile": "",
+      "fax": "",
+      "tollFree": "",
+      "website": "",
+      "currency": "USD",
+      "isArchived": false,
+      "address": {
+        "line1": "",
+        "line2": "",
+        "city": "",
+        "province": "",
+        "provinceCode": "",
+        "postalCode": "",
+        "country": "",
+        "countryCode": ""
+      },
+      "shipping": null
+    },
+    {
+      "id": "Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDA0",
+      "name": "Dogwood Partners",
+      "firstName": "",
+      "lastName": "",
+      "displayId": "",
+      "email": "",
+      "phone": "",
+      "mobile": "",
+      "fax": "",
+      "tollFree": "",
+      "website": "",
+      "currency": "USD",
+      "isArchived": false,
+      "address": {
+        "line1": "",
+        "line2": "",
+        "city": "",
+        "province": "",
+        "provinceCode": "",
+        "postalCode": "",
+        "country": "",
+        "countryCode": ""
+      },
+      "shipping": null
+    }
+  ],
+  "vendors": [
+    {
+      "id": "VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMQ==",
+      "name": "Paper Planet",
+      "firstName": "",
+      "lastName": "",
+      "displayId": "",
+      "email": "",
+      "phone": "",
+      "mobile": "",
+      "fax": "",
+      "tollFree": "",
+      "website": "",
+      "currency": "USD",
+      "isArchived": false,
+      "address": null
+    },
+    {
+      "id": "VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMg==",
+      "name": "Cloudware Inc",
+      "firstName": "",
+      "lastName": "",
+      "displayId": "",
+      "email": "",
+      "phone": "",
+      "mobile": "",
+      "fax": "",
+      "tollFree": "",
+      "website": "",
+      "currency": "USD",
+      "isArchived": false,
+      "address": null
+    },
+    {
+      "id": "VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMw==",
+      "name": "Granite Print Co",
+      "firstName": "",
+      "lastName": "",
+      "displayId": "",
+      "email": "",
+      "phone": "",
+      "mobile": "",
+      "fax": "",
+      "tollFree": "",
+      "website": "",
+      "currency": "USD",
+      "isArchived": false,
+      "address": null
+    },
+    {
+      "id": "VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwNA==",
+      "name": "Corner Coffee",
+      "firstName": "",
+      "lastName": "",
+      "displayId": "",
+      "email": "",
+      "phone": "",
+      "mobile": "",
+      "fax": "",
+      "tollFree": "",
+      "website": "",
+      "currency": "USD",
+      "isArchived": false,
+      "address": null
+    },
+    {
+      "id": "VmVuZG9yOjAwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwNQ==",
+      "name": "Lease Masters",
+      "firstName": "",
+      "lastName": "",
+      "displayId": "",
+      "email": "",
+      "phone": "",
+      "mobile": "",
+      "fax": "",
+      "tollFree": "",
+      "website": "",
+      "currency": "USD",
+      "isArchived": false,
+      "address": null
+    }
+  ],
+  "products": [
+    {
+      "id": "UHJvZHVjdDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+      "name": "Services",
+      "description": "",
+      "unitPrice": "125",
+      "isSold": true,
+      "isBought": false,
+      "isArchived": false,
+      "incomeAccountId": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTY=",
+      "expenseAccountId": "",
+      "salesTaxIds": []
+    }
+  ],
+  "salesTaxes": [
+    {
+      "id": "U2FsZXNUYXg6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx",
+      "name": "State Sales Tax",
+      "abbreviation": "ST",
+      "description": "",
+      "taxNumber": "",
+      "isCompound": false,
+      "isRecoverable": false,
+      "isArchived": false,
+      "rates": [
+        {
+          "effective": "2024-01-01",
+          "rate": "0.0825"
+        }
+      ]
+    }
+  ],
+  "invoices": [
+    {
+      "id": "SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+      "number": "1001",
+      "date": "2025-02-01",
+      "dueDate": "2025-03-03",
+      "status": "PAID",
+      "title": "Invoice",
+      "poNumber": "",
+      "memo": "",
+      "currency": "USD",
+      "exchangeRate": "1",
+      "customerId": "Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx",
+      "customerName": "Birch Studio",
+      "subtotal": "1440.00",
+      "taxTotal": "0.00",
+      "discountTotal": "0.00",
+      "total": "1440.00",
+      "amountPaid": "1440.00",
+      "amountDue": "0.00",
+      "items": [
+        {
+          "description": "Brand workshop",
+          "quantity": "12",
+          "unitPrice": "120",
+          "subtotal": "1440.00",
+          "total": "1440.00",
+          "accountId": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTY=",
+          "productId": "UHJvZHVjdDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+          "taxes": []
+        }
+      ],
+      "payments": [
+        {
+          "id": "SW52b2ljZVBheW1lbnQ6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx",
+          "date": "2025-02-15",
+          "amount": "500.00",
+          "method": "BANK_TRANSFER",
+          "active": true,
+          "memo": "",
+          "accountId": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+          "ledgerTransactionId": "9000000000000000007"
+        },
+        {
+          "id": "SW52b2ljZVBheW1lbnQ6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAy",
+          "date": "2025-03-01",
+          "amount": "940.00",
+          "method": "CHEQUE",
+          "active": true,
+          "memo": "",
+          "accountId": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+          "ledgerTransactionId": ""
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "id": "SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDI=",
+      "number": "1002",
+      "date": "2025-02-10",
+      "dueDate": "2025-03-12",
+      "status": "PARTIAL",
+      "title": "Invoice",
+      "poNumber": "",
+      "memo": "",
+      "currency": "USD",
+      "exchangeRate": "1",
+      "customerId": "Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAy",
+      "customerName": "Cedar & Co",
+      "subtotal": "1000.00",
+      "taxTotal": "82.50",
+      "discountTotal": "0.00",
+      "total": "1082.50",
+      "amountPaid": "500.00",
+      "amountDue": "582.50",
+      "items": [
+        {
+          "description": "Logo package",
+          "quantity": "1",
+          "unitPrice": "1000",
+          "subtotal": "1000.00",
+          "total": "1000.00",
+          "accountId": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTU=",
+          "productId": "UHJvZHVjdDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+          "taxes": [
+            {
+              "salesTaxId": "U2FsZXNUYXg6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx",
+              "amount": "82.50"
+            }
+          ]
+        }
+      ],
+      "payments": [
+        {
+          "id": "SW52b2ljZVBheW1lbnQ6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAz",
+          "date": "2025-03-10",
+          "amount": "500.00",
+          "method": "BANK_TRANSFER",
+          "active": true,
+          "memo": "",
+          "accountId": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+          "ledgerTransactionId": "9000000000000000010"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "id": "SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDM=",
+      "number": "1003",
+      "date": "2025-03-15",
+      "dueDate": "2025-04-14",
+      "status": "PAID",
+      "title": "Invoice",
+      "poNumber": "",
+      "memo": "",
+      "currency": "USD",
+      "exchangeRate": "1",
+      "customerId": "Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx",
+      "customerName": "Birch Studio",
+      "subtotal": "1960.00",
+      "taxTotal": "0.00",
+      "discountTotal": "0.00",
+      "total": "1960.00",
+      "amountPaid": "1960.00",
+      "amountDue": "0.00",
+      "items": [
+        {
+          "description": "Website build",
+          "quantity": "16",
+          "unitPrice": "122.50",
+          "subtotal": "1960.00",
+          "total": "1960.00",
+          "accountId": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTY=",
+          "productId": "UHJvZHVjdDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+          "taxes": []
+        }
+      ],
+      "payments": [
+        {
+          "id": "SW52b2ljZVBheW1lbnQ6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDA0",
+          "date": "2025-04-01",
+          "amount": "1960.00",
+          "method": "BANK_TRANSFER",
+          "active": true,
+          "memo": "",
+          "accountId": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+          "ledgerTransactionId": "9000000000000000013"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "id": "SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDQ=",
+      "number": "1004",
+      "date": "2025-03-16",
+      "dueDate": "2025-04-15",
+      "status": "PAID",
+      "title": "Invoice",
+      "poNumber": "",
+      "memo": "",
+      "currency": "USD",
+      "exchangeRate": "1",
+      "customerId": "Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAx",
+      "customerName": "Birch Studio",
+      "subtotal": "750.00",
+      "taxTotal": "0.00",
+      "discountTotal": "0.00",
+      "total": "750.00",
+      "amountPaid": "750.00",
+      "amountDue": "0.00",
+      "items": [
+        {
+          "description": "Print run",
+          "quantity": "3",
+          "unitPrice": "250",
+          "subtotal": "750.00",
+          "total": "750.00",
+          "accountId": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTU=",
+          "productId": "UHJvZHVjdDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+          "taxes": []
+        }
+      ],
+      "payments": [
+        {
+          "id": "SW52b2ljZVBheW1lbnQ6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDA1",
+          "date": "2025-04-01",
+          "amount": "750.00",
+          "method": "BANK_TRANSFER",
+          "active": true,
+          "memo": "",
+          "accountId": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+          "ledgerTransactionId": "9000000000000000013"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "id": "SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDU=",
+      "number": "1005",
+      "date": "2025-04-05",
+      "dueDate": "2025-05-05",
+      "status": "PAID",
+      "title": "Invoice",
+      "poNumber": "",
+      "memo": "",
+      "currency": "USD",
+      "exchangeRate": "1",
+      "customerId": "Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAy",
+      "customerName": "Cedar & Co",
+      "subtotal": "1000.00",
+      "taxTotal": "0.00",
+      "discountTotal": "100.00",
+      "total": "900.00",
+      "amountPaid": "900.00",
+      "amountDue": "0.00",
+      "items": [
+        {
+          "description": "Annual retainer",
+          "quantity": "1",
+          "unitPrice": "1000",
+          "subtotal": "1000.00",
+          "total": "1000.00",
+          "accountId": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTU=",
+          "productId": "UHJvZHVjdDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+          "taxes": []
+        }
+      ],
+      "payments": [
+        {
+          "id": "SW52b2ljZVBheW1lbnQ6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDA2",
+          "date": "2025-04-20",
+          "amount": "900.00",
+          "method": "CREDIT_CARD",
+          "active": true,
+          "memo": "",
+          "accountId": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+          "ledgerTransactionId": "9000000000000000015"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "id": "SW52b2ljZTowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDY=",
+      "number": "1006",
+      "date": "2025-10-01",
+      "dueDate": "2025-10-31",
+      "status": "DRAFT",
+      "title": "Invoice",
+      "poNumber": "",
+      "memo": "",
+      "currency": "USD",
+      "exchangeRate": "1",
+      "customerId": "Q3VzdG9tZXI6MDAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDA0",
+      "customerName": "Dogwood Partners",
+      "subtotal": "300.00",
+      "taxTotal": "0.00",
+      "discountTotal": "0.00",
+      "total": "300.00",
+      "amountPaid": "0.00",
+      "amountDue": "300.00",
+      "items": [
+        {
+          "description": "Proposal",
+          "quantity": "1",
+          "unitPrice": "300",
+          "subtotal": "300.00",
+          "total": "300.00",
+          "accountId": "QWNjb3VudDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMTY=",
+          "productId": "UHJvZHVjdDowMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDE=",
+          "taxes": []
+        }
+      ],
+      "payments": [],
+      "attachments": []
+    }
+  ],
+  "estimates": []
+}
