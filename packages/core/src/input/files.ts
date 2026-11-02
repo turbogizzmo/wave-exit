@@ -15,26 +15,52 @@ export interface InputFile {
 
 export const baseName = (path: string): string => path.split("/").pop() ?? path;
 
+/**
+ * A name that is safe as a single archive entry (`attachments/<name>`) on every system:
+ * the last segment after either separator, with characters Windows refuses replaced,
+ * and never empty, "." or "..".
+ */
+export function safeEntryName(name: string): string {
+  const last = (name.split(/[\\/]/).pop() ?? "").replace(/[:*?"<>|\u0000-\u001f]/g, "-").trim();
+  return last === "" || /^\.+$/.test(last) ? "attachment" : last;
+}
+
 export function isZip(f: InputFile): boolean {
   const b = f.bytes;
   return b.length >= 4 && b[0] === 0x50 && b[1] === 0x4b && (b[2] === 0x03 || b[2] === 0x05);
 }
 
+/** Limits on what ZIPs may expand to, so a crafted ZIP can't exhaust memory (same file count as the native side). */
+export const MAX_ZIP_ENTRIES = 20_000;
+export const MAX_UNZIPPED_BYTES = 2 * 1024 * 1024 * 1024;
+
 /**
  * Expand ZIPs into their member files. Directory entries and macOS metadata
  * (`__MACOSX/`, `.DS_Store`) are dropped. A damaged or cut-off ZIP raises a
- * plain-English problem rather than a library error.
+ * plain-English problem rather than a library error, and so does one that would
+ * expand past MAX_ZIP_ENTRIES files or MAX_UNZIPPED_BYTES.
  */
 export function expandZips(files: InputFile[]): InputFile[] {
   const out: InputFile[] = [];
+  let count = 0;
+  let bytes = 0;
   for (const f of files) {
     if (!isZip(f)) {
       out.push(f);
       continue;
     }
     let entries: Record<string, Uint8Array>;
+    let tooBig = false;
     try {
-      entries = unzipSync(f.bytes);
+      // Sizes come from the ZIP's headers; fflate never inflates an entry past its stated size.
+      entries = unzipSync(f.bytes, {
+        filter: (e) => {
+          count++;
+          bytes += e.originalSize;
+          if (count > MAX_ZIP_ENTRIES || bytes > MAX_UNZIPPED_BYTES) tooBig = true;
+          return !tooBig;
+        },
+      });
     } catch (e) {
       throw new InputProblem(
         "damaged-file",
@@ -43,9 +69,17 @@ export function expandZips(files: InputFile[]): InputFile[] {
         String(e),
       );
     }
-    for (const [name, bytes] of Object.entries(entries)) {
+    if (tooBig) {
+      throw new InputProblem(
+        "unsupported-format",
+        `"${baseName(f.path)}" expands to more files or data than Wave Exit can open at once, so it isn't a normal Wave export.`,
+        "Check that this is the export Wave emailed you, and download it again if you're not sure.",
+        `limit: ${MAX_ZIP_ENTRIES} files, ${MAX_UNZIPPED_BYTES} bytes`,
+      );
+    }
+    for (const [name, data] of Object.entries(entries)) {
       if (name.endsWith("/") || name.startsWith("__MACOSX/") || baseName(name) === ".DS_Store") continue;
-      out.push({ path: name, bytes, ...(f.modified ? { modified: f.modified } : {}) });
+      out.push({ path: name, bytes: data, ...(f.modified ? { modified: f.modified } : {}) });
     }
   }
   return out;

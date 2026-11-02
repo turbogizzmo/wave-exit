@@ -54,9 +54,10 @@ export function intuitAuthorizeUrl(p: { clientId: string; redirectUri: string; s
 /** Read Intuit's redirect: code, state and the company (realm) the user picked. */
 export function parseIntuitRedirect(url: string, expectedState: string): { code: string; realmId: string } {
   const u = new URL(url);
+  // State first: a reply that isn't for this request, error or not, is ignored.
+  if (u.searchParams.get("state") !== expectedState) throw new Error("The sign-in reply didn't match this request. Start again.");
   const err = u.searchParams.get("error");
   if (err) throw new Error(err === "access_denied" ? "You cancelled the connection in QuickBooks." : `QuickBooks returned an error: ${err}`);
-  if (u.searchParams.get("state") !== expectedState) throw new Error("The sign-in reply didn't match this request. Start again.");
   const code = u.searchParams.get("code");
   const realmId = u.searchParams.get("realmId");
   if (!code || !realmId) throw new Error("QuickBooks didn't say which company was chosen. Start again.");

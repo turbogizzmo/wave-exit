@@ -1,4 +1,5 @@
 import { zipSync } from "fflate";
+import { safeEntryName } from "../../input/files.ts";
 import type { Books } from "../../model/types.ts";
 import { encodeText, safeFileName, toCsv } from "../csv.ts";
 import { tieOutReport } from "../reports/reports.ts";
@@ -72,7 +73,7 @@ export async function writeUniversalPackage(books: Books, ctx: OutputContext): P
   }
   for (const r of books.receipts) {
     const data = ctx.attachments.get(r.fileName);
-    if (data) files[`attachments/${r.fileName}`] = [data, { mtime, level: 0 }];
+    if (data) files[`attachments/${safeEntryName(r.fileName)}`] = [data, { mtime, level: 0 }];
   }
   rowCounts["attachments/"] = books.receipts.filter((r) => ctx.attachments.has(r.fileName)).length;
   const manifest = manifestFor(books, ctx, rowCounts);

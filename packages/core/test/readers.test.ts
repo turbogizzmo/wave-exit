@@ -104,6 +104,17 @@ describe("transactions export reader", () => {
   });
 });
 
+describe("ZIP limits", () => {
+  it("refuses a ZIP that claims to expand past the limit, without inflating it", async () => {
+    const z = zipSync({ "2025-01-05-A.pdf": strToU8("a".repeat(100)) });
+    // Patch the central directory's uncompressed size to 4 GB.
+    const dv = new DataView(z.buffer, z.byteOffset, z.byteLength);
+    for (let i = 0; i + 4 <= z.length; i++) if (dv.getUint32(i, true) === 0x02014b50) dv.setUint32(i + 24, 0xfffffff0, true);
+    const p = await problem(readReceiptsExport([zipFile(z)]));
+    expect(p.code).toBe("unsupported-format");
+  });
+});
+
 describe("receipts export reader", () => {
   it("reads Wave's receipts ZIP", async () => {
     const r = await readReceiptsExport([zipFile(receiptsZip(), "owner@maple-pine.example-2026-01-15-12-00-00.zip")]);
@@ -122,5 +133,25 @@ describe("receipts export reader", () => {
     expect(r.receipts).toHaveLength(2);
     expect(r.receipts.find((x) => x.fileName === "scan.pdf")?.date).toBe("");
     expect(r.notes[0]?.severity).toBe("warning");
+  });
+
+  it("keeps every receipt name a plain file name", async () => {
+    const z = zipSync({
+      "2025-01-15-..\\..\\..\\Startup\\evil.cmd": strToU8("a"),
+      "..\\..\\x.pdf": strToU8("b"),
+      "2025-01-05-C:x.pdf": strToU8("c"),
+      "a/x.pdf": strToU8("d"),
+      "2025-01-05-A.pdf": strToU8("e"),
+    });
+    const r = await readReceiptsExport([zipFile(z)]);
+    const names = r.receipts.map((x) => x.fileName);
+    for (const n of names) {
+      expect(n).toMatch(/^[^\\/:]+$/);
+      expect(n).not.toMatch(/^\.+$/);
+    }
+    expect(new Set(names).size).toBe(names.length);
+    expect(names).toContain("evil.cmd");
+    expect(names).toContain("2025-01-05-C-x.pdf");
+    expect(names.filter((n) => n.startsWith("x")).sort()).toEqual(["x (2).pdf", "x.pdf"].sort());
   });
 });

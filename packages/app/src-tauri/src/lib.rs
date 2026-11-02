@@ -21,6 +21,7 @@ use tauri_plugin_dialog::DialogExt;
 const KEYCHAIN_SERVICE: &str = "Wave Exit";
 const MAX_INPUT_FILES: usize = 20_000;
 const MAX_INPUT_BYTES: u64 = 4 * 1024 * 1024 * 1024;
+const MAX_INPUT_DEPTH: usize = 32;
 
 /// Paths the user has handed over (picked in a dialog or dropped on the window).
 #[derive(Default)]
@@ -164,9 +165,14 @@ struct NativeFile {
     size: u64,
 }
 
-fn collect(path: &Path, rel: String, out: &mut Vec<NativeFile>, total: &mut u64) -> Res<()> {
+/// List files under a picked or dropped path. Links to folders inside it are not followed
+/// (a link back to a parent folder would never end), and nesting stops at MAX_INPUT_DEPTH.
+fn collect(path: &Path, rel: String, out: &mut Vec<NativeFile>, total: &mut u64, depth: usize) -> Res<()> {
     let meta = fs::metadata(path).map_err(err)?;
     if meta.is_dir() {
+        if depth >= MAX_INPUT_DEPTH {
+            return Err("The folder is nested too deeply to read.".into());
+        }
         let mut entries: Vec<_> = fs::read_dir(path).map_err(err)?.filter_map(Result::ok).collect();
         entries.sort_by_key(|e| e.file_name());
         for e in entries {
@@ -174,7 +180,10 @@ fn collect(path: &Path, rel: String, out: &mut Vec<NativeFile>, total: &mut u64)
             if name.starts_with('.') || name == "__MACOSX" {
                 continue;
             }
-            collect(&e.path(), format!("{rel}/{name}"), out, total)?;
+            if e.file_type().map(|t| t.is_symlink()).unwrap_or(true) && e.path().is_dir() {
+                continue;
+            }
+            collect(&e.path(), format!("{rel}/{name}"), out, total, depth + 1)?;
         }
         return Ok(());
     }
@@ -200,7 +209,7 @@ fn list_granted(granted: &Granted, paths: &[PathBuf]) -> Res<Vec<NativeFile>> {
             return Err("That file wasn't chosen or dropped in this window.".into());
         }
         let name = p.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
-        collect(p, name, &mut out, &mut total)?;
+        collect(p, name, &mut out, &mut total, 0)?;
     }
     granted.readable.lock().map_err(err)?.extend(out.iter().map(|f| PathBuf::from(&f.absolute)));
     Ok(out)
@@ -244,6 +253,17 @@ fn pick_output_folder(app: AppHandle, granted: State<'_, Granted>) -> Res<Option
     Ok(Some(p.to_string_lossy().into_owned()))
 }
 
+/// A plain file name: exactly one normal path component, with nothing Windows reads as a
+/// drive (`C:x`), stream (`name:stream`) or device (`CON`, `COM1.txt`).
+fn valid_output_name(name: &str) -> bool {
+    let mut parts = Path::new(name).components();
+    let one_normal = matches!((parts.next(), parts.next()), (Some(Component::Normal(_)), None));
+    let stem = name.split('.').next().unwrap_or("").trim_end().to_ascii_uppercase();
+    let device = matches!(stem.as_str(), "CON" | "PRN" | "AUX" | "NUL")
+        || ((stem.starts_with("COM") || stem.starts_with("LPT")) && stem.len() == 4 && stem.as_bytes()[3].is_ascii_digit());
+    one_normal && !name.contains(['/', '\\', ':', '\0']) && !device
+}
+
 /// Write one output into a folder the user chose. Never overwrites: adds " (2)", " (3)"….
 #[tauri::command]
 fn write_output(granted: State<'_, Granted>, request: Request<'_>) -> Res<String> {
@@ -252,7 +272,7 @@ fn write_output(granted: State<'_, Granted>, request: Request<'_>) -> Res<String
         return Err("That folder wasn't chosen in this window.".into());
     }
     let name = header(&request, "x-name")?;
-    if name.is_empty() || name.contains(['/', '\\']) || name == "." || name == ".." {
+    if !valid_output_name(&name) {
         return Err(format!("bad file name {name:?}"));
     }
     let (stem, ext) = match name.rfind('.') {
@@ -265,6 +285,9 @@ fn write_output(granted: State<'_, Granted>, request: Request<'_>) -> Res<String
         target = folder.join(format!("{stem} ({n}){ext}"));
         n += 1;
     }
+    if target.parent() != Some(folder.as_path()) {
+        return Err(format!("bad file name {name:?}"));
+    }
     fs::write(&target, raw_body(&request)?).map_err(err)?;
     Ok(target.to_string_lossy().into_owned())
 }
@@ -276,14 +299,24 @@ fn write_output(granted: State<'_, Granted>, request: Request<'_>) -> Res<String
 /// sandbox/development keys; production uses the token-exchange service's https page).
 const INTUIT_LOOPBACK_PORT: u16 = 53682;
 
+/// One query parameter's raw (still encoded) value.
+fn query_param<'a>(query: &'a str, key: &str) -> Option<&'a str> {
+    query.split('&').find_map(|kv| kv.strip_prefix(key)?.strip_prefix('='))
+}
+
 /// Open Intuit's sign-in page in the user's browser, wait (up to 5 minutes) for the
-/// redirect on localhost, and return its URL. Only Intuit's own sign-in address is opened.
+/// redirect on localhost, and return its URL. Only Intuit's own sign-in address is opened,
+/// and only a reply carrying the same `state` as that address ends the wait.
 #[tauri::command]
 async fn intuit_sign_in(app: AppHandle, authorize_url: String) -> Res<String> {
     use tauri_plugin_opener::OpenerExt;
-    if !authorize_url.starts_with("https://appcenter.intuit.com/connect/oauth2?") {
+    let Some(query) = authorize_url.strip_prefix("https://appcenter.intuit.com/connect/oauth2?") else {
         return Err("not an Intuit sign-in address".into());
-    }
+    };
+    let state = match query_param(query, "state") {
+        Some(s) if !s.is_empty() => s.to_string(),
+        _ => return Err("the Intuit sign-in address has no state".into()),
+    };
     let listeners: Vec<std::net::TcpListener> = ["127.0.0.1", "[::1]"]
         .iter()
         .filter_map(|h| std::net::TcpListener::bind(format!("{h}:{INTUIT_LOOPBACK_PORT}")).ok())
@@ -295,12 +328,18 @@ async fn intuit_sign_in(app: AppHandle, authorize_url: String) -> Res<String> {
         l.set_nonblocking(true).map_err(err)?;
     }
     app.opener().open_url(&authorize_url, None::<&str>).map_err(err)?;
-    tauri::async_runtime::spawn_blocking(move || wait_for_callback(listeners))
+    tauri::async_runtime::spawn_blocking(move || wait_for_callback(listeners, &state))
         .await
         .map_err(err)?
 }
 
-fn wait_for_callback(listeners: Vec<std::net::TcpListener>) -> Res<String> {
+/// Whether a request path is the sign-in reply for this `state` (any other local
+/// program or web page can reach the port, so a reply without it is ignored).
+fn is_our_callback(path: &str, state: &str) -> bool {
+    path.strip_prefix("/callback?").and_then(|q| query_param(q, "state")) == Some(state)
+}
+
+fn wait_for_callback(listeners: Vec<std::net::TcpListener>, state: &str) -> Res<String> {
     use std::io::{Read, Write};
     let deadline = std::time::Instant::now() + std::time::Duration::from_secs(300);
     while std::time::Instant::now() < deadline {
@@ -312,7 +351,7 @@ fn wait_for_callback(listeners: Vec<std::net::TcpListener>) -> Res<String> {
             let n = stream.read(&mut buf).unwrap_or(0);
             let head = String::from_utf8_lossy(&buf[..n]);
             let path = head.lines().next().and_then(|l| l.split_whitespace().nth(1)).unwrap_or("").to_string();
-            if !path.starts_with("/callback?") {
+            if !is_our_callback(&path, state) {
                 let _ = stream.write_all(b"HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\nConnection: close\r\n\r\n");
                 continue;
             }
@@ -364,4 +403,46 @@ pub fn run() {
         ])
         .run(tauri::generate_context!())
         .expect("error while running Wave Exit");
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn only_the_matching_sign_in_reply_counts() {
+        let s = "0123456789abcdef0123456789abcdef";
+        assert!(is_our_callback(&format!("/callback?code=c&state={s}&realmId=1"), s));
+        assert!(is_our_callback(&format!("/callback?state={s}&error=access_denied"), s));
+        assert!(!is_our_callback("/callback?error=access_denied", s));
+        assert!(!is_our_callback("/callback?code=c&state=forged", s));
+        assert!(!is_our_callback(&format!("/callback?code=c&xstate={s}"), s));
+        assert!(!is_our_callback(&format!("/other?state={s}"), s));
+        assert_eq!(query_param("a=1&state=x&b=2", "state"), Some("x"));
+        assert_eq!(query_param("a=1", "state"), None);
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn folder_links_are_not_followed() {
+        let root = std::env::temp_dir().join(format!("wave-exit-collect-{}", std::process::id()));
+        let _ = fs::remove_dir_all(&root);
+        fs::create_dir_all(root.join("export")).unwrap();
+        fs::write(root.join("export/accounting.csv"), b"x").unwrap();
+        std::os::unix::fs::symlink(&root, root.join("export/loop")).unwrap();
+        let (mut out, mut total) = (Vec::new(), 0);
+        collect(&root.join("export"), "export".into(), &mut out, &mut total, 0).unwrap();
+        let _ = fs::remove_dir_all(&root);
+        assert_eq!(out.iter().map(|f| f.path.as_str()).collect::<Vec<_>>(), ["export/accounting.csv"]);
+    }
+
+    #[test]
+    fn output_names_stay_in_the_folder() {
+        for ok in ["Maple – Wave books – 2026-01-16.xlsx", "report.pdf", "CONTACTS.csv", "COM.txt", "a..b"] {
+            assert!(valid_output_name(ok), "{ok}");
+        }
+        for bad in ["", ".", "..", "a/b", "a\\b", "C:evil.txt", "C:", "name:stream", "CON", "con.txt", "COM1.csv", "lpt9", "/etc/x", "a\0b"] {
+            assert!(!valid_output_name(bad), "{bad}");
+        }
+    }
 }

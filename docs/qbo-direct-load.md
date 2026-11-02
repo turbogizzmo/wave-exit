@@ -96,3 +96,24 @@ desktop app. The service is a stateless fetch handler (Cloudflare Workers or sim
 three routes: `GET /intuit/callback` (redirects to the app on 127.0.0.1), `POST /intuit/token`
 and `POST /intuit/refresh`. It stores and logs nothing and never sees accounting data.
 Written and tested; **not deployed**.
+
+The two POST routes attach the client secret, so they only answer the desktop app and are
+rate limited. Configuration:
+
+| Setting | Required | What it is |
+|---|---|---|
+| `INTUIT_CLIENT_ID`, `INTUIT_CLIENT_SECRET` | yes (secret) | The production Intuit app's keys. |
+| `ALLOWED_REDIRECT_URIS` | yes | Comma-separated; the service's own `/intuit/callback` URL. |
+| `IP_LIMITER` | yes | A rate-limit binding (Cloudflare Workers `ratelimit`, or anything with `limit({ key })`), keyed `ip:<CF-Connecting-IP>`. For example 30 requests per 60 s. |
+| `TOKEN_LIMITER` | yes | A rate-limit binding keyed by the SHA-256 of the code or refresh token. For example 5 requests per 60 s. |
+| `ALLOWED_ORIGINS` | no | Comma-separated `Origin` values allowed on the POST routes. Defaults to `tauri://localhost,http://tauri.localhost`, which Tauri's HTTP plugin sends for the app's window. |
+
+Without both limiters the POST routes answer 503 and never call Intuit. Requests with any
+other `Origin` (or none) get 403. The origin check stops web pages and casual misuse, but a
+determined script can send the same header, so the client secret is still effectively
+shared with anyone who can reach the service: the limits are what bound the damage of a
+stolen refresh token. Binding refreshes to an installation (a per-install key pair) would
+close that gap and is not done yet.
+
+When the app is switched to this service, add its https origin to the HTTP allow-list in
+`packages/app/src-tauri/capabilities/default.json`.
