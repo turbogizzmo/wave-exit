@@ -1,3 +1,4 @@
+import { safeEntryName } from "../../input/files.ts";
 import { formatPlain, type Minor } from "../../money.ts";
 import { trialBalance } from "../../model/ledger.ts";
 import type { Account, Books, Contact, DocumentLine, OpenDocument } from "../../model/types.ts";
@@ -359,7 +360,7 @@ export const TABLES: TableSpec[] = [
       C("status", "text", "linked, ambiguous (several possible entries) or unmatched."),
       C("candidate_entry_ids", "list", "Entries it might belong to."),
     ],
-    rows: (b) => b.receipts.map((r) => [`attachments/${r.fileName}`, r.sha256, String(r.bytes), r.entryId, r.status, JSON.stringify(r.candidates)]),
+    rows: (b) => b.receipts.map((r) => [`attachments/${safeEntryName(r.fileName)}`, r.sha256, String(r.bytes), r.entryId, r.status, JSON.stringify(r.candidates)]),
   },
   {
     file: "review_items.csv", sheet: "Review Items", doc: "Everything Wave Exit asked a person to look at, and the answer given.",

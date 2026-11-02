@@ -237,6 +237,8 @@ describe("QuickBooks client and sign-in", () => {
     expect(qbo.parseIntuitRedirect("http://localhost:53682/callback?code=c1&state=s1&realmId=42", "s1")).toEqual({ code: "c1", realmId: "42" });
     expect(() => qbo.parseIntuitRedirect("http://localhost/cb?code=c1&state=evil&realmId=42", "s1")).toThrow(/didn't match/);
     expect(() => qbo.parseIntuitRedirect("http://localhost/cb?error=access_denied&state=s1", "s1")).toThrow(/cancelled/);
+    expect(() => qbo.parseIntuitRedirect("http://localhost/cb?error=access_denied", "s1")).toThrow(/didn't match/);
+    expect(() => qbo.parseIntuitRedirect("http://localhost/cb?error=access_denied&state=evil", "s1")).toThrow(/didn't match/);
   });
 
   it("refreshes the access token before it runs out and stores the new one", async () => {

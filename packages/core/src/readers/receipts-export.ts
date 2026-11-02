@@ -1,4 +1,4 @@
-import { baseName, expandZips, sha256Hex, type InputFile } from "../input/files.ts";
+import { baseName, expandZips, safeEntryName, sha256Hex, type InputFile } from "../input/files.ts";
 import { InputProblem } from "../problems.ts";
 import type { ReaderNote } from "./common.ts";
 
@@ -40,8 +40,12 @@ export async function readReceiptsExport(input: InputFile[]): Promise<ReceiptsEx
   const files = expandZips(input);
   const receipts: ReceiptFile[] = [];
   const unrecognised: string[] = [];
+  const used = new Set<string>();
   for (const f of files) {
-    const name = baseName(f.path);
+    // The name becomes an entry in the archive, so it must stay one plain file name.
+    let name = safeEntryName(f.path);
+    for (let n = 2; used.has(name); n++) name = safeEntryName(f.path).replace(/(\.[^.]*)?$/, ` (${n})$1`);
+    used.add(name);
     const m = NAME.exec(name);
     if (!m) unrecognised.push(name);
     receipts.push({
